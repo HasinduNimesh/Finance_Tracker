@@ -4,6 +4,8 @@
  */
 package financeapplication;
 
+import java.io.File;
+
 /**
  *
  * @author ASUS
@@ -14,7 +16,6 @@ public class FinanceApplication {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
     }
     
 }
