@@ -80,7 +80,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel1" min="-2" pref="109" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
