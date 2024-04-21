@@ -1,10 +1,18 @@
 package loginandsignup;
 
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 
 public class SignUp extends javax.swing.JFrame {
 
     public SignUp() {
         initComponents();
+        //Setting the Header Icon
+        Image headerIcon = new ImageIcon(this.getClass().getResource("logo.png")).getImage();
+        this.setIconImage(headerIcon);
     }
 
 
@@ -20,18 +28,18 @@ public class SignUp extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        firstName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        lastName = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        signUpEmail = new javax.swing.JTextField();
+        signUpPassword = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        signUpPasswordConf = new javax.swing.JPasswordField();
+        signUpButton = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        signInRedirectButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sign Up");
@@ -100,12 +108,17 @@ public class SignUp extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("First Name");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        firstName.setBackground(new java.awt.Color(255, 255, 255));
+        firstName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        firstName.setForeground(new java.awt.Color(0, 0, 0));
+        firstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                firstNameActionPerformed(evt);
+            }
+        });
+        firstName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                firstNameKeyPressed(evt);
             }
         });
 
@@ -114,12 +127,17 @@ public class SignUp extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Last Name");
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        lastName.setBackground(new java.awt.Color(255, 255, 255));
+        lastName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lastName.setForeground(new java.awt.Color(0, 0, 0));
+        lastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                lastNameActionPerformed(evt);
+            }
+        });
+        lastName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lastNameKeyPressed(evt);
             }
         });
 
@@ -133,20 +151,30 @@ public class SignUp extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Password");
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        signUpEmail.setBackground(new java.awt.Color(255, 255, 255));
+        signUpEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        signUpEmail.setForeground(new java.awt.Color(0, 0, 0));
+        signUpEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                signUpEmailActionPerformed(evt);
+            }
+        });
+        signUpEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                signUpEmailKeyPressed(evt);
             }
         });
 
-        jPasswordField1.setBackground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setForeground(new java.awt.Color(0, 0, 0));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        signUpPassword.setBackground(new java.awt.Color(255, 255, 255));
+        signUpPassword.setForeground(new java.awt.Color(0, 0, 0));
+        signUpPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                signUpPasswordActionPerformed(evt);
+            }
+        });
+        signUpPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                signUpPasswordKeyPressed(evt);
             }
         });
 
@@ -155,21 +183,26 @@ public class SignUp extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Confirm Password");
 
-        jPasswordField2.setBackground(new java.awt.Color(255, 255, 255));
-        jPasswordField2.setForeground(new java.awt.Color(0, 0, 0));
-        jPasswordField2.addActionListener(new java.awt.event.ActionListener() {
+        signUpPasswordConf.setBackground(new java.awt.Color(255, 255, 255));
+        signUpPasswordConf.setForeground(new java.awt.Color(0, 0, 0));
+        signUpPasswordConf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField2ActionPerformed(evt);
+                signUpPasswordConfActionPerformed(evt);
+            }
+        });
+        signUpPasswordConf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                signUpPasswordConfKeyPressed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Sign Up");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        signUpButton.setBackground(new java.awt.Color(0, 102, 102));
+        signUpButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        signUpButton.setForeground(new java.awt.Color(255, 255, 255));
+        signUpButton.setText("Sign Up");
+        signUpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                signUpButtonActionPerformed(evt);
             }
         });
 
@@ -177,12 +210,12 @@ public class SignUp extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Already Have An Account?");
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setForeground(new java.awt.Color(255, 51, 51));
-        jButton2.setText("Sign In");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        signInRedirectButton.setBackground(new java.awt.Color(255, 255, 255));
+        signInRedirectButton.setForeground(new java.awt.Color(255, 51, 51));
+        signInRedirectButton.setText("Sign In");
+        signInRedirectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                signInRedirectButtonActionPerformed(evt);
             }
         });
 
@@ -203,20 +236,20 @@ public class SignUp extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(signInRedirectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(signUpButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(signUpPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                            .addComponent(signUpEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lastName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(firstName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(signUpPasswordConf, javax.swing.GroupLayout.Alignment.LEADING))
                         .addContainerGap(23, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -227,29 +260,29 @@ public class SignUp extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(signUpEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(signUpPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(signUpPasswordConf, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(signUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jButton2))
+                    .addComponent(signInRedirectButton))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -274,37 +307,83 @@ public class SignUp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_firstNameActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void lastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_lastNameActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void signUpEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_signUpEmailActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void signUpPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_signUpPasswordActionPerformed
 
-    private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
+    private void signUpPasswordConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpPasswordConfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField2ActionPerformed
+    }//GEN-LAST:event_signUpPasswordConfActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if(firstName.getText().trim().isEmpty() || (lastName.getText().trim().isEmpty()) || (signUpEmail.getText().trim().isEmpty()) || (signUpPassword.getText().trim().isEmpty()) || (signUpPasswordConf.getText().trim().isEmpty())){
+            JOptionPane.showMessageDialog(this, "Registration Failed!");
+        }
+        else if(!(new String(signUpPassword.getPassword()).equals(new String(signUpPasswordConf.getPassword())))){
+            JOptionPane.showMessageDialog(this, "Passwords do not match!");
+        }else{
+            JOptionPane.showMessageDialog(this, "Registration Successful!");
+        }
+    }//GEN-LAST:event_signUpButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void signInRedirectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInRedirectButtonActionPerformed
         Login LogInFrame = new Login();
         LogInFrame.setVisible(true);
         LogInFrame.pack();
         LogInFrame.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_signInRedirectButtonActionPerformed
+
+    private void firstNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstNameKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+            lastName.requestFocus();
+    }//GEN-LAST:event_firstNameKeyPressed
+
+    private void lastNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+            signUpEmail.requestFocus();
+    }//GEN-LAST:event_lastNameKeyPressed
+
+    private void signUpEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_signUpEmailKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+            signUpPassword.requestFocus();
+    }//GEN-LAST:event_signUpEmailKeyPressed
+
+    private void signUpPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_signUpPasswordKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+            signUpPasswordConf.requestFocus();
+    }//GEN-LAST:event_signUpPasswordKeyPressed
+
+    private void signUpPasswordConfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_signUpPasswordConfKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            if(firstName.getText().trim().isEmpty() || (lastName.getText().trim().isEmpty()) || (signUpEmail.getText().trim().isEmpty()) || (signUpPassword.getText().trim().isEmpty()) || (signUpPasswordConf.getText().trim().isEmpty())){
+               JOptionPane.showMessageDialog(this, "Registration Failed!");
+            }
+            else if(!(new String(signUpPassword.getPassword()).equals(new String(signUpPasswordConf.getPassword())))){
+               JOptionPane.showMessageDialog(this, "Passwords do not match!");
+            }else{
+               JOptionPane.showMessageDialog(this, "Registration Successful!");
+            }
+        }      
+    }//GEN-LAST:event_signUpPasswordConfKeyPressed
 
     /**
      * @param args the command line arguments
@@ -312,8 +391,7 @@ public class SignUp extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField firstName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -327,10 +405,11 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField lastName;
+    private javax.swing.JButton signInRedirectButton;
+    private javax.swing.JButton signUpButton;
+    private javax.swing.JTextField signUpEmail;
+    private javax.swing.JPasswordField signUpPassword;
+    private javax.swing.JPasswordField signUpPasswordConf;
     // End of variables declaration//GEN-END:variables
 }
