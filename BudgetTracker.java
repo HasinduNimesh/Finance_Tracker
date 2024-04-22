@@ -32,7 +32,7 @@ public class BudgetTracker {
     }
 
     public static void main(String[] args) {
-        int numUsers = 2;
+        int numUsers = 1;
         int numCategories = 3;
 
         BudgetTracker budgetTracker = new BudgetTracker(numUsers, numCategories);
