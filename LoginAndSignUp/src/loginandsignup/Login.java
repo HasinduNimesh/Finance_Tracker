@@ -250,7 +250,26 @@ public class Login extends javax.swing.JFrame {
         if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(this, "Login failed!");
         }else{
-            JOptionPane.showMessageDialog(this, "Login Successful!");
+            
+
+            String userID = signInEmail.getText();
+			String password = String.valueOf(signInPassword.getPassword());//get the hashed password
+
+            //database
+			if(SQLite.userAuthentication(userID, password)) {
+				
+				this.dispose();
+				WelcomePage welcomePage = new WelcomePage(userID);
+                JOptionPane.showMessageDialog(this, "Login Successful!");
+			}
+			else {
+                JOptionPane.showMessageDialog(this, "Incorrect username or password!");
+			}
+
+
+
+
+           
         }
     }//GEN-LAST:event_signInButtonActionPerformed
 

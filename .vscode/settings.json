@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "LoginAndSignUp/src/loginandsignup/sqlite-jdbc-3.45.2.0.jar",
+        "LoginAndSignUp/src/loginandsignup/slf4j-api-2.0.13.jar"
+    ]
+}
