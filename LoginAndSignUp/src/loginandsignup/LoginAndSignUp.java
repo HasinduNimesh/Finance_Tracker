@@ -6,7 +6,7 @@ public class LoginAndSignUp {
         Login loginFrame = new Login();
         loginFrame.setVisible(true);
         loginFrame.pack();
-        loginFrame.setLocationRelativeTo(null);
+        loginFrame.setLocationRelativeTo(null); 
     }
     
 }

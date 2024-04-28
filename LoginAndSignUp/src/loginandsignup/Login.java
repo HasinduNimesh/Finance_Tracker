@@ -6,7 +6,12 @@ package loginandsignup;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +28,9 @@ public class Login extends javax.swing.JFrame {
         //Setting the Header Icon
         Image headerIcon = new ImageIcon(this.getClass().getResource("logo.png")).getImage();
         this.setIconImage(headerIcon);
+        
+        //setting password hide character
+        signInPassword.setEchoChar('\u25cf');
     }
 
     /**
@@ -48,9 +56,14 @@ public class Login extends javax.swing.JFrame {
         signInButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         signUpRedirectButton = new javax.swing.JButton();
+        signInEmailLbl = new javax.swing.JLabel();
+        signInPasswordLbl = new javax.swing.JLabel();
+        signNoticeLbl = new javax.swing.JLabel();
+        signInPassToggleButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("LOGIN");
+        setTitle("Sign In");
+        setMinimumSize(new java.awt.Dimension(800, 500));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
@@ -171,28 +184,65 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        signInEmailLbl.setBackground(new java.awt.Color(255, 255, 255));
+        signInEmailLbl.setForeground(new java.awt.Color(255, 0, 0));
+
+        signInPasswordLbl.setBackground(new java.awt.Color(255, 255, 255));
+        signInPasswordLbl.setForeground(new java.awt.Color(255, 0, 0));
+
+        signNoticeLbl.setBackground(new java.awt.Color(255, 255, 255));
+        signNoticeLbl.setForeground(new java.awt.Color(255, 0, 0));
+
+        signInPassToggleButton.setBackground(new java.awt.Color(255, 255, 255));
+        signInPassToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginandsignup/eye-line.png"))); // NOI18N
+        signInPassToggleButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signInPassToggleButtonMouseClicked(evt);
+            }
+        });
+        signInPassToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signInPassToggleButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout rightLayout = new javax.swing.GroupLayout(right);
         right.setLayout(rightLayout);
         rightLayout.setHorizontalGroup(
             rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rightLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(rightLayout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(jLabel1))
-                    .addGroup(rightLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(signInEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
-                            .addComponent(jLabel3)
-                            .addComponent(signInPassword)
-                            .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(rightLayout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(signUpRedirectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightLayout.createSequentialGroup()
+                        .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rightLayout.createSequentialGroup()
+                                .addComponent(signInPassword)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(signUpRedirectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                                .addComponent(signInPassToggleButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rightLayout.createSequentialGroup()
+                                .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rightLayout.createSequentialGroup()
+                                        .addGap(120, 120, 120)
+                                        .addComponent(jLabel1))
+                                    .addComponent(signInEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(signNoticeLbl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(signInEmailLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(signInPasswordLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(244, 244, 244))
+                    .addGroup(rightLayout.createSequentialGroup()
+                        .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         rightLayout.setVerticalGroup(
             rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,18 +252,25 @@ public class Login extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(signInEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(signInEmailLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(signInEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(signInPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(signInPasswordLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(signInPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(signInPassToggleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(signNoticeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(signInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(signUpRedirectButton))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(49, 49, 49))
         );
 
         jPanel1.add(right);
@@ -223,9 +280,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,6 +290,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void signInEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInEmailActionPerformed
@@ -245,13 +301,67 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_signInPasswordActionPerformed
 
+    
+    private void signInActionPerformer(){
+        String checkEmail, checkPassword, querry, passDb = null;
+        
+        String SUrl, SUser, SPass;
+        SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
+        SUser = "root";
+        SPass = "";
+        int notFound = 0;
+        
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(SUrl, SUser, SPass);
+            Statement st = con.createStatement();
+            
+        if(signInEmail.getText().trim().isEmpty() && signInPassword.getText().trim().isEmpty()){
+            signInEmailLbl.setText("?");
+            signInPasswordLbl.setText("?");
+            signNoticeLbl.setText("'?' shows the required fields");
+        }else if(signInEmail.getText().trim().isEmpty()){
+            signInEmailLbl.setText("?");
+            signInPasswordLbl.setText("");
+            signNoticeLbl.setText("'?' shows the required fields");
+        }else if(signInPassword.getText().trim().isEmpty()){
+            signInPasswordLbl.setText("?");
+            signInEmailLbl.setText("");
+            signNoticeLbl.setText("'?' shows the required fields");
+        }else{
+            signInEmailLbl.setText("");
+            signInPasswordLbl.setText("");
+            signNoticeLbl.setText(""); 
+
+            checkEmail = signInEmail.getText();
+            checkPassword = signInPassword.getText();
+            
+            querry = "SELECT * FROM signup_user WHERE email= '"+checkEmail+"'";
+            ResultSet rs = st.executeQuery(querry);
+            while(rs.next()){
+                passDb = rs.getString("password");
+                notFound = 1;
+            }
+            if(notFound == 1 &&  checkPassword.equals(passDb)){
+                //Add the next page which is to be opened after a successful signIn
+                
+            }else{
+                JOptionPane.showMessageDialog(new JFrame(), "Incorrect Email or Password", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            signInEmail.setText("");
+            signInPassword.setText("");
+        }
+            
+        }catch(Exception e){
+            System.out.println("Error!"+ e.getMessage());
+        }
+        
+    }
+    
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
         // TODO add your handling code here:
-        if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Login failed!");
-        }else{
-            JOptionPane.showMessageDialog(this, "Login Successful!");
-        }
+        signInActionPerformer();
     }//GEN-LAST:event_signInButtonActionPerformed
 
     private void signUpRedirectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpRedirectButtonActionPerformed
@@ -276,14 +386,25 @@ public class Login extends javax.swing.JFrame {
     private void signInPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_signInPasswordKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){
-                JOptionPane.showMessageDialog(this, "Login failed!");
-            }else{
-                JOptionPane.showMessageDialog(this, "Login Successful!");
-            }
+            signInActionPerformer();
         }
     }//GEN-LAST:event_signInPasswordKeyPressed
 
+    private void signInPassToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInPassToggleButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_signInPassToggleButtonActionPerformed
+
+    private void signInPassToggleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signInPassToggleButtonMouseClicked
+        // TODO add your handling code here:
+        if(signInPassToggleButton.isSelected()){
+            signInPassword.setEchoChar((char)0);
+            signInPassToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("eye-close-line.png")));
+        }else{
+            signInPassword.setEchoChar('\u25cf');
+            signInPassToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("eye-line.png")));
+        }
+    }//GEN-LAST:event_signInPassToggleButtonMouseClicked
+    
     /**
      * @param args the command line arguments
      */
@@ -302,7 +423,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel right;
     private javax.swing.JButton signInButton;
     private javax.swing.JTextField signInEmail;
+    private javax.swing.JLabel signInEmailLbl;
+    private javax.swing.JToggleButton signInPassToggleButton;
     private javax.swing.JPasswordField signInPassword;
+    private javax.swing.JLabel signInPasswordLbl;
+    private javax.swing.JLabel signNoticeLbl;
     private javax.swing.JButton signUpRedirectButton;
     // End of variables declaration//GEN-END:variables
 }
