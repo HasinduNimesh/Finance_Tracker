@@ -318,7 +318,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_signInPasswordActionPerformed
 
     private boolean ifInputEmpty(){
-        if(signInEmail.getText().trim().isEmpty() && signInPassword.getText().trim().isEmpty()){
+        if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){
              if(signInEmail.getText().trim().isEmpty()){
              signInEmailLbl.setText("?");
                 signInPasswordLbl.setText("");
