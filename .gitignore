@@ -4,5 +4,6 @@
 # Ignore build files
 target/
 build/
-# Ignore all .class files
-**/*.class
+
+# Ignore class files
+*.class
