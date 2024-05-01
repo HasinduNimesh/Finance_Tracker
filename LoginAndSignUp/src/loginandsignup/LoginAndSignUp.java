@@ -8,5 +8,5 @@ public class LoginAndSignUp {
         loginFrame.pack();
         loginFrame.setLocationRelativeTo(null);
     }
-    
+       
 }
