@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class SQLite {
     
      static boolean userAuthentication(String username, String password) {
-        String jdbcUrl = "jdbc:sqlite:LoginAndSignUp\\database\\userPasswords.db";
+        String jdbcUrl = "jdbc:sqlite:src\\database\\userPasswords.db";
         try {
             Class.forName("org.sqlite.JDBC");
             Connection connection = DriverManager.getConnection(jdbcUrl);
