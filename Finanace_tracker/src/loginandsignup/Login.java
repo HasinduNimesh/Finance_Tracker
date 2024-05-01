@@ -337,7 +337,7 @@ public class Login extends javax.swing.JFrame {
             else {
             signInEmailLbl.setText("?");
             signInPasswordLbl.setText("?");
-            signNoticeLbl.setText("'?' shows the required fields");
+            signNoticeLbl.setText("'?' Fill the required fields");
 
 
              }
