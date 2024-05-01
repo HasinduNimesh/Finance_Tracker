@@ -1,2 +1,8 @@
 # Ignore .vscode directory
 .vscode/
+
+# Ignore build files
+target/
+build/
+# Ignore all .class files
+**/*.class
