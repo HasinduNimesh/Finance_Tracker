@@ -321,7 +321,7 @@ public class Login extends javax.swing.JFrame {
         if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){
              if(signInEmail.getText().trim().isEmpty()){
              signInEmailLbl.setText("?");
-                signInPasswordLbl.setText("");
+                signInPassword.setText("");
                 signNoticeLbl.setText("'?' Fill the required fields");
             
 
@@ -330,7 +330,7 @@ public class Login extends javax.swing.JFrame {
 
                 //String.valueOf(signInPassword.getPassword())
                 signInPasswordLbl.setText("?");
-            signInEmailLbl.setText("");
+            signInEmail.setText("");
             signNoticeLbl.setText("'?' shows the required fields");
             
             }
@@ -377,8 +377,8 @@ public class Login extends javax.swing.JFrame {
             signNoticeLbl.setText("'?' shows the required fields");
         }else{
             */
-            signInEmail.setText("");
-            signInPassword.setText("");//kiwwane hutto 
+            signInEmailLbl.setText("");
+            signInPasswordLbl.setText("");//kiwwane hutto 
             signNoticeLbl.setText(""); 
 
             checkEmail = signInEmail.getText();
