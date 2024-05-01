@@ -319,29 +319,29 @@ public class Login extends javax.swing.JFrame {
 
     private boolean ifInputEmpty(){
         if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){
-             if(signInEmail.getText().trim().isEmpty()){
-             signInEmailLbl.setText("?");
-                signInPassword.setText("");
-                signInPasswordLbl.setText("");
+             if(signInEmail.getText().trim().isEmpty()&&  signInPassword.getText().trim().isEmpty()){
+             
+                signInEmailLbl.setText("?");
+                signInPasswordLbl.setText("?");
                 signNoticeLbl.setText("'?' Fill the required fields");
-            
+
 
              }
              else if (signInPassword.getText().trim().isEmpty()){
 
                 //String.valueOf(signInPassword.getPassword())
                 signInPasswordLbl.setText("?");
-            signInEmailLbl.setText("");
-            signInEmail.setText("");
-            signNoticeLbl.setText("'?' Fill the required fields");
+                signInEmailLbl.setText("");
+                signInEmail.setText("");
+                signNoticeLbl.setText("'?' Fill the required fields");
             
             }
             else {
-            signInEmailLbl.setText("?");
-            signInEmail.setText("?");
-            signInPasswordLbl.setText("?");
-            signInPassword.setText("?");
-            signNoticeLbl.setText("'?' Fill the required fields");
+           
+                signInEmailLbl.setText("?");
+                signInPassword.setText("");
+                signInPasswordLbl.setText("");
+                signNoticeLbl.setText("'?' Fill the required fields");
 
 
              }
