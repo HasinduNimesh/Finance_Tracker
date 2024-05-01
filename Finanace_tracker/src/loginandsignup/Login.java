@@ -344,7 +344,10 @@ public class Login extends javax.swing.JFrame {
         return true;
 
         }
-        else{return false;}
+        else{
+            signNoticeLbl.setText("");
+            return false;
+        }
     }
     private void signInActionPerformer(){
         String checkEmail, checkPassword, querry, passDb = null;
@@ -359,7 +362,7 @@ public class Login extends javax.swing.JFrame {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(SUrl, SUser, SPass);
             Statement st = con.createStatement();
-            
+            /* 
         if(signInEmail.getText().trim().isEmpty() && signInPassword.getText().trim().isEmpty()){
             signInEmailLbl.setText("?");
             signInPasswordLbl.setText("?");
@@ -373,8 +376,9 @@ public class Login extends javax.swing.JFrame {
             signInEmailLbl.setText("");
             signNoticeLbl.setText("'?' shows the required fields");
         }else{
-            signInEmailLbl.setText("");
-            signInPasswordLbl.setText("");
+            */
+            signInEmail.setText("");
+            signInPassword.setText("");//kiwwane hutto 
             signNoticeLbl.setText(""); 
 
             checkEmail = signInEmail.getText();
@@ -395,7 +399,7 @@ public class Login extends javax.swing.JFrame {
 
             signInEmail.setText("");
             signInPassword.setText("");
-        }
+        
             
         }catch(Exception e){
             System.out.println("Error!"+ e.getMessage());
