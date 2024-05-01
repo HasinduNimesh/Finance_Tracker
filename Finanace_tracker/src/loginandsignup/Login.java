@@ -377,7 +377,11 @@ public class Login extends javax.swing.JFrame {
     
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
         // TODO add your handling code here:
+        if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Invaild Inputs !");
+        }else{
         signInActionPerformer();
+        }
     }//GEN-LAST:event_signInButtonActionPerformed
 
     private void signUpRedirectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpRedirectButtonActionPerformed
