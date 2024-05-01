@@ -44,11 +44,11 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="tablePanel" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="kGradientPanel4" max="32767" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="kGradientPanel3" max="32767" attributes="0"/>
-                              <Component id="kGradientPanel2" max="32767" attributes="0"/>
+                          <Component id="kGradientPanel4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="income_goal_defict_kGradientPanel3" max="32767" attributes="0"/>
+                              <Component id="tot_income_kGradientPanel2" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -63,9 +63,9 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="kGradientPanel4" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="kGradientPanel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="tot_income_kGradientPanel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="kGradientPanel3" max="32767" attributes="0"/>
+                          <Component id="income_goal_defict_kGradientPanel3" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="keeptoo.KGradientPanel" name="kGradientPanel2">
+        <Container class="keeptoo.KGradientPanel" name="tot_income_kGradientPanel2">
 
           <Layout>
             <DimensionLayout dim="0">
@@ -125,21 +125,23 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="keeptoo.KGradientPanel" name="kGradientPanel3">
+        <Container class="keeptoo.KGradientPanel" name="income_goal_defict_kGradientPanel3">
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" pref="146" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="34" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -159,9 +161,9 @@
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="24" style="1"/>
+                  <Font name="Segoe UI" size="20" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="TOTAL INCOME"/>
+                <Property name="text" type="java.lang.String" value="INCOME GOAL DEFICIT"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
@@ -177,7 +179,7 @@
         <Container class="keeptoo.KGradientPanel" name="kGradientPanel4">
           <Properties>
             <Property name="kStartColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="33" green="33" red="0" type="rgb"/>
+              <Color blue="67" green="67" red="1d" type="rgb"/>
             </Property>
           </Properties>
 
@@ -187,28 +189,33 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="add_new_income_jLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
+                                  <Component id="method_jLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amount_jLabel" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="salary_type_jComboBox" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="amount_enter_jTextField" alignment="0" pref="150" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="date_jLabel" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
+                                  <Component id="note_jLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jScrollPane1" min="-2" pref="276" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jComboBox1" alignment="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="jTextField1" alignment="0" pref="150" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jScrollPane1" alignment="0" min="-2" pref="276" max="-2" attributes="0"/>
+                                  <Component id="jDateChooser" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -216,38 +223,42 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
+                              <Component id="add_new_income_jLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="method_jLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="salary_type_jComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="amount_jLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="amount_enter_jTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="date_jLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jDateChooser" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane1" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="note_jLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane1" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="12" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="add_new_income_jLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="1"/>
@@ -255,7 +266,7 @@
                 <Property name="text" type="java.lang.String" value="ADD NEW INCOME"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="method_jLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -263,25 +274,24 @@
                 <Property name="text" type="java.lang.String" value="Method"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="salary_type_jComboBox">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="12">
-                    <StringItem index="0" value="Rent/Mortgage"/>
-                    <StringItem index="1" value="Utilities (Electricity, Water, Gas, Internet)"/>
-                    <StringItem index="2" value="Groceries"/>
-                    <StringItem index="3" value="Transportation (Fuel, Public Transport)"/>
-                    <StringItem index="4" value="Insurance (Health, Life, Vehicle)"/>
-                    <StringItem index="5" value="Education (Tuition, Books, Supplies)"/>
-                    <StringItem index="6" value="Health Care (Medications, Doctor Visits)"/>
-                    <StringItem index="7" value="Entertainment (Movies, Dining Out, Events)"/>
-                    <StringItem index="8" value="Shopping (Clothing, Accessories)"/>
-                    <StringItem index="9" value="Travel (Tickets, Accommodation, Food)"/>
-                    <StringItem index="10" value="Debt Repayment (Loans, Credit Cards)"/>
-                    <StringItem index="11" value="Savings/Investments"/>
+                  <StringArray count="11">
+                    <StringItem index="0" value="Basic Salary"/>
+                    <StringItem index="1" value="Overtime"/>
+                    <StringItem index="2" value="Bonus"/>
+                    <StringItem index="3" value="Commission"/>
+                    <StringItem index="4" value="Allowances"/>
+                    <StringItem index="5" value="Rental Income"/>
+                    <StringItem index="6" value="Investment Income"/>
+                    <StringItem index="7" value="Freelance Work"/>
+                    <StringItem index="8" value="Business Income"/>
+                    <StringItem index="9" value="Pension/Retirement Benefits"/>
+                    <StringItem index="10" value="Other"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -289,7 +299,7 @@
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
+            <Component class="javax.swing.JLabel" name="amount_jLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -297,7 +307,7 @@
                 <Property name="text" type="java.lang.String" value="Amount"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
+            <Component class="javax.swing.JLabel" name="note_jLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
@@ -305,7 +315,7 @@
                 <Property name="text" type="java.lang.String" value="Note"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="amount_enter_jTextField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="1"/>
@@ -319,7 +329,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea1">
+                <Component class="javax.swing.JTextArea" name="note_taker_jTextArea">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -333,9 +343,19 @@
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Icons/expense (1).png"/>
+                  <Image iconType="3" name="/Icons/dollar.png"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="date_jLabel">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Date"/>
+              </Properties>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser">
             </Component>
           </SubComponents>
         </Container>
@@ -351,7 +371,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="TableScroll" max="32767" attributes="0"/>
+                      <Component id="TableScroll" pref="686" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -387,9 +407,9 @@
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="6" rowCount="4">
-                        <Column editable="true" title="Date" type="java.lang.Object"/>
                         <Column editable="false" title="Index" type="java.lang.Object"/>
-                        <Column editable="false" title="Expenses Type" type="java.lang.Object"/>
+                        <Column editable="true" title="Date" type="java.lang.Object"/>
+                        <Column editable="false" title="Income Type" type="java.lang.Object"/>
                         <Column editable="false" title="Note" type="java.lang.Object"/>
                         <Column editable="false" title="Amount" type="java.lang.Object"/>
                         <Column editable="true" title="Edit" type="java.lang.Object"/>
