@@ -318,8 +318,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_signInPasswordActionPerformed
 
     private boolean ifInputEmpty(){
-        if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){
-             if(signInEmail.getText().trim().isEmpty()&&  signInPassword.getText().trim().isEmpty()){
+        if(signInEmail.getText().trim().isEmpty() || String.valueOf(signInPassword.getPassword()).trim().isEmpty()){
+             if(signInEmail.getText().trim().isEmpty()&&  String.valueOf(signInPassword.getPassword()).trim().isEmpty()){
              
                 signInEmailLbl.setText("?");
                 signInPasswordLbl.setText("?");
@@ -327,7 +327,7 @@ public class Login extends javax.swing.JFrame {
 
 
              }
-             else if (signInPassword.getText().trim().isEmpty()){
+             else if (String.valueOf(signInPassword.getPassword()).trim().isEmpty()){
 
                 //String.valueOf(signInPassword.getPassword())
                 signInPasswordLbl.setText("?");
@@ -422,11 +422,26 @@ public class Login extends javax.swing.JFrame {
           //  JOptionPane.showMessageDialog(this, "Invaild Inputs !");
        // }
         if(ifInputEmpty()){
-            
-        }
+            }
+    else{
+        
+       // signInActionPerformer();
+        
+       String userID = signInEmail.getText();
+       String password = String.valueOf(signInPassword.getPassword());//get the hashed password
 
-        else{
-        signInActionPerformer();
+       //database
+       if(SQLite.userAuthentication(userID, password)) {
+           
+           this.dispose();
+           WelcomePage welcomePage = new WelcomePage(userID);
+           JOptionPane.showMessageDialog(this, "Login Successful!");
+       }
+       else {
+           JOptionPane.showMessageDialog(this, "Incorrect username or password!");
+       }
+
+
         }
     }//GEN-LAST:event_signInButtonActionPerformed
 
