@@ -317,7 +317,27 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_signInPasswordActionPerformed
 
-    
+    private boolean ifInputEmpty(){
+        if(signInEmail.getText().trim().isEmpty() && signInPassword.getText().trim().isEmpty()){
+            signInEmailLbl.setText("?");
+            signInPasswordLbl.setText("?");
+            signNoticeLbl.setText("'?' shows the required fields");
+            return true;
+        }else if(signInEmail.getText().trim().isEmpty()){
+            signInEmailLbl.setText("?");
+            signInPasswordLbl.setText("");
+            signNoticeLbl.setText("'?' shows the required fields");
+            return true;
+
+        }else if(signInPassword.getText().trim().isEmpty()){
+            signInPasswordLbl.setText("?");
+            signInEmailLbl.setText("");
+            signNoticeLbl.setText("'?' shows the required fields");
+            return true;
+
+        }
+        else{return false;}
+    }
     private void signInActionPerformer(){
         String checkEmail, checkPassword, querry, passDb = null;
         
@@ -374,12 +394,22 @@ public class Login extends javax.swing.JFrame {
         }
         
     }
+
+   // private void signInActionPerformer(){
+
+
+
     
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
         // TODO add your handling code here:
-        if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Invaild Inputs !");
-        }else{
+        //if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){
+          //  JOptionPane.showMessageDialog(this, "Invaild Inputs !");
+       // }
+        if(ifInputEmpty()){
+            
+        }
+
+        else{
         signInActionPerformer();
         }
     }//GEN-LAST:event_signInButtonActionPerformed
