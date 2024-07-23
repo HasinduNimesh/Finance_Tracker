@@ -1,6 +1,9 @@
 
 package loginandsignup;
 import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,7 +16,7 @@ public class SQLite {
         String jdbcUrl = "jdbc:sqlite:C:\\Users\\ASUS\\OneDrive - General Sir John Kotelawala Defence University\\Documents\\NetBeansProjects\\Finanace_tracker\\src\\loginandsignup\\databse\\userPasswords.db";
        // String path = System.getProperty("user.dir") + "/src/loginandsignup/database/userPasswords.db";
        // String jdbcUrl = "jdbc:sqlite:" + path;
-        String errorMessage="";
+         String errorMessage="";
         try {
             Class.forName("org.sqlite.JDBC");
             Connection connection = DriverManager.getConnection(jdbcUrl);
@@ -36,6 +39,7 @@ public class SQLite {
             } else {
                 System.out.println("User not found");//change this to "Incorrect username or password" in production
                 errorMessage="Incorrect user name or password";
+
                 return false;
             }
 
@@ -48,7 +52,9 @@ public class SQLite {
         catch (SQLException e) {
             System.out.println("Error connecting to database");
             e.printStackTrace(); // remove this line in production
-            errorMessage="Error connecting !! Restart the application or please contact ";
+            errorMessage="Error connecting !! Restart the application or please contact tech support ";
+            JOptionPane.showMessageDialog(null, errorMessage);
+
             return false;
         }
     }
