@@ -14,6 +14,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import finanace_tracker.Home;
+
 /**
  *
  * @author Tharusha
@@ -317,7 +319,9 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_signInPasswordActionPerformed
 
-    
+
+
+    /* this sql server signInActionPerformer was replaced with sqlite */
     private void signInActionPerformer(){
         String checkEmail, checkPassword, querry, passDb = null;
         
@@ -377,7 +381,36 @@ public class Login extends javax.swing.JFrame {
     
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
         // TODO add your handling code here:
-        signInActionPerformer();
+       // signInActionPerformer(); SQL server
+       //----sqlite---
+       if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){ // noo need to hash cuz just checking for empty strings 
+        JOptionPane.showMessageDialog(this, "Login failed!");
+        }else{
+        
+
+        String userID = signInEmail.getText();
+        String password = String.valueOf(signInPassword.getPassword());//get the hashed password
+
+        //database
+        if(SQLite.userAuthentication(userID, password)) {
+            
+            this.dispose();
+            Home welcomePage = new Home();//userID send username
+            JOptionPane.showMessageDialog(this, "Login Successful!");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Incorrect username or password!");
+        }
+
+
+
+
+       
+    }
+
+
+
+
     }//GEN-LAST:event_signInButtonActionPerformed
 
     private void signUpRedirectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpRedirectButtonActionPerformed
