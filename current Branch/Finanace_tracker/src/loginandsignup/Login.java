@@ -397,6 +397,7 @@ public class Login extends javax.swing.JFrame {
             this.dispose();
             Home welcomePage = new Home();//userID send username
             JOptionPane.showMessageDialog(this, "Login Successful!");
+            welcomePage.setVisible(true);
         }
         else {
             JOptionPane.showMessageDialog(this, "Incorrect username or password!");
