@@ -32,6 +32,9 @@ public class Settings extends javax.swing.JPanel {
 
         kGradientPanel1 = new keeptoo.KGradientPanel();
         btn_load_dashboard = new javax.swing.JButton();
+        btn_load_dashboard1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
         kGradientPanel1.setkStartColor(new java.awt.Color(85, 77, 222));
@@ -56,21 +59,61 @@ public class Settings extends javax.swing.JPanel {
             }
         });
 
+        btn_load_dashboard1.setBackground(new java.awt.Color(255, 255, 255));
+        btn_load_dashboard1.setFont(new java.awt.Font("MS PGothic", 1, 18)); // NOI18N
+        btn_load_dashboard1.setForeground(new java.awt.Color(0, 0, 0));
+        btn_load_dashboard1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dashboard (1).png"))); // NOI18N
+        btn_load_dashboard1.setText("Change Currency");
+        btn_load_dashboard1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 10));
+        btn_load_dashboard1.setBorderPainted(false);
+        btn_load_dashboard1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_load_dashboard1.setFocusPainted(false);
+        btn_load_dashboard1.setFocusable(false);
+        btn_load_dashboard1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_load_dashboard1.setIconTextGap(25);
+        btn_load_dashboard1.setMargin(new java.awt.Insets(10, 20, 10, 20));
+        btn_load_dashboard1.setPreferredSize(new java.awt.Dimension(50, 20));
+        btn_load_dashboard1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_load_dashboard1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
+        jLabel1.setText("<html>\n<h1><font color=\"white\">About This Application </font></h1>\n<font color=\"white\">\nApp Name: Financial Tracker Pro  <br>\nVersion: 1.0.0  <br>\nDeveloper: FiveIdiots Solutions  <br>\nRelease Date: July 23, 2024 <br></font>\n<html>");
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Calibri Light", 0, 12)); // NOI18N
+        jLabel2.setText("<html>\n<h1><font color=\"white\">Overview</h1></font>\n<p><font size=\"5\" color=\"white\" type=\"roboto\">Financial Tracker Pro is a comprehensive personal finance management tool \ndesigned to help users take control of their financial lives. \nOur application provides an intuitive interface to \ntrack incomes, expenses, investments, and financial goals. \nWith detailed analytics and reports, users can make informed decisions about \ntheir finances and achieve their financial objectives.<font><p>\n</html>");
+
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(btn_load_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(510, Short.MAX_VALUE))
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_load_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_load_dashboard1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(btn_load_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(531, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_load_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_load_dashboard1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(137, 137, 137)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -89,9 +132,16 @@ public class Settings extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btn_load_dashboardActionPerformed
 
+    private void btn_load_dashboard1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_dashboard1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_load_dashboard1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_load_dashboard;
+    private javax.swing.JButton btn_load_dashboard1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private keeptoo.KGradientPanel kGradientPanel1;
     // End of variables declaration//GEN-END:variables
 }

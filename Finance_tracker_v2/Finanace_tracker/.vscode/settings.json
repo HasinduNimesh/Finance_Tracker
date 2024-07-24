@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "e:\\Gitrep\\Finance_Tracker\\LoginAndSignUp\\src\\loginandsignup\\slf4j-api-2.0.13.jar",
+        "e:\\Gitrep\\Finance_Tracker\\LoginAndSignUp\\src\\loginandsignup\\sqlite-jdbc-3.45.2.0.jar"
+    ]
+}

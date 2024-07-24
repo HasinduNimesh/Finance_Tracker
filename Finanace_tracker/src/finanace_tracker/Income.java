@@ -5,6 +5,8 @@
 package finanace_tracker;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import raven_cell.TableActionButtonRender;
 
 /**
@@ -16,6 +18,14 @@ public class Income extends javax.swing.JPanel {
     /**
      * Creates new form Expenses
      */
+    
+    //VARIABLES 
+    String type=null;
+    double income_amount=0.00;
+    
+    
+    
+    
     public Income() {
         initComponents();
         IncomeShowTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionButtonRender());
@@ -148,7 +158,13 @@ public class Income extends javax.swing.JPanel {
         note_taker_jTextArea.setRows(5);
         jScrollPane1.setViewportView(note_taker_jTextArea);
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dollar.png"))); // NOI18N
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
 
         date_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         date_jLabel.setText("Date");
@@ -298,6 +314,21 @@ public class Income extends javax.swing.JPanel {
             .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        type = (String)salary_type_jComboBox.getSelectedItem();
+        try{
+         income_amount = Double.parseDouble(amount_enter_jTextField.getText());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        Date selectedDate = jDateChooser.getDate();
+        // Format the date to a readable format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = dateFormat.format(selectedDate);
+        System.out.println(type+income_amount+dateString);
+        
+    }//GEN-LAST:event_jLabel9MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
