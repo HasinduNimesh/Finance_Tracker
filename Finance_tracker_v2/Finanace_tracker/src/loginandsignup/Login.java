@@ -54,6 +54,7 @@ public class Login extends javax.swing.JFrame {
             page.panelResetter(pnl);
             //JOptionPane.showMessageDialog(this, "Login Successful!");
         } else {
+            
             JOptionPane.showMessageDialog(this, "Incorrect username or password!");
         }
         }
