@@ -5,6 +5,7 @@
 package loadingPage;
 
 import finanace_tracker.Home;
+import finanace_tracker.Settings;
 import javax.swing.JProgressBar;
 import javax.swing.*;
 import java.awt.*;
@@ -132,12 +133,14 @@ public class loadingBar extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 value++;
                 value++;
+                value++;
+                value++;
                 jProgressBar1.setValue(value);
                 if (value == 100) {
                     ((Timer) e.getSource()).stop();
                     b.dispose();
                     Login loginFrame = new Login();
-                    loginFrame.setVisible(true);          
+                    loginFrame.setVisible(true);  
                 }
             }
         });

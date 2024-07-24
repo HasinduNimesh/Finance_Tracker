@@ -47,6 +47,27 @@ public class Home extends javax.swing.JFrame {
         btn_load_investments.setBackground( Color.WHITE);
         btn_load_investments.setForeground(Color.BLACK);
     }
+    
+     /*void ShowAccDetials()
+    {
+        CHome ch = new CHome();
+        lbl_accemail.setText(acc_email);
+        lbl_username.setText(ch.getFirstName(acc_email) + " " + ch.getLastName(acc_email));
+    }*/
+    
+    public void panelPreprocessor() {
+        // Assuming pane_load_ui is a JPanel
+        JLayeredPane pane_load_ui = new JLayeredPane();
+        // Use BorderLayout or another layout manager of your choice
+        pane_load_ui.setLayout(new BorderLayout());
+    }
+
+    public void panelResetter(JPanel pnl) {
+        mainPane.removeAll(); // Remove all components from mainPane
+        mainPane.add(pnl, BorderLayout.CENTER); // Add pnl to mainPane
+        mainPane.revalidate(); // Revalidate the mainPane to reflect the changes
+        mainPane.repaint(); // Repaint the mainPane to reflect the changes
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -505,19 +526,7 @@ public class Home extends javax.swing.JFrame {
         setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_closeButton1MouseClicked
 
-    public void panelPreprocessor() {
-        // Assuming pane_load_ui is a JPanel
-        JLayeredPane pane_load_ui = new JLayeredPane();
-        // Use BorderLayout or another layout manager of your choice
-        pane_load_ui.setLayout(new BorderLayout());
-    }
-
-    public void panelResetter(JPanel pnl) {
-        mainPane.removeAll(); // Remove all components from mainPane
-        mainPane.add(pnl, BorderLayout.CENTER); // Add pnl to mainPane
-        mainPane.revalidate(); // Revalidate the mainPane to reflect the changes
-        mainPane.repaint(); // Repaint the mainPane to reflect the changes
-    }
+    
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

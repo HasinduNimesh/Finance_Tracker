@@ -81,7 +81,7 @@ public class Settings extends javax.swing.JPanel {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Calibri Light", 0, 14)); // NOI18N
-        jLabel1.setText("<html>\n<h1>About This Application </h1>\nApp Name: Financial Tracker Pro  <br>\nVersion: 1.0.0  <br>\nDeveloper: FiveIdiots Solutions  <br>\nRelease Date: July 23, 2024 <br>\n<html>");
+        jLabel1.setText("<html>\n<h1><font color=\"white\">About This Application </font></h1>\n<font color=\"white\">\nApp Name: Financial Tracker Pro  <br>\nVersion: 1.0.0  <br>\nDeveloper: FiveIdiots Solutions  <br>\nRelease Date: July 23, 2024 <br></font>\n<html>");
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Calibri Light", 0, 12)); // NOI18N

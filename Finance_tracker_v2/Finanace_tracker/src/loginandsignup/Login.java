@@ -5,6 +5,8 @@
 package loginandsignup;
 
 import finanace_tracker.Home;
+import finanace_tracker.Settings;
+import finanace_tracker.Welcome_Page;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -46,9 +48,11 @@ public class Login extends javax.swing.JFrame {
         //database
         if(SQLite.userAuthentication(userID, password)) { 
             this.dispose();
-            Home welcomePage = new Home();//userID send username
-            welcomePage.setVisible(true);
-            JOptionPane.showMessageDialog(this, "Login Successful!");
+            Home page = new Home();//userID send username
+            page.setVisible(true);
+            Welcome_Page pnl = new Welcome_Page();
+            page.panelResetter(pnl);
+            //JOptionPane.showMessageDialog(this, "Login Successful!");
         } else {
             JOptionPane.showMessageDialog(this, "Incorrect username or password!");
         }
