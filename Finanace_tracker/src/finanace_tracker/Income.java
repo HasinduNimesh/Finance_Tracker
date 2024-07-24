@@ -20,11 +20,8 @@ public class Income extends javax.swing.JPanel {
      */
     
     //VARIABLES 
-    String type=null;
+    String type=null,note=null;
     double income_amount=0.00;
-    
-    
-    
     
     public Income() {
         initComponents();
@@ -65,7 +62,7 @@ public class Income extends javax.swing.JPanel {
         amount_enter_jTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         note_taker_jTextArea = new javax.swing.JTextArea();
-        jLabel9 = new javax.swing.JLabel();
+        income_Button = new javax.swing.JLabel();
         date_jLabel = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
         tablePanel = new javax.swing.JPanel();
@@ -158,11 +155,11 @@ public class Income extends javax.swing.JPanel {
         note_taker_jTextArea.setRows(5);
         jScrollPane1.setViewportView(note_taker_jTextArea);
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dollar.png"))); // NOI18N
-        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+        income_Button.setForeground(new java.awt.Color(255, 255, 255));
+        income_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dollar.png"))); // NOI18N
+        income_Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel9MouseClicked(evt);
+                income_ButtonMouseClicked(evt);
             }
         });
 
@@ -194,7 +191,7 @@ public class Income extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)))
+                        .addComponent(income_Button)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         kGradientPanel4Layout.setVerticalGroup(
@@ -202,7 +199,7 @@ public class Income extends javax.swing.JPanel {
             .addGroup(kGradientPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
+                    .addComponent(income_Button)
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
                         .addComponent(add_new_income_jLabel)
                         .addGap(12, 12, 12)
@@ -315,20 +312,29 @@ public class Income extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+    private void income_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_income_ButtonMouseClicked
+        //get incometype
         type = (String)salary_type_jComboBox.getSelectedItem();
+        
+        //get income
         try{
          income_amount = Double.parseDouble(amount_enter_jTextField.getText());
         }catch(Exception e){
             e.printStackTrace();
         }
+        
+        //value getter from date selector
         Date selectedDate = jDateChooser.getDate();
         // Format the date to a readable format
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = dateFormat.format(selectedDate);
-        System.out.println(type+income_amount+dateString);
+
+        //Note taker
+        note = note_taker_jTextArea.getText();
         
-    }//GEN-LAST:event_jLabel9MouseClicked
+        //send values to the database
+        AccessOfDatabase.ValueSetterToDatabase.setIncomePerform(type, income_amount, dateString, note);
+    }//GEN-LAST:event_income_ButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -338,13 +344,13 @@ public class Income extends javax.swing.JPanel {
     private javax.swing.JTextField amount_enter_jTextField;
     private javax.swing.JLabel amount_jLabel;
     private javax.swing.JLabel date_jLabel;
+    private javax.swing.JLabel income_Button;
     private keeptoo.KGradientPanel income_goal_defict_kGradientPanel3;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel4;

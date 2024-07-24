@@ -14,7 +14,7 @@ public class SQLite {
     public static String jdbcUrl = "jdbc:sqlite:C:\\Users\\ASUS\\OneDrive - General Sir John Kotelawala Defence University\\Documents\\NetBeansProjects\\Finanace_tracker\\src\\loginandsignup\\database\\userPasswords.db";
 
     
-     static boolean userAuthentication(String username, String password) {
+    static boolean userAuthentication(String username, String password) {
         try {
             Class.forName("org.sqlite.JDBC");
             Connection connection = DriverManager.getConnection(jdbcUrl);
@@ -51,8 +51,8 @@ public class SQLite {
         }
     }
      
-     // Method to insert income into the database
-    static void setIncome(String incomeType, double incomeAmount, String dateChooser, String note) {
+    // Method to insert income into the database
+    public static void setIncome(String incomeType, double incomeAmount, String dateChooser, String note) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -65,7 +65,7 @@ public class SQLite {
             System.out.println("Connected to database");
 
             // SQL statement to insert income record
-            String sql = "INSERT INTO income (income_type, income_amount, date_chooser, note) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO setIncome (income_type, income_amount, date_chooser, note) VALUES (?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
 
             // Set values for the placeholders
@@ -77,6 +77,136 @@ public class SQLite {
             // Execute the insert statement
             preparedStatement.executeUpdate();
             System.out.println("Income record inserted successfully");
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("SQLite JDBC driver not found");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error connecting to database");
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    // Method to insert expense into the database
+    public static void setExpense(String expenseType, double expenseAmount, String dateChooser, String note) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // Load SQLite JDBC driver
+            Class.forName("org.sqlite.JDBC");
+
+            // Establish database connection
+            connection = DriverManager.getConnection(jdbcUrl);
+            System.out.println("Connected to database");
+
+            // SQL statement to insert income record
+            String sql = "INSERT INTO setExpense (expense_type, expense_amount, date_chooser, note) VALUES (?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+
+            // Set values for the placeholders
+            preparedStatement.setString(1, expenseType);
+            preparedStatement.setDouble(2, expenseAmount);
+            preparedStatement.setString(3, dateChooser);
+            preparedStatement.setString(4, note);
+
+            // Execute the insert statement
+            preparedStatement.executeUpdate();
+            System.out.println("Income record inserted successfully");
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("SQLite JDBC driver not found");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error connecting to database");
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    // Method to insert a goal into the database
+    public static void setIncomeGoal(double incomeGoalAmount, String startDate, String endDate) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // Load SQLite JDBC driver
+            Class.forName("org.sqlite.JDBC");
+
+            // Establish database connection
+            connection = DriverManager.getConnection(jdbcUrl);
+            System.out.println("Connected to database");
+
+            // SQL statement to insert goal record
+            String sql = "INSERT INTO setIncomeGoal (goal_amount, start_date, end_date) VALUES (?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+
+            // Set values for the placeholders
+            preparedStatement.setDouble(1, incomeGoalAmount);
+            preparedStatement.setString(2, startDate);
+            preparedStatement.setString(3, endDate);
+
+            // Execute the insert statement
+            preparedStatement.executeUpdate();
+            System.out.println("Goal record inserted successfully");
+
+        } catch (ClassNotFoundException e) {
+            System.out.println("SQLite JDBC driver not found");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error connecting to database");
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    // Method to insert a goal into the database
+    public static void setExpenseGoal(double expenseGoalAmount, String startDate, String endDate) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // Load SQLite JDBC driver
+            Class.forName("org.sqlite.JDBC");
+
+            // Establish database connection
+            connection = DriverManager.getConnection(jdbcUrl);
+            System.out.println("Connected to database");
+
+            // SQL statement to insert goal record
+            String sql = "INSERT INTO setExpenseGoal (goal_amount, start_date, end_date) VALUES (?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+
+            // Set values for the placeholders
+            preparedStatement.setDouble(1, expenseGoalAmount);
+            preparedStatement.setString(2, startDate);
+            preparedStatement.setString(3, endDate);
+
+            // Execute the insert statement
+            preparedStatement.executeUpdate();
+            System.out.println("Goal record inserted successfully");
 
         } catch (ClassNotFoundException e) {
             System.out.println("SQLite JDBC driver not found");

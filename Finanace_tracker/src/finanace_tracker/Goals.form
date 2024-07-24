@@ -117,7 +117,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
-                      <Component id="income_setter_button" min="-2" max="-2" attributes="0"/>
+                      <Component id="income_goal_setter_button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -143,7 +143,7 @@
                           <Component id="end_jDateChooser_income" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="income_setter_button" min="-2" max="-2" attributes="0"/>
+                      <Component id="income_goal_setter_button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="24" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -193,12 +193,15 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="end_jDateChooser_income">
             </Component>
-            <Component class="javax.swing.JLabel" name="income_setter_button">
+            <Component class="javax.swing.JLabel" name="income_goal_setter_button">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Icons/add.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="income_goal_setter_buttonMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -287,7 +290,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
-                      <Component id="expense_setter_button" min="-2" max="-2" attributes="0"/>
+                      <Component id="expense_goal_setter_button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -313,7 +316,7 @@
                           <Component id="end_jDateChooser_expense" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="expense_setter_button" min="-2" max="-2" attributes="0"/>
+                      <Component id="expense_goal_setter_button" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="24" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -363,12 +366,15 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="end_jDateChooser_expense">
             </Component>
-            <Component class="javax.swing.JLabel" name="expense_setter_button">
+            <Component class="javax.swing.JLabel" name="expense_goal_setter_button">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Icons/add.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="expense_goal_setter_buttonMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

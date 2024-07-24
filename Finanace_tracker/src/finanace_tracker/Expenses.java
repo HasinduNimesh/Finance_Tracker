@@ -5,6 +5,8 @@
 package finanace_tracker;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import raven_cell.TableActionButtonRender;
 
 /**
@@ -16,6 +18,10 @@ public class Expenses extends javax.swing.JPanel {
     /**
      * Creates new form Expenses
      */
+    //VARIABLES 
+    String type=null,note=null;
+    double expense_amount=0.00;
+    
     public Expenses() {
         initComponents();
         IncomeShowTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionButtonRender());
@@ -49,15 +55,15 @@ public class Expenses extends javax.swing.JPanel {
         kGradientPanel4 = new keeptoo.KGradientPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        expense_type_jComboBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        amount_enter_jTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabel9 = new javax.swing.JLabel();
+        note_taker_jTextArea = new javax.swing.JTextArea();
+        expenseButton = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
         tablePanel = new javax.swing.JPanel();
         TableScroll = new javax.swing.JScrollPane();
         IncomeShowTable = new javax.swing.JTable();
@@ -130,8 +136,8 @@ public class Expenses extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Method");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rent/Mortgage", "Utilities (Electricity, Water, Gas, Internet)", "Groceries", "Transportation (Fuel, Public Transport)", "Insurance (Health, Life, Vehicle)", "Education (Tuition, Books, Supplies)", "Health Care (Medications, Doctor Visits)", "Entertainment (Movies, Dining Out, Events)", "Shopping (Clothing, Accessories)", "Travel (Tickets, Accommodation, Food)", "Debt Repayment (Loans, Credit Cards)", "Savings/Investments", "Other Expenses" }));
+        expense_type_jComboBox.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        expense_type_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rent/Mortgage", "Utilities (Electricity, Water, Gas, Internet)", "Groceries", "Transportation (Fuel, Public Transport)", "Insurance (Health, Life, Vehicle)", "Education (Tuition, Books, Supplies)", "Health Care (Medications, Doctor Visits)", "Entertainment (Movies, Dining Out, Events)", "Shopping (Clothing, Accessories)", "Travel (Tickets, Accommodation, Food)", "Debt Repayment (Loans, Credit Cards)", "Savings/Investments", "Other Expenses" }));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Amount");
@@ -139,14 +145,19 @@ public class Expenses extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Note");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        amount_enter_jTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        note_taker_jTextArea.setColumns(20);
+        note_taker_jTextArea.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        note_taker_jTextArea.setRows(5);
+        jScrollPane1.setViewportView(note_taker_jTextArea);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/expense (1).png"))); // NOI18N
+        expenseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/expense (1).png"))); // NOI18N
+        expenseButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                expenseButtonMouseClicked(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setText("Date");
@@ -165,8 +176,8 @@ public class Expenses extends javax.swing.JPanel {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                            .addComponent(expense_type_jComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
+                            .addComponent(amount_enter_jTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,9 +185,9 @@ public class Expenses extends javax.swing.JPanel {
                         .addGap(0, 0, 0)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)))
+                        .addComponent(expenseButton)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         kGradientPanel4Layout.setVerticalGroup(
@@ -184,21 +195,21 @@ public class Expenses extends javax.swing.JPanel {
             .addGroup(kGradientPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
+                    .addComponent(expenseButton)
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(12, 12, 12)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(expense_type_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(amount_enter_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(8, 8, 8)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGradientPanel4Layout.createSequentialGroup()
@@ -297,12 +308,39 @@ public class Expenses extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void expenseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenseButtonMouseClicked
+        //get incometype
+        type = (String)expense_type_jComboBox.getSelectedItem();
+        
+        //get income
+        try{
+         expense_amount = Double.parseDouble(amount_enter_jTextField.getText());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        //value getter from date selector
+        Date selectedDate = jDateChooser.getDate();
+        
+        // Format the date to a readable format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = dateFormat.format(selectedDate);
+
+        //Note taker
+        note = note_taker_jTextArea.getText();
+        
+        //send values to the database
+        AccessOfDatabase.ValueSetterToDatabase.setExpensePerform(type, expense_amount, dateString, type);
+    }//GEN-LAST:event_expenseButtonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable IncomeShowTable;
     private javax.swing.JScrollPane TableScroll;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JTextField amount_enter_jTextField;
+    private javax.swing.JLabel expenseButton;
+    private javax.swing.JComboBox<String> expense_type_jComboBox;
+    private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -312,14 +350,12 @@ public class Expenses extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;
     private keeptoo.KGradientPanel kGradientPanel4;
+    private javax.swing.JTextArea note_taker_jTextArea;
     private javax.swing.JPanel tablePanel;
     // End of variables declaration//GEN-END:variables
 }
