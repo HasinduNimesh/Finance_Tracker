@@ -4,10 +4,14 @@
  */
 package AccessOfDatabase;
 
+import loginandsignup.*;
+
 /**
  *
  * @author ASUS
  */
 public class ValueViewFromDatabase {
-    
+    private void view(){
+       
+    }
 }
