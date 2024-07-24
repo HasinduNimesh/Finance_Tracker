@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package finanace_tracker;
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
@@ -15,6 +18,55 @@ public class Home extends javax.swing.JFrame {
 
     public Home() {
         initComponents();
+    }
+    
+     void SetButtonColor(JButton btn)
+    {
+        ResetButtonColor();
+        btn.setBackground( new Color(0,0,102));
+        btn.setForeground(Color.WHITE);
+    }
+    
+    void ResetButtonColor()
+    {
+        btn_load_dashboard.setBackground( Color.WHITE);
+        btn_load_dashboard.setForeground(Color.BLACK);
+        
+        btn_load_income.setBackground( Color.WHITE);
+        btn_load_income.setForeground(Color.BLACK);
+        
+        btn_load_expenses.setBackground( Color.WHITE);
+        btn_load_expenses.setForeground(Color.BLACK);
+        
+        btn_load_goals.setBackground( Color.WHITE);
+        btn_load_goals.setForeground(Color.BLACK);
+        
+        btn_load_reports.setBackground( Color.WHITE);
+        btn_load_reports.setForeground(Color.BLACK);
+        
+        btn_load_investments.setBackground( Color.WHITE);
+        btn_load_investments.setForeground(Color.BLACK);
+    }
+    
+     /*void ShowAccDetials()
+    {
+        CHome ch = new CHome();
+        lbl_accemail.setText(acc_email);
+        lbl_username.setText(ch.getFirstName(acc_email) + " " + ch.getLastName(acc_email));
+    }*/
+    
+    public void panelPreprocessor() {
+        // Assuming pane_load_ui is a JPanel
+        JLayeredPane pane_load_ui = new JLayeredPane();
+        // Use BorderLayout or another layout manager of your choice
+        pane_load_ui.setLayout(new BorderLayout());
+    }
+
+    public void panelResetter(JPanel pnl) {
+        mainPane.removeAll(); // Remove all components from mainPane
+        mainPane.add(pnl, BorderLayout.CENTER); // Add pnl to mainPane
+        mainPane.revalidate(); // Revalidate the mainPane to reflect the changes
+        mainPane.repaint(); // Repaint the mainPane to reflect the changes
     }
 
     @SuppressWarnings("unchecked")
@@ -402,6 +454,8 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_load_incomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_incomeActionPerformed
         panelPreprocessor();
+        ResetButtonColor();
+        SetButtonColor(btn_load_income);
         // Assuming pnl is an instance of the Dashboard panel 
         Income pnl = new Income();
         panelResetter(pnl);
@@ -409,6 +463,8 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_load_expensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_expensesActionPerformed
         panelPreprocessor();
+        ResetButtonColor();
+        SetButtonColor(btn_load_expenses);
         // Assuming pnl is an instance of the Dashboard panel 
         Expenses pnl = new Expenses();
         panelResetter(pnl);
@@ -416,6 +472,8 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_load_dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_dashboardActionPerformed
         panelPreprocessor();
+        ResetButtonColor();
+        SetButtonColor(btn_load_dashboard);
         // Assuming pnl is an instance of the Dashboard panel 
         Dashboard pnl = new Dashboard();
         panelResetter(pnl);
@@ -423,6 +481,8 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_load_goalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_goalsActionPerformed
         panelPreprocessor();
+        ResetButtonColor();
+        SetButtonColor(btn_load_goals);
         // Assuming pnl is an instance of the Dashboard panel 
         Goals pnl = new Goals();
         panelResetter(pnl);
@@ -441,11 +501,18 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_load_calculatorActionPerformed
 
     private void btn_load_settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_settingsActionPerformed
-        // TODO add your handling code here:
+        panelPreprocessor();
+        ResetButtonColor();
+        SetButtonColor(btn_load_settings);
+        // Assuming pnl is an instance of the Dashboard panel 
+        Settings pnl = new Settings();
+        panelResetter(pnl);
     }//GEN-LAST:event_btn_load_settingsActionPerformed
 
     private void btn_load_investmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_investmentsActionPerformed
         panelPreprocessor();
+        ResetButtonColor();
+        SetButtonColor(btn_load_investments);
         // Assuming pnl is an instance of the Dashboard panel 
         Investment pnl = new Investment();
         panelResetter(pnl);
@@ -459,18 +526,7 @@ public class Home extends javax.swing.JFrame {
         setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_closeButton1MouseClicked
 
-    public void panelPreprocessor(){
-        // Assuming pane_load_ui is a JPanel
-        JLayeredPane pane_load_ui = new JLayeredPane();
-        // Use BorderLayout or another layout manager of your choice
-        pane_load_ui.setLayout(new BorderLayout()); 
-    }
-    public void panelResetter(JPanel pnl){
-        mainPane.removeAll(); // Remove all components from mainPane
-        mainPane.add(pnl, BorderLayout.CENTER); // Add pnl to mainPane
-        mainPane.revalidate(); // Revalidate the mainPane to reflect the changes
-        mainPane.repaint(); // Repaint the mainPane to reflect the changes
-    }
+    
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

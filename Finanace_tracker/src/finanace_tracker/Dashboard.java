@@ -23,7 +23,7 @@ public class Dashboard extends javax.swing.JPanel {
         pieChart1.setChartType(PieChart.PeiChartType.DONUT_CHART);
         pieChart1.addData(new ModelPieChart("Tigher", 150, new Color(23, 126, 238)));
         pieChart1.addData(new ModelPieChart("ABC", 100, new Color(221, 65, 65)));
-        pieChart1.addData(new ModelPieChart("Coca", 1, new Color(47, 157, 64)));
+        pieChart1.addData(new ModelPieChart("Coca", 10, new Color(47, 157, 64)));
         pieChart1.addData(new ModelPieChart("Vita", 60, new Color(196, 151, 58)));
         
         pieChart2.setChartType(PieChart.PeiChartType.DONUT_CHART);

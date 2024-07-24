@@ -4,6 +4,9 @@
  */
 package loginandsignup;
 
+import finanace_tracker.Home;
+import finanace_tracker.Settings;
+import finanace_tracker.Welcome_Page;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -31,6 +34,28 @@ public class Login extends javax.swing.JFrame {
         
         //setting password hide character
         signInPassword.setEchoChar('\u25cf');
+    }
+    
+    private void signInActionPerformer(){
+        // signInActionPerformer(); SQL server
+        //----sqlite---
+        if(signInEmail.getText().trim().isEmpty() || signInPassword.getText().trim().isEmpty()){ // noo need to hash cuz just checking for empty strings 
+        JOptionPane.showMessageDialog(this, "Login failed!");
+        }else{
+        String userID = signInEmail.getText();
+        String password = String.valueOf(signInPassword.getPassword());//get the hashed password
+        
+        //database
+        if(SQLite.userAuthentication(userID, password)) { 
+            this.dispose();
+            Home page = new Home(); //userID send username
+            page.setVisible(true);
+            Welcome_Page pnl = new Welcome_Page();
+            page.panelResetter(pnl);
+        } else {
+            JOptionPane.showMessageDialog(this, "Incorrect username or password!");
+        }
+        }
     }
 
     /**
@@ -72,7 +97,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        left.setBackground(new java.awt.Color(0, 102, 102));
+        left.setBackground(new java.awt.Color(102, 51, 255));
         left.setPreferredSize(new java.awt.Dimension(400, 500));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginandsignup/logo.png"))); // NOI18N
@@ -96,7 +121,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         leftLayout.setVerticalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +143,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel1.setForeground(new java.awt.Color(102, 51, 255));
         jLabel1.setText("Sign In");
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
@@ -158,7 +183,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        signInButton.setBackground(new java.awt.Color(0, 102, 102));
+        signInButton.setBackground(new java.awt.Color(102, 51, 255));
         signInButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         signInButton.setForeground(new java.awt.Color(255, 255, 255));
         signInButton.setText("Sign In");
@@ -262,9 +287,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(rightLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel1))
-                    .addGroup(rightLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(closeButton)))
+                    .addComponent(closeButton))
                 .addGap(33, 33, 33)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -318,65 +341,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_signInPasswordActionPerformed
 
     
-    private void signInActionPerformer(){
-        String checkEmail, checkPassword, querry, passDb = null;
-        
-        String SUrl, SUser, SPass;
-        SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
-        SUser = "root";
-        SPass = "";
-        int notFound = 0;
-        
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(SUrl, SUser, SPass);
-            Statement st = con.createStatement();
-            
-        if(signInEmail.getText().trim().isEmpty() && signInPassword.getText().trim().isEmpty()){
-            signInEmailLbl.setText("?");
-            signInPasswordLbl.setText("?");
-            signNoticeLbl.setText("'?' shows the required fields");
-        }else if(signInEmail.getText().trim().isEmpty()){
-            signInEmailLbl.setText("?");
-            signInPasswordLbl.setText("");
-            signNoticeLbl.setText("'?' shows the required fields");
-        }else if(signInPassword.getText().trim().isEmpty()){
-            signInPasswordLbl.setText("?");
-            signInEmailLbl.setText("");
-            signNoticeLbl.setText("'?' shows the required fields");
-        }else{
-            signInEmailLbl.setText("");
-            signInPasswordLbl.setText("");
-            signNoticeLbl.setText(""); 
-
-            checkEmail = signInEmail.getText();
-            checkPassword = signInPassword.getText();
-            
-            querry = "SELECT * FROM signup_user WHERE email= '"+checkEmail+"'";
-            ResultSet rs = st.executeQuery(querry);
-            while(rs.next()){
-                passDb = rs.getString("password");
-                notFound = 1;
-            }
-            if(notFound == 1 &&  checkPassword.equals(passDb)){
-                //Add the next page which is to be opened after a successful signIn
-                
-            }else{
-                JOptionPane.showMessageDialog(new JFrame(), "Incorrect Email or Password", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-            signInEmail.setText("");
-            signInPassword.setText("");
-        }
-            
-        }catch(Exception e){
-            System.out.println("Error!"+ e.getMessage());
-        }
-        
-    }
-    
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
-        // TODO add your handling code here:
         signInActionPerformer();
     }//GEN-LAST:event_signInButtonActionPerformed
 
