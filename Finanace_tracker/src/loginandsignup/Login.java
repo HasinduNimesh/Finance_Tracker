@@ -7,12 +7,17 @@ package loginandsignup;
 import finanace_tracker.Home;
 import finanace_tracker.Settings;
 import finanace_tracker.Welcome_Page;
+
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -43,17 +48,34 @@ public class Login extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Login failed!");
         }else{
         String userID = signInEmail.getText();
-        String password = String.valueOf(signInPassword.getPassword());//get the hashed password
+        String password = String.valueOf(signInPassword.getPassword());
+        
+
         
         //database
-        if(SQLite.userAuthentication(userID, password)) { 
-            this.dispose();
-            Home page = new Home(); //userID send username
-            page.setVisible(true);
-            Welcome_Page pnl = new Welcome_Page();
-            page.panelResetter(pnl);
-        } else {
-            JOptionPane.showMessageDialog(this, "Incorrect username or password!");
+        try {
+            if(UserAuthentication.authenticateUser(userID, password)!=null) {
+                String userIDtoSend=UserAuthentication.authenticateUser(userID, password);
+                 
+                java.awt.EventQueue.invokeLater(() -> {
+                    this.dispose();
+                    Home page = new Home(userIDtoSend); //userID send username
+                    page.setVisible(true);
+                    Welcome_Page pnl = new Welcome_Page();
+                    page.panelResetter(pnl);
+                });
+            } else {
+                JOptionPane.showMessageDialog(this, "Incorrect username or password!");
+            }
+        } catch (HeadlessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         }
     }
@@ -342,6 +364,8 @@ public class Login extends javax.swing.JFrame {
 
     
     private void signInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInButtonActionPerformed
+        
+       // signInActionPerformer_OLD();
         signInActionPerformer();
     }//GEN-LAST:event_signInButtonActionPerformed
 

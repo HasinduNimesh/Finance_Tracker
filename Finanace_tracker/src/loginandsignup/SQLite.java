@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class SQLite {
     public static String jdbcUrl = "jdbc:sqlite:C:\\Users\\ASUS\\OneDrive - General Sir John Kotelawala Defence University\\Documents\\NetBeansProjects\\Finanace_tracker\\src\\loginandsignup\\database\\userPasswords.db";
-
+   //! public static String jdbcUrl = "jdbc:sqlite:database/userPasswords.db";
     
      static boolean userAuthentication(String username, String password) {
         try {
