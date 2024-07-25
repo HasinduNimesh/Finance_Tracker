@@ -19,14 +19,17 @@ public class UserAuthentication {
         return hexString.toString();
     }
 
-    public static boolean registerUser(String username, String password, String  email) throws SQLException, NoSuchAlgorithmException {
+    public static boolean registerUser( String password, String  email, String f_name, String l_name) throws SQLException, NoSuchAlgorithmException {
         String hashedPassword = hashPassword(password);
         try (Connection conn = DatabaseUtil.getConnection()) {
-            String query = "INSERT INTO users (username, password_hash,email) VALUES (?, ?,?)";
+            String query = "INSERT INTO users (password_hash,email ,f_name ,l_name) VALUES (?, ?,?)";
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, username);
-            stmt.setString(2, hashedPassword);
-            stmt.setString(3, email);
+            stmt.setString(1, hashedPassword);
+            stmt.setString(2, email);
+            stmt.setString(3, f_name);
+            stmt.setString(4, l_name);
+
+
             return stmt.executeUpdate() > 0;
         }
     }
@@ -44,13 +47,14 @@ public class UserAuthentication {
             return rs.next();
         }
     }
-    public static String authenticateUser(String username, String password) throws SQLException, NoSuchAlgorithmException {
+    public static String authenticateUser( String password,String email) throws SQLException, NoSuchAlgorithmException {
         String hashedPassword = hashPassword(password);
         try (Connection conn = DatabaseUtil.getConnection()) {
-            String query = "SELECT username FROM users WHERE username = ? AND password_hash = ?";
+            String query = "SELECT username FROM users WHERE email = ? AND password_hash = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, username);
+            stmt.setString(1, email);
             stmt.setString(2, hashedPassword);
+
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return rs.getString("username");

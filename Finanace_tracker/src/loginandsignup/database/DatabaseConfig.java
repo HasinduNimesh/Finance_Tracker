@@ -23,7 +23,7 @@ public static void main(String[] args) {
     try {
       //  Connection connection= DriverManager.getConnection(jdbcURL, USER, PASSWORD);
        // System.out.println("Connected to H2 database");
-        //done UserAuthentication.registerUser("Admin1", "StrongPassword123", "admin@kdu.ac.lk");
+    //done UserAuthentication.registerUser("Admin1", "StrongPassword123", "admin@kdu.ac.lk");
         UserAuthentication.authenticateUser("Admin1", "StrongPassword123");
 
        // connection.close();

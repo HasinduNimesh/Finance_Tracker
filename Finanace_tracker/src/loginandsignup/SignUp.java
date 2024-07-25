@@ -520,7 +520,7 @@ public class SignUp extends javax.swing.JFrame {
             dbEmail = signUpEmail.getText();
             dbPassword = signUpPassword.getText();
             
-            UserAuthentication.registerUser()
+            UserAuthentication.registerUser(dbfName, dblName, dbEmail, dbPassword);
             querry = "INSERT INTO signup_user(fName, lName, email, password)"+"VALUES('"+dbfName+"','"+dblName+"','"+dbEmail+"','"+dbPassword+"')";
             st.execute(querry);
             
