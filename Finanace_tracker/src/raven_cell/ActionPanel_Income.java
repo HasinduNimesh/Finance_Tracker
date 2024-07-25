@@ -20,6 +20,8 @@ public class ActionPanel_Income extends javax.swing.JPanel {
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
+        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/rubbish.png"))); // NOI18N
         jPanel1.add(jLabel1);
 

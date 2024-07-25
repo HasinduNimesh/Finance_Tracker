@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 
 
 
@@ -117,7 +118,7 @@ public class SQLite {
             preparedStatement.setDouble(2, expenseAmount);
             preparedStatement.setString(3, dateChooser);
             preparedStatement.setString(4, note);
-
+   
             // Execute the insert statement
             preparedStatement.executeUpdate();
             System.out.println("Income record inserted successfully");
@@ -140,7 +141,7 @@ public class SQLite {
     }
     
     // Method to insert a goal into the database
-    public static void setIncomeGoal(double incomeGoalAmount, String startDate, String endDate) {
+    public static void setIncomeGoal(double incomeGoalAmount, Date startDate, Date endDate) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -153,13 +154,13 @@ public class SQLite {
             System.out.println("Connected to database");
 
             // SQL statement to insert goal record
-            String sql = "INSERT INTO setIncomeGoal (goal_amount, start_date, end_date) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO IncomeGoal (goal_amount, start_date, end_date) VALUES (?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
 
             // Set values for the placeholders
             preparedStatement.setDouble(1, incomeGoalAmount);
-            preparedStatement.setString(2, startDate);
-            preparedStatement.setString(3, endDate);
+            preparedStatement.setDate(2, (java.sql.Date) startDate);
+            preparedStatement.setDate(3, (java.sql.Date) endDate);
 
             // Execute the insert statement
             preparedStatement.executeUpdate();
@@ -182,8 +183,8 @@ public class SQLite {
         }
     }
     
-    // Method to insert a goal into the database
-    public static void setExpenseGoal(double expenseGoalAmount, String startDate, String endDate) {
+   // Method to insert a goal into the database
+    public static void setExpenseGoal(double expenseGoalAmount, Date startDate, Date endDate) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
@@ -196,17 +197,17 @@ public class SQLite {
             System.out.println("Connected to database");
 
             // SQL statement to insert goal record
-            String sql = "INSERT INTO setExpenseGoal (goal_amount, start_date, end_date) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO expenseGoals (goal_amount, start_date, end_date) VALUES (?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
 
             // Set values for the placeholders
             preparedStatement.setDouble(1, expenseGoalAmount);
-            preparedStatement.setString(2, startDate);
-            preparedStatement.setString(3, endDate);
+            preparedStatement.setDate(2, new java.sql.Date(startDate.getTime()));
+            preparedStatement.setDate(3, new java.sql.Date(endDate.getTime()));
 
             // Execute the insert statement
             preparedStatement.executeUpdate();
-            System.out.println("Goal record inserted successfully");
+            System.out.println("Expense goal record inserted successfully");
 
         } catch (ClassNotFoundException e) {
             System.out.println("SQLite JDBC driver not found");

@@ -25,7 +25,7 @@ public class Income extends javax.swing.JPanel {
     
     public Income() {
         initComponents();
-        IncomeShowTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionButtonRender());
+        IncomeShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionButtonRender());
         
         //Color changes of table
         IncomeShowTable.setDefaultRenderer(Object.class, new TableGradientFun());
@@ -72,6 +72,9 @@ public class Income extends javax.swing.JPanel {
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
         kGradientPanel1.setkStartColor(new java.awt.Color(85, 77, 222));
 
+        tot_income_kGradientPanel2.setkGradientFocus(600);
+        tot_income_kGradientPanel2.setkStartColor(new java.awt.Color(191, 0, 255));
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("TOTAL INCOME");
 
@@ -100,6 +103,9 @@ public class Income extends javax.swing.JPanel {
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
+
+        income_goal_defict_kGradientPanel3.setkGradientFocus(600);
+        income_goal_defict_kGradientPanel3.setkStartColor(new java.awt.Color(191, 0, 255));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel6.setText("INCOME GOAL DEFICIT");
@@ -131,27 +137,44 @@ public class Income extends javax.swing.JPanel {
                 .addGap(12, 12, 12))
         );
 
-        kGradientPanel4.setkStartColor(new java.awt.Color(29, 103, 103));
+        kGradientPanel4.setkGradientFocus(1000);
+        kGradientPanel4.setkStartColor(new java.awt.Color(28, 88, 90));
 
+        add_new_income_jLabel.setBackground(new java.awt.Color(255, 255, 255));
         add_new_income_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        add_new_income_jLabel.setForeground(new java.awt.Color(255, 255, 255));
         add_new_income_jLabel.setText("ADD NEW INCOME");
 
+        method_jLabel.setBackground(new java.awt.Color(255, 255, 255));
         method_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        method_jLabel.setForeground(new java.awt.Color(255, 255, 255));
         method_jLabel.setText("Method");
 
+        salary_type_jComboBox.setBackground(new java.awt.Color(255, 255, 255));
         salary_type_jComboBox.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        salary_type_jComboBox.setForeground(new java.awt.Color(0, 0, 0));
         salary_type_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Basic Salary", "Overtime", "Bonus", "Commission", "Allowances", "Rental Income", "Investment Income", "Freelance Work", "Business Income", "Pension/Retirement Benefits", "Other" }));
+        salary_type_jComboBox.setBorder(null);
+        salary_type_jComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        amount_jLabel.setBackground(new java.awt.Color(255, 255, 255));
         amount_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        amount_jLabel.setForeground(new java.awt.Color(255, 255, 255));
         amount_jLabel.setText("Amount");
 
+        note_jLabel.setBackground(new java.awt.Color(255, 255, 255));
         note_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        note_jLabel.setForeground(new java.awt.Color(255, 255, 255));
         note_jLabel.setText("Note");
 
+        amount_enter_jTextField.setBackground(new java.awt.Color(255, 255, 255));
         amount_enter_jTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        amount_enter_jTextField.setForeground(new java.awt.Color(0, 0, 0));
 
+        note_taker_jTextArea.setBackground(new java.awt.Color(255, 255, 255));
         note_taker_jTextArea.setColumns(20);
         note_taker_jTextArea.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        note_taker_jTextArea.setForeground(new java.awt.Color(0, 0, 0));
         note_taker_jTextArea.setRows(5);
         jScrollPane1.setViewportView(note_taker_jTextArea);
 
@@ -163,8 +186,13 @@ public class Income extends javax.swing.JPanel {
             }
         });
 
+        date_jLabel.setBackground(new java.awt.Color(255, 255, 255));
         date_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        date_jLabel.setForeground(new java.awt.Color(255, 255, 255));
         date_jLabel.setText("Date");
+
+        jDateChooser.setBackground(new java.awt.Color(255, 255, 255));
+        jDateChooser.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
         kGradientPanel4.setLayout(kGradientPanel4Layout);
@@ -223,9 +251,11 @@ public class Income extends javax.swing.JPanel {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        amount_enter_jTextField.getAccessibleContext().setAccessibleParent(amount_enter_jTextField);
+
         tablePanel.setBackground(new java.awt.Color(51, 0, 102));
 
-        IncomeShowTable.setBackground(new java.awt.Color(153, 255, 255));
+        IncomeShowTable.setBackground(new java.awt.Color(0, 0, 0));
         IncomeShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         IncomeShowTable.setForeground(new java.awt.Color(0, 0, 0));
         IncomeShowTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -240,7 +270,7 @@ public class Income extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
