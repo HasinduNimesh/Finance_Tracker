@@ -5,6 +5,8 @@
 package finanace_tracker;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import java.awt.Frame;
+import javax.swing.SwingUtilities;
 import raven_cell.TableActionButtonRender;
 
 /**
@@ -43,7 +45,7 @@ public class Settings extends javax.swing.JPanel {
         btn_load_dashboard.setFont(new java.awt.Font("MS PGothic", 1, 18)); // NOI18N
         btn_load_dashboard.setForeground(new java.awt.Color(0, 0, 0));
         btn_load_dashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dashboard (1).png"))); // NOI18N
-        btn_load_dashboard.setText("EDIT USER DETAILS");
+        btn_load_dashboard.setText("Edit User Details");
         btn_load_dashboard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 10));
         btn_load_dashboard.setBorderPainted(false);
         btn_load_dashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -129,7 +131,10 @@ public class Settings extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_load_dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_dashboardActionPerformed
-
+         
+        // Open a dialog to edit user details
+        EditUserDetails editFrame = new EditUserDetails();
+        editFrame.setVisible(true);
     }//GEN-LAST:event_btn_load_dashboardActionPerformed
 
     private void btn_load_dashboard1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_dashboard1ActionPerformed

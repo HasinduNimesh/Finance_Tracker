@@ -20,7 +20,7 @@ public class ValueSetterToDatabase {
         SQLite.setIncome(expense_Type, expense_Amount, Date_Chooser, Note);
     }
     
-    public static void setGoalIncomePerform(double incomeGoalAmount,){
+    public static void setGoalIncomePerform(double incomeGoalAmount){
         SQLite.setIncomeGoal(0, startDate, endDate);
     }
     
