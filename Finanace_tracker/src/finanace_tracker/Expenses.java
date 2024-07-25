@@ -71,6 +71,8 @@ public class Expenses extends javax.swing.JPanel {
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
         kGradientPanel1.setkStartColor(new java.awt.Color(85, 77, 222));
 
+        kGradientPanel2.setkStartColor(new java.awt.Color(191, 0, 255));
+
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("TOTAL EXPENSES");
 
@@ -101,6 +103,8 @@ public class Expenses extends javax.swing.JPanel {
                 .addGap(12, 12, 12))
         );
 
+        kGradientPanel3.setkStartColor(new java.awt.Color(191, 0, 255));
+
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel8.setText("0.00");
 
@@ -128,27 +132,42 @@ public class Expenses extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        kGradientPanel4.setkGradientFocus(1000);
         kGradientPanel4.setkStartColor(new java.awt.Color(29, 103, 103));
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ADD NEW EXPENSE");
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Method");
 
+        expense_type_jComboBox.setBackground(new java.awt.Color(255, 255, 255));
         expense_type_jComboBox.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        expense_type_jComboBox.setForeground(new java.awt.Color(0, 0, 0));
         expense_type_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rent/Mortgage", "Utilities (Electricity, Water, Gas, Internet)", "Groceries", "Transportation (Fuel, Public Transport)", "Insurance (Health, Life, Vehicle)", "Education (Tuition, Books, Supplies)", "Health Care (Medications, Doctor Visits)", "Entertainment (Movies, Dining Out, Events)", "Shopping (Clothing, Accessories)", "Travel (Tickets, Accommodation, Food)", "Debt Repayment (Loans, Credit Cards)", "Savings/Investments", "Other Expenses" }));
 
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Amount");
 
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Note");
 
+        amount_enter_jTextField.setBackground(new java.awt.Color(255, 255, 255));
         amount_enter_jTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        amount_enter_jTextField.setForeground(new java.awt.Color(0, 0, 0));
 
+        note_taker_jTextArea.setBackground(new java.awt.Color(255, 255, 255));
         note_taker_jTextArea.setColumns(20);
         note_taker_jTextArea.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        note_taker_jTextArea.setForeground(new java.awt.Color(0, 0, 0));
         note_taker_jTextArea.setRows(5);
         jScrollPane1.setViewportView(note_taker_jTextArea);
 
@@ -159,8 +178,13 @@ public class Expenses extends javax.swing.JPanel {
             }
         });
 
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Date");
+
+        jDateChooser.setBackground(new java.awt.Color(255, 255, 255));
+        jDateChooser.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
         kGradientPanel4.setLayout(kGradientPanel4Layout);
@@ -221,7 +245,7 @@ public class Expenses extends javax.swing.JPanel {
 
         tablePanel.setBackground(new java.awt.Color(51, 0, 102));
 
-        IncomeShowTable.setBackground(new java.awt.Color(153, 255, 255));
+        IncomeShowTable.setBackground(new java.awt.Color(0, 0, 0));
         IncomeShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         IncomeShowTable.setForeground(new java.awt.Color(0, 0, 0));
         IncomeShowTable.setModel(new javax.swing.table.DefaultTableModel(

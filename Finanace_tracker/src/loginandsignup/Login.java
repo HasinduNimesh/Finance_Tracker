@@ -119,7 +119,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        left.setBackground(new java.awt.Color(102, 51, 255));
+        left.setBackground(new java.awt.Color(28, 88, 90));
         left.setPreferredSize(new java.awt.Dimension(400, 500));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginandsignup/logo.png"))); // NOI18N
@@ -165,7 +165,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 51, 255));
+        jLabel1.setForeground(new java.awt.Color(7, 6, 36));
         jLabel1.setText("Sign In");
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
@@ -205,7 +205,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        signInButton.setBackground(new java.awt.Color(102, 51, 255));
+        signInButton.setBackground(new java.awt.Color(47, 79, 163));
         signInButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         signInButton.setForeground(new java.awt.Color(255, 255, 255));
         signInButton.setText("Sign In");
