@@ -520,6 +520,7 @@ public class SignUp extends javax.swing.JFrame {
             dbEmail = signUpEmail.getText();
             dbPassword = signUpPassword.getText();
             
+            UserAuthentication.registerUser()
             querry = "INSERT INTO signup_user(fName, lName, email, password)"+"VALUES('"+dbfName+"','"+dblName+"','"+dbEmail+"','"+dbPassword+"')";
             st.execute(querry);
             
@@ -541,7 +542,15 @@ public class SignUp extends javax.swing.JFrame {
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
         // TODO add your handling code here:
         signUpActionPerformer();
+        signUpActionPerformerH2();
+        
     }//GEN-LAST:event_signUpButtonActionPerformed
+
+    private void signUpActionPerformerH2() {
+        
+        
+    }
+
 
     private void signInRedirectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInRedirectButtonActionPerformed
         Login LogInFrame = new Login();

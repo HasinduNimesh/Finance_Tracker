@@ -15,8 +15,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class Home extends javax.swing.JFrame {
+    private String userID;
 
     public Home() {
+        initComponents();
+    }
+    public Home(String userID) {
+        this.userID=userID;
         initComponents();
     }
     
@@ -111,7 +116,7 @@ public class Home extends javax.swing.JFrame {
 
         lbl_username.setFont(new java.awt.Font("MS PGothic", 1, 18)); // NOI18N
         lbl_username.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_username.setText("User Name");
+        lbl_username.setText(userID);
 
         lbl_accemail.setFont(new java.awt.Font("MS PGothic", 0, 10)); // NOI18N
         lbl_accemail.setForeground(new java.awt.Color(0, 0, 0));
