@@ -471,19 +471,19 @@ public class EditUserDetails extends javax.swing.JFrame {
         });
 
         eFNameLbl.setBackground(new java.awt.Color(255, 255, 255));
-        eFNameLbl.setForeground(new java.awt.Color(102, 0, 153));
+        eFNameLbl.setForeground(new java.awt.Color(255, 0, 0));
 
         eLNameLbl.setBackground(new java.awt.Color(255, 255, 255));
-        eLNameLbl.setForeground(new java.awt.Color(102, 0, 153));
+        eLNameLbl.setForeground(new java.awt.Color(255, 0, 0));
 
         eEmailLbl.setBackground(new java.awt.Color(255, 255, 255));
-        eEmailLbl.setForeground(new java.awt.Color(102, 0, 153));
+        eEmailLbl.setForeground(new java.awt.Color(255, 0, 0));
 
         ePasswordLbl.setBackground(new java.awt.Color(255, 255, 255));
-        ePasswordLbl.setForeground(new java.awt.Color(102, 0, 153));
+        ePasswordLbl.setForeground(new java.awt.Color(255, 0, 0));
 
         ePassConfLbl.setBackground(new java.awt.Color(255, 255, 255));
-        ePassConfLbl.setForeground(new java.awt.Color(102, 0, 153));
+        ePassConfLbl.setForeground(new java.awt.Color(255, 0, 0));
 
         eNoticeLbl.setBackground(new java.awt.Color(255, 255, 255));
         eNoticeLbl.setForeground(new java.awt.Color(255, 0, 0));

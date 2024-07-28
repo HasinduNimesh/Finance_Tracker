@@ -41,6 +41,13 @@ public class Home extends javax.swing.JFrame {
         btn_load_goals.setBackground( Color.WHITE);
         btn_load_goals.setForeground(Color.BLACK);
         
+        btn_load_calculator.setBackground( Color.WHITE);
+        btn_load_calculator.setForeground(Color.BLACK);
+        
+        btn_load_settings.setBackground( Color.WHITE);
+        btn_load_settings.setForeground(Color.BLACK);
+        
+        
         btn_load_reports.setBackground( Color.WHITE);
         btn_load_reports.setForeground(Color.BLACK);
         
@@ -497,7 +504,12 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_load_logoutActionPerformed
 
     private void btn_load_calculatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_calculatorActionPerformed
-        // TODO add your handling code here:
+        panelPreprocessor();
+        ResetButtonColor();
+        SetButtonColor(btn_load_calculator);
+        // Assuming pnl is an instance of the Dashboard panel 
+        Calculator pnl = new Calculator();
+        panelResetter(pnl);
     }//GEN-LAST:event_btn_load_calculatorActionPerformed
 
     private void btn_load_settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_settingsActionPerformed
