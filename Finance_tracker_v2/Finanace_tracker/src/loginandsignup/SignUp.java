@@ -437,7 +437,7 @@ public class SignUp extends javax.swing.JFrame {
     }
     
     //This method is used to perform the sign up procedure
-    private void signUpActionPerformerMySQL(){
+    private void signUpActionPerformer(){
         String dbfName, dblName, dbEmail, dbPassword, querry;
         
         String SUrl, SUser, SPass;
@@ -537,54 +537,6 @@ public class SignUp extends javax.swing.JFrame {
         }
         
     }
-
-    
-    private void signUpActionPerformer(){
-        String dbfName, dblName, dbEmail, dbPassword, query;
-        
-        String SUrl, SUser, SPass;
-        SUrl = "jdbc:sqlite:/path/to/your/database.db";
-        SUser = ""; // SQLite does not require username and password
-        SPass = "";
-        
-        try{
-            if(firstName.getText().trim().isEmpty() || lastName.getText().trim().isEmpty() || signUpEmail.getText().trim().isEmpty() || signUpPassword.getText().trim().isEmpty() || signUpPasswordConf.getText().trim().isEmpty()){
-                // Handle empty fields error
-                noticeLbl.setText("Please fill in all the fields.");
-            } else if(!signUpPassword.getText().equals(signUpPasswordConf.getText())){
-                // Handle password mismatch error
-                noticeLbl.setText("Passwords do not match.");
-            } else {
-                // Get the values from the input fields
-                dbfName = firstName.getText().trim();
-                dblName = lastName.getText().trim();
-                dbEmail = signUpEmail.getText().trim();
-                dbPassword = signUpPassword.getText().trim();
-                
-                // Create the query to insert the user data into the database
-                query = "INSERT INTO users (first_name, last_name, email, password) VALUES ('" + dbfName + "', '" + dblName + "', '" + dbEmail + "', '" + dbPassword + "')";
-                
-                // Create a connection to the SQLite database
-                Connection conn = DriverManager.getConnection(SUrl, SUser, SPass);
-                
-                // Create a statement object to execute the query
-                Statement stmt = conn.createStatement();
-                
-                // Execute the query
-                stmt.executeUpdate(query);
-                
-                // Close the statement and connection
-                stmt.close();
-                conn.close();
-                
-                // Display success message
-                noticeLbl.setText("Sign up successful!");
-            }
-        } catch(Exception e){
-            System.out.println("Error! " + e.getMessage());
-        }
-    }
-
     
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
         // TODO add your handling code here:

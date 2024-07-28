@@ -4,7 +4,14 @@
  */
 package finanace_tracker;
 
+import records.IncomeRecord;
 import com.formdev.flatlaf.FlatClientProperties;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import static loginandsignup.SQLite.getIncomeRecords;
 import raven_cell.TableActionButtonRender;
 
 /**
@@ -16,9 +23,14 @@ public class Income extends javax.swing.JPanel {
     /**
      * Creates new form Expenses
      */
+    
+    //VARIABLES 
+    String type=null,note=null;
+    double income_amount=0.00;
+    
     public Income() {
         initComponents();
-        IncomeShowTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionButtonRender());
+        IncomeShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionButtonRender());
         
         //Color changes of table
         IncomeShowTable.setDefaultRenderer(Object.class, new TableGradientFun());
@@ -28,6 +40,31 @@ public class Income extends javax.swing.JPanel {
                 + "separatorColor:$TableHeader.background");
         TableScroll.putClientProperty(FlatClientProperties.STYLE, "border:3,0,3,0,$Table.background,10,10");
         TableScroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE,"hoverTrackColor:null");
+        
+       dynamicTableUpdater();
+    }
+ 
+
+    public void dynamicTableUpdater(){
+         // Fetch and update the table data
+        List<IncomeRecord> incomeRecords = getIncomeRecords();
+        updateIncomeTable(incomeRecords);
+    }
+    // Method to update the table model
+    public void updateIncomeTable(List<IncomeRecord> incomeRecords) {
+        DefaultTableModel model = (DefaultTableModel) IncomeShowTable.getModel();
+        model.setRowCount(0); // Clear existing rows
+
+        for (IncomeRecord record : incomeRecords) {
+            Object[] rowData = {
+                record.getId(),
+                record.getDateChooser(),
+                record.getIncomeType(),
+                record.getNote(),
+                record.getIncomeAmount()
+            };
+            model.addRow(rowData);
+        }
     }
 
     /**
@@ -55,7 +92,7 @@ public class Income extends javax.swing.JPanel {
         amount_enter_jTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         note_taker_jTextArea = new javax.swing.JTextArea();
-        jLabel9 = new javax.swing.JLabel();
+        income_Button = new javax.swing.JLabel();
         date_jLabel = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
         tablePanel = new javax.swing.JPanel();
@@ -64,6 +101,9 @@ public class Income extends javax.swing.JPanel {
 
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
         kGradientPanel1.setkStartColor(new java.awt.Color(85, 77, 222));
+
+        tot_income_kGradientPanel2.setkGradientFocus(600);
+        tot_income_kGradientPanel2.setkStartColor(new java.awt.Color(191, 0, 255));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("TOTAL INCOME");
@@ -93,6 +133,9 @@ public class Income extends javax.swing.JPanel {
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
+
+        income_goal_defict_kGradientPanel3.setkGradientFocus(600);
+        income_goal_defict_kGradientPanel3.setkStartColor(new java.awt.Color(191, 0, 255));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel6.setText("INCOME GOAL DEFICIT");
@@ -124,34 +167,63 @@ public class Income extends javax.swing.JPanel {
                 .addGap(12, 12, 12))
         );
 
-        kGradientPanel4.setkStartColor(new java.awt.Color(29, 103, 103));
+        kGradientPanel4.setkGradientFocus(1000);
+        kGradientPanel4.setkStartColor(new java.awt.Color(28, 88, 90));
 
+        add_new_income_jLabel.setBackground(new java.awt.Color(255, 255, 255));
         add_new_income_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        add_new_income_jLabel.setForeground(new java.awt.Color(255, 255, 255));
         add_new_income_jLabel.setText("ADD NEW INCOME");
 
+        method_jLabel.setBackground(new java.awt.Color(255, 255, 255));
         method_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        method_jLabel.setForeground(new java.awt.Color(255, 255, 255));
         method_jLabel.setText("Method");
 
+        salary_type_jComboBox.setBackground(new java.awt.Color(255, 255, 255));
         salary_type_jComboBox.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        salary_type_jComboBox.setForeground(new java.awt.Color(0, 0, 0));
         salary_type_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Basic Salary", "Overtime", "Bonus", "Commission", "Allowances", "Rental Income", "Investment Income", "Freelance Work", "Business Income", "Pension/Retirement Benefits", "Other" }));
+        salary_type_jComboBox.setBorder(null);
+        salary_type_jComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        amount_jLabel.setBackground(new java.awt.Color(255, 255, 255));
         amount_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        amount_jLabel.setForeground(new java.awt.Color(255, 255, 255));
         amount_jLabel.setText("Amount");
 
+        note_jLabel.setBackground(new java.awt.Color(255, 255, 255));
         note_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        note_jLabel.setForeground(new java.awt.Color(255, 255, 255));
         note_jLabel.setText("Note");
 
+        amount_enter_jTextField.setBackground(new java.awt.Color(255, 255, 255));
         amount_enter_jTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        amount_enter_jTextField.setForeground(new java.awt.Color(0, 0, 0));
 
+        note_taker_jTextArea.setBackground(new java.awt.Color(255, 255, 255));
         note_taker_jTextArea.setColumns(20);
         note_taker_jTextArea.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        note_taker_jTextArea.setForeground(new java.awt.Color(0, 0, 0));
         note_taker_jTextArea.setRows(5);
         jScrollPane1.setViewportView(note_taker_jTextArea);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dollar.png"))); // NOI18N
+        income_Button.setForeground(new java.awt.Color(255, 255, 255));
+        income_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dollar.png"))); // NOI18N
+        income_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        income_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                income_ButtonMouseClicked(evt);
+            }
+        });
 
+        date_jLabel.setBackground(new java.awt.Color(255, 255, 255));
         date_jLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        date_jLabel.setForeground(new java.awt.Color(255, 255, 255));
         date_jLabel.setText("Date");
+
+        jDateChooser.setBackground(new java.awt.Color(255, 255, 255));
+        jDateChooser.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
         kGradientPanel4.setLayout(kGradientPanel4Layout);
@@ -178,7 +250,7 @@ public class Income extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)))
+                        .addComponent(income_Button)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         kGradientPanel4Layout.setVerticalGroup(
@@ -186,7 +258,7 @@ public class Income extends javax.swing.JPanel {
             .addGroup(kGradientPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
+                    .addComponent(income_Button)
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
                         .addComponent(add_new_income_jLabel)
                         .addGap(12, 12, 12)
@@ -210,9 +282,11 @@ public class Income extends javax.swing.JPanel {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        amount_enter_jTextField.getAccessibleContext().setAccessibleParent(amount_enter_jTextField);
+
         tablePanel.setBackground(new java.awt.Color(51, 0, 102));
 
-        IncomeShowTable.setBackground(new java.awt.Color(153, 255, 255));
+        IncomeShowTable.setBackground(new java.awt.Color(255, 255, 255));
         IncomeShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         IncomeShowTable.setForeground(new java.awt.Color(0, 0, 0));
         IncomeShowTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -227,7 +301,7 @@ public class Income extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -299,6 +373,33 @@ public class Income extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void income_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_income_ButtonMouseClicked
+        //get incometype
+        type = (String)salary_type_jComboBox.getSelectedItem();
+        
+        //get income
+        try{
+         income_amount = Double.parseDouble(amount_enter_jTextField.getText());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        //value getter from date selector
+        Date selectedDate = jDateChooser.getDate();
+        // Format the date to a readable format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = dateFormat.format(selectedDate);
+
+        //Note taker
+        note = note_taker_jTextArea.getText();
+        
+        //send values to the database
+        AccessOfDatabase.ValueSetterToDatabase.setIncomePerform(type, income_amount, dateString, note);
+        
+        //update table
+        dynamicTableUpdater();
+    }//GEN-LAST:event_income_ButtonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable IncomeShowTable;
@@ -307,13 +408,13 @@ public class Income extends javax.swing.JPanel {
     private javax.swing.JTextField amount_enter_jTextField;
     private javax.swing.JLabel amount_jLabel;
     private javax.swing.JLabel date_jLabel;
+    private javax.swing.JLabel income_Button;
     private keeptoo.KGradientPanel income_goal_defict_kGradientPanel3;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel4;

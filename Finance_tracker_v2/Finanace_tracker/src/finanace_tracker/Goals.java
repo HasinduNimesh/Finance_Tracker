@@ -4,6 +4,10 @@
  */
 package finanace_tracker;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
+
 /**
  *
  * @author ASUS
@@ -15,6 +19,15 @@ public class Goals extends javax.swing.JPanel {
      */
     public Goals() {
         initComponents();
+    }
+    
+    //variables
+    double incomeGoal=0.0;
+    double expenseGoal=0.0;
+    
+    //progress shower
+    private void progress_shower(){
+        
     }
 
     /**
@@ -35,7 +48,7 @@ public class Goals extends javax.swing.JPanel {
         start_jDateChooser_income = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
         end_jDateChooser_income = new com.toedter.calendar.JDateChooser();
-        income_setter_button = new javax.swing.JLabel();
+        income_goal_setter_button = new javax.swing.JLabel();
         kGradientPanel2 = new keeptoo.KGradientPanel();
         income_goal_jProgressBar = new javax.swing.JProgressBar();
         incomeGoalAchievementLable = new javax.swing.JLabel();
@@ -47,7 +60,7 @@ public class Goals extends javax.swing.JPanel {
         start_jDateChooser_expense = new com.toedter.calendar.JDateChooser();
         jLabel15 = new javax.swing.JLabel();
         end_jDateChooser_expense = new com.toedter.calendar.JDateChooser();
-        expense_setter_button = new javax.swing.JLabel();
+        expense_goal_setter_button = new javax.swing.JLabel();
         kGradientPanel3 = new keeptoo.KGradientPanel();
         expense_goal_jProgressBar = new javax.swing.JProgressBar();
         ExpenseGoalAchievementLable = new javax.swing.JLabel();
@@ -55,23 +68,46 @@ public class Goals extends javax.swing.JPanel {
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
         kGradientPanel1.setkStartColor(new java.awt.Color(85, 77, 222));
 
+        income_goal_setter_kGradientPanel.setkGradientFocus(1000);
         income_goal_setter_kGradientPanel.setkStartColor(new java.awt.Color(29, 103, 103));
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("SET INCOME GOAL");
 
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Amount");
 
+        income_amount_txtfield.setBackground(new java.awt.Color(255, 255, 255));
         income_amount_txtfield.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        income_amount_txtfield.setDisabledTextColor(new java.awt.Color(40, 40, 40));
 
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Start Date");
 
+        start_jDateChooser_income.setBackground(new java.awt.Color(0, 0, 0));
+        start_jDateChooser_income.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("End Date");
 
-        income_setter_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add.png"))); // NOI18N
+        end_jDateChooser_income.setBackground(new java.awt.Color(0, 0, 0));
+        end_jDateChooser_income.setForeground(new java.awt.Color(255, 255, 255));
+
+        income_goal_setter_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add.png"))); // NOI18N
+        income_goal_setter_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        income_goal_setter_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                income_goal_setter_buttonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout income_goal_setter_kGradientPanelLayout = new javax.swing.GroupLayout(income_goal_setter_kGradientPanel);
         income_goal_setter_kGradientPanel.setLayout(income_goal_setter_kGradientPanelLayout);
@@ -100,7 +136,7 @@ public class Goals extends javax.swing.JPanel {
                         .addGap(27, 27, 27))))
             .addGroup(income_goal_setter_kGradientPanelLayout.createSequentialGroup()
                 .addGap(139, 139, 139)
-                .addComponent(income_setter_button)
+                .addComponent(income_goal_setter_button)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         income_goal_setter_kGradientPanelLayout.setVerticalGroup(
@@ -121,11 +157,15 @@ public class Goals extends javax.swing.JPanel {
                     .addComponent(jLabel12)
                     .addComponent(end_jDateChooser_income, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(income_setter_button)
+                .addComponent(income_goal_setter_button)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        kGradientPanel2.setkStartColor(new java.awt.Color(191, 0, 255));
+
+        incomeGoalAchievementLable.setBackground(new java.awt.Color(255, 255, 255));
         incomeGoalAchievementLable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        incomeGoalAchievementLable.setForeground(new java.awt.Color(255, 255, 255));
         incomeGoalAchievementLable.setText("INCOME GOAL ACHIEVEMENT");
 
         javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
@@ -151,23 +191,46 @@ public class Goals extends javax.swing.JPanel {
                 .addGap(36, 36, 36))
         );
 
+        expense_goal_setter_kGradientPanel.setkGradientFocus(1000);
         expense_goal_setter_kGradientPanel.setkStartColor(new java.awt.Color(29, 103, 103));
 
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("SET EXPENSE GOAL");
 
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Amount");
 
+        expense_amount_txtfield.setBackground(new java.awt.Color(255, 255, 255));
         expense_amount_txtfield.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        expense_amount_txtfield.setForeground(new java.awt.Color(0, 0, 0));
 
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Start Date");
 
+        start_jDateChooser_expense.setBackground(new java.awt.Color(0, 0, 0));
+        start_jDateChooser_expense.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("End Date");
 
-        expense_setter_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add.png"))); // NOI18N
+        end_jDateChooser_expense.setBackground(new java.awt.Color(0, 0, 0));
+        end_jDateChooser_expense.setForeground(new java.awt.Color(255, 255, 255));
+
+        expense_goal_setter_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add.png"))); // NOI18N
+        expense_goal_setter_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        expense_goal_setter_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                expense_goal_setter_buttonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout expense_goal_setter_kGradientPanelLayout = new javax.swing.GroupLayout(expense_goal_setter_kGradientPanel);
         expense_goal_setter_kGradientPanel.setLayout(expense_goal_setter_kGradientPanelLayout);
@@ -196,7 +259,7 @@ public class Goals extends javax.swing.JPanel {
                         .addGap(27, 27, 27))))
             .addGroup(expense_goal_setter_kGradientPanelLayout.createSequentialGroup()
                 .addGap(139, 139, 139)
-                .addComponent(expense_setter_button)
+                .addComponent(expense_goal_setter_button)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         expense_goal_setter_kGradientPanelLayout.setVerticalGroup(
@@ -217,11 +280,15 @@ public class Goals extends javax.swing.JPanel {
                     .addComponent(jLabel15)
                     .addComponent(end_jDateChooser_expense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(expense_setter_button)
+                .addComponent(expense_goal_setter_button)
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        kGradientPanel3.setkStartColor(new java.awt.Color(191, 0, 255));
+
+        ExpenseGoalAchievementLable.setBackground(new java.awt.Color(255, 255, 255));
         ExpenseGoalAchievementLable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ExpenseGoalAchievementLable.setForeground(new java.awt.Color(255, 255, 255));
         ExpenseGoalAchievementLable.setText("EXPENSES GOAL ACHIEVEMENT");
 
         javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
@@ -288,19 +355,64 @@ public class Goals extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void income_goal_setter_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_income_goal_setter_buttonMouseClicked
+        //enter income goal
+        try{
+        incomeGoal = Double.parseDouble(income_amount_txtfield.getText());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        //start date getter
+        java.util.Date selectedStartDate_Income = start_jDateChooser_income.getDate();
+        //end date getter
+        java.util.Date selectEndDate_Income = end_jDateChooser_income.getDate();
+        // Format the date to a readable format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //save income startdate to Date
+        String income_start_date = dateFormat.format(selectedStartDate_Income);
+        //save income enddate to Date
+        String income_end_date = dateFormat.format(selectEndDate_Income);
+        
+        //send goal to the database
+        AccessOfDatabase.ValueSetterToDatabase.setGoalIncomePerform(incomeGoal, income_start_date, income_end_date);
+    }//GEN-LAST:event_income_goal_setter_buttonMouseClicked
+
+    private void expense_goal_setter_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expense_goal_setter_buttonMouseClicked
+        //enter income goal
+        try{
+        expenseGoal = Double.parseDouble(expense_amount_txtfield.getText());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        //start date getter
+        java.util.Date selectedStartDate_Expense = start_jDateChooser_expense.getDate();
+        //end date getter
+        java.util.Date selectEndDate_Expense = end_jDateChooser_expense.getDate();
+        // Format the date to a readable format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //save income startdate to Date
+        String expense_start_date = dateFormat.format(selectedStartDate_Expense);
+        //save income enddate to Date
+        String expense_end_date = dateFormat.format(selectEndDate_Expense);
+        
+         //send goal to the database
+        AccessOfDatabase.ValueSetterToDatabase.setGoalExpensePerform(incomeGoal, expense_start_date, expense_end_date);
+        
+    }//GEN-LAST:event_expense_goal_setter_buttonMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ExpenseGoalAchievementLable;
     private com.toedter.calendar.JDateChooser end_jDateChooser_expense;
     private com.toedter.calendar.JDateChooser end_jDateChooser_income;
     private javax.swing.JTextField expense_amount_txtfield;
     private javax.swing.JProgressBar expense_goal_jProgressBar;
+    private javax.swing.JLabel expense_goal_setter_button;
     private keeptoo.KGradientPanel expense_goal_setter_kGradientPanel;
-    private javax.swing.JLabel expense_setter_button;
     private javax.swing.JLabel incomeGoalAchievementLable;
     private javax.swing.JTextField income_amount_txtfield;
     private javax.swing.JProgressBar income_goal_jProgressBar;
+    private javax.swing.JLabel income_goal_setter_button;
     private keeptoo.KGradientPanel income_goal_setter_kGradientPanel;
-    private javax.swing.JLabel income_setter_button;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
