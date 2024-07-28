@@ -60,6 +60,8 @@ public class Calculator extends javax.swing.JPanel {
         multiplyBtn = new javax.swing.JButton();
         backspaceBtn = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(788, 592));
+
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
         kGradientPanel1.setkStartColor(new java.awt.Color(85, 77, 222));
 
