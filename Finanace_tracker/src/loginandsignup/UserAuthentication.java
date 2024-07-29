@@ -79,4 +79,21 @@ public class UserAuthentication {
             e.printStackTrace();
         }
     }
+
+    public static String getUserFullName(String email) throws SQLException {
+        try (Connection conn = DatabaseUtil.getConnection()) {
+            String query = "SELECT f_name, l_name FROM users WHERE email = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String firstName = rs.getString("f_name");
+                String lastName = rs.getString("l_name");
+                return firstName + " " + lastName;
+            } else {
+                return null;
+            }
+        }
+    }
+
 }

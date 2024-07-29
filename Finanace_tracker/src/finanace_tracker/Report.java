@@ -9,6 +9,9 @@ import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
+
+import loginandsignup.UserAuthentication;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,10 +35,11 @@ import java.sql.SQLException;
 public class Report extends javax.swing.JPanel {
 
     private String userName = "";
-    private String userID = "";
+    private String email = "";
 
-    public Report() {
+    public Report(String email) {
     initComponents();
+    this.email = email;
 
     PDF.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,7 +55,7 @@ public class Report extends javax.swing.JPanel {
 
     // Call saveDataToFile to read data from the database and save it to a .txt file
     saveDataToFile();
-}
+} 
 
 
     private void generatePDF() {
@@ -74,7 +78,7 @@ public class Report extends javax.swing.JPanel {
 
             // Add user details
             doc.add(new Paragraph("User Name  : " + userName));
-            doc.add(new Paragraph("User ID        : " + userID));
+            doc.add(new Paragraph("User ID        : " + email));
             doc.add(new Paragraph(" ")); // Add a blank line
 
             // Add title and subtitle
@@ -178,7 +182,7 @@ public class Report extends javax.swing.JPanel {
     }
 
     private void refreshTable() {
-        String filePath = "D:\\Documents\\oop lab sheets\\Practicle exam\\Reporter\\src\\reporter\\Table.txt";
+        String filePath = System.getProperty("user.dir") + "/Table.txt";
         File file = new File(filePath);
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -186,7 +190,7 @@ public class Report extends javax.swing.JPanel {
             String userLine = br.readLine();
             String[] userDetails = userLine.split("/");
             userName = userDetails[1];
-            userID = userDetails[2];
+            email = userDetails[2];
 
             DefaultTableModel incomeModel = (DefaultTableModel) Income_Table.getModel();
             DefaultTableModel expenseModel = (DefaultTableModel) Expences_Table.getModel();
@@ -223,29 +227,52 @@ public class Report extends javax.swing.JPanel {
     }
 
     private void saveDataToFile() {
+        /* 
     String url = "jdbc:mysql://localhost:3306/yourdatabase"; // Update with your database URL
     String user = "yourusername"; // Update with your database username
     String password = "yourpassword"; // Update with your database password
+*/
+String jdbcUrlLogin = "jdbc:sqlite:C:\\Users\\ASUS\\OneDrive - General Sir John Kotelawala Defence University\\Documents\\NetBeansProjects\\Finanace_tracker\\src\\loginandsignup\\database\\userPasswords.db";
+String jdbcUrl = "jdbc:sqlite:C:\\Users\\ASUS\\OneDrive - General Sir John Kotelawala Defence University\\Documents\\NetBeansProjects\\Finanace_tracker\\src\\loginandsignup\\database\\userDetailDatabase.db";
 
-    String filePath = "D:\\Documents\\oop lab sheets\\Practicle exam\\Reporter\\src\\reporter\\Table.txt"; // Path to the file
 
-    try (Connection conn = DriverManager.getConnection(url, user, password);
-         Statement stmt = conn.createStatement();
-         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+     String fullname=UserAuthentication.getUserFullName(email);
 
+
+
+   // String filePath = "D:\\Documents\\oop lab sheets\\Practicle exam\\Reporter\\src\\reporter\\Table.txt"; // Path to the file
+    String filePath = System.getProperty("user.dir") + "/Table.txt";
+
+
+   // try (Connection conn = DriverManager.getConnection(url, user, password);
+    //     Statement stmt = conn.createStatement();
+     //    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
         // Query to get user details
-        String userQuery = "SELECT * FROM UserDetails WHERE userID = 1"; // Adjust the query as per your database schema
-        ResultSet userRs = stmt.executeQuery(userQuery);
-        if (userRs.next()) {
-            userName = userRs.getString("userName");
-            userID = userRs.getString("userID");
-            writer.write("User/" + userName + "/" + userID);
+        String userQuery = "SELECT * FROM UserDetails WHERE email = 1"; // Adjust the query as per your database schema
+      //  ResultSet userRs = stmt.executeQuery(userQuery);
+       // if (userRs.next()) {
+       //     userName = userRs.getString("userName");
+           // email = userRs.getString("email");
+            writer.write("User/" + fullname + "/" + email);
             writer.newLine();
-        }
+        //}
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            // Load SQLite JDBC driver
+            Class.forName("org.sqlite.JDBC");
 
-        // Query to get income details
-        String incomeQuery = "SELECT * FROM Income";
-        ResultSet incomeRs = stmt.executeQuery(incomeQuery);
+            // Establish database connection
+            connection = DriverManager.getConnection(jdbcUrl);
+            System.out.println("Connected to database");
+            
+            statement = connection.createStatement();
+
+          
+        // Query to get income details // CONNECT TO HASII
+        String incomeQuery = "SELECT * FROM setIncome";
+        ResultSet incomeRs = statement.executeQuery(incomeQuery);
         while (incomeRs.next()) {
             writer.write("Income/" + incomeRs.getString("Income_Type") + "/" + incomeRs.getString("Amount") + "/"
                     + incomeRs.getString("Date") + "/" + incomeRs.getString("Note"));
@@ -253,26 +280,35 @@ public class Report extends javax.swing.JPanel {
         }
 
         // Query to get expense details
-        String expenseQuery = "SELECT * FROM Expenses";
-        ResultSet expenseRs = stmt.executeQuery(expenseQuery);
+        String expenseQuery = "SELECT * FROM setExpenses";
+        ResultSet expenseRs = statement.executeQuery(expenseQuery);
         while (expenseRs.next()) {
             writer.write("Expense/" + expenseRs.getString("Expense_Type") + "/" + expenseRs.getString("Amount") + "/"
                     + expenseRs.getString("Date") + "/" + expenseRs.getString("Note"));
             writer.newLine();
         }
 
-        // Query to get goal details
-        String goalQuery = "SELECT * FROM Goals";
-        ResultSet goalRs = stmt.executeQuery(goalQuery);
-        while (goalRs.next()) {
-            writer.write("Goal/" + goalRs.getString("Goal_Type") + "/" + goalRs.getString("Amount") + "/"
-                    + goalRs.getString("Start_Date") + "/" + goalRs.getString("End_Date"));
+        // Query to get income_goal details
+        String incomegoalQuery = "SELECT * FROM incomeGoals";
+        ResultSet incomegoalRs = statement.executeQuery(incomegoalQuery);
+        while (incomegoalRs.next()) {
+            writer.write("Goal/" + incomegoalRs.getString("Goal_Type") + "/" + goalRs.getString("Amount") + "/"
+                    + incomegoalRs.getString("Start_Date") + "/" + incomegoalRs.getString("End_Date"));
             writer.newLine();
         }
+         // Query to get expense_goal details
+         String expensesgoalQuery = "SELECT * FROM expensesGoals";
+         ResultSet expensegoalRs = statement.executeQuery(expensesgoalQuery);
+         while (expensegoalRs.next()) {
+             writer.write("Goal/" + expensegoalRs.getString("Goal_Type") + "/" + goalRs.getString("Amount") + "/"
+                     + expensegoalRs.getString("Start_Date") + "/" + goalRs.getString("End_Date"));
+             writer.newLine();
+         }
+ 
 
         // Query to get investment details
-        String investmentQuery = "SELECT * FROM Investments";
-        ResultSet investmentRs = stmt.executeQuery(investmentQuery);
+        String investmentQuery = "SELECT * FROM setInvestments";
+        ResultSet investmentRs = statement.executeQuery(investmentQuery);
         while (investmentRs.next()) {
             writer.write("Investment/" + investmentRs.getString("Investment_Type") + "/" + investmentRs.getString("Amount") + "/"
                     + investmentRs.getString("Date") + "/" + investmentRs.getString("Note"));

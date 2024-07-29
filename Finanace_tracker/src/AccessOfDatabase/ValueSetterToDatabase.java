@@ -5,20 +5,41 @@
 package AccessOfDatabase;
 
 import loginandsignup.SQLite;
+import java.sql.Date;
 
 /**
- *
+ * This class provides methods to interact with the database.
+ * It uses the SQLite class to perform various database operations.
+ * 
  * @author ASUS
  */
 public class ValueSetterToDatabase {
-    public void setIncomePerform(String Income_Type,double Income_Amount,String Date_Chooser,String Note){
-        SQLite.setIncome(Income_Type, Income_Amount, Date_Chooser, Note);
+    
+    // Method to set income in the database
+    public static void setIncomePerform(String incomeType, double incomeAmount, String dateChooser, String note) {
+        SQLite.setIncome(incomeType, incomeAmount, dateChooser, note);
     }
     
-    public void setExpensePerform(String expense_Type,double expense_Amount,String Date_Chooser,String Note){
-        SQLite.setIncome(expense_Type, expense_Amount, Date_Chooser, Note);
+    // Method to set expense in the database
+    public static void setExpensePerform(String expenseType, double expenseAmount, String dateChooser, String note) {
+        SQLite.setExpense(expenseType, expenseAmount, dateChooser, note);
     }
     
-    
+    // Method to set investment in the database
+    public static void setInvestmentPerform(String investmentType, double investmentAmount, String dateChooser, String note) {
+        SQLite.setInvestment(investmentType, investmentAmount, dateChooser, note);
+    }
 
+    
+    // Method to set income goal in the database
+    public static void setGoalIncomePerform(double incomeGoalAmount, String startDate, String endDate) {
+        SQLite.setIncomeGoal(incomeGoalAmount, startDate, endDate);
+    }
+    
+    // Method to set expense goal in the database
+    public static void setGoalExpensePerform(double expenseGoalAmount, String startDate, String endDate) {
+        SQLite.setExpenseGoal(expenseGoalAmount, startDate, endDate);
+    }
+    
+    //
 }

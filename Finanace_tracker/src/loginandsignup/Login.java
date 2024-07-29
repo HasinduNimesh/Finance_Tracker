@@ -55,7 +55,7 @@ public class Login extends javax.swing.JFrame {
         //database
         try {
             if(UserAuthentication.authenticateUser(password, userID)!=null) {
-                String userIDtoSend=UserAuthentication.authenticateUser(userID, password);
+                String userIDtoSend=UserAuthentication.authenticateUser(password, userID);
                  
                 java.awt.EventQueue.invokeLater(() -> {
                     this.dispose();

@@ -494,7 +494,12 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_load_goalsActionPerformed
 
     private void btn_load_reportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_reportsActionPerformed
-
+        panelPreprocessor();
+        ResetButtonColor();
+        SetButtonColor(btn_load_goals);
+        // Assuming pnl is an instance of the Dashboard panel 
+        Report pnl = new Report(userID);
+        panelResetter(pnl);
     }//GEN-LAST:event_btn_load_reportsActionPerformed
 
     private void btn_load_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_logoutActionPerformed
