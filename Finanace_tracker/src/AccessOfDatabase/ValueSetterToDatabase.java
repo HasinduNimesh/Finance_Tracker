@@ -25,13 +25,21 @@ public class ValueSetterToDatabase {
         SQLite.setExpense(expenseType, expenseAmount, dateChooser, note);
     }
     
+    // Method to set investment in the database
+    public static void setInvestmentPerform(String investmentType, double investmentAmount, String dateChooser, String note) {
+        SQLite.setInvestment(investmentType, investmentAmount, dateChooser, note);
+    }
+
+    
     // Method to set income goal in the database
-    public static void setGoalIncomePerform(double incomeGoalAmount, Date startDate, Date endDate) {
+    public static void setGoalIncomePerform(double incomeGoalAmount, String startDate, String endDate) {
         SQLite.setIncomeGoal(incomeGoalAmount, startDate, endDate);
     }
     
     // Method to set expense goal in the database
-    public static void setGoalExpensePerform(double expenseGoalAmount, Date startDate, Date endDate) {
+    public static void setGoalExpensePerform(double expenseGoalAmount, String startDate, String endDate) {
         SQLite.setExpenseGoal(expenseGoalAmount, startDate, endDate);
     }
+    
+    //
 }

@@ -4,9 +4,15 @@
  */
 package finanace_tracker;
 
+import records.IncomeRecord;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import static loginandsignup.SQLite.getIncomeRecords;
 import raven_cell.TableActionButtonRender;
 
 /**
@@ -23,6 +29,7 @@ public class Income extends javax.swing.JPanel {
     String type=null,note=null;
     double income_amount=0.00;
     
+    
     public Income() {
         initComponents();
         IncomeShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionButtonRender());
@@ -35,6 +42,31 @@ public class Income extends javax.swing.JPanel {
                 + "separatorColor:$TableHeader.background");
         TableScroll.putClientProperty(FlatClientProperties.STYLE, "border:3,0,3,0,$Table.background,10,10");
         TableScroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE,"hoverTrackColor:null");
+        
+       dynamicTableUpdater();
+    }
+ 
+
+    public void dynamicTableUpdater(){
+         // Fetch and update the table data
+        List<IncomeRecord> incomeRecords = getIncomeRecords();
+        updateIncomeTable(incomeRecords);
+    }
+    // Method to update the table model
+    public void updateIncomeTable(List<IncomeRecord> incomeRecords) {
+        DefaultTableModel model = (DefaultTableModel) IncomeShowTable.getModel();
+        model.setRowCount(0); // Clear existing rows
+
+        for (IncomeRecord record : incomeRecords) {
+            Object[] rowData = {
+                record.getId(),
+                record.getDateChooser(),
+                record.getIncomeType(),
+                record.getNote(),
+                record.getIncomeAmount()
+            };
+            model.addRow(rowData);
+        }
     }
 
     /**
@@ -180,6 +212,7 @@ public class Income extends javax.swing.JPanel {
 
         income_Button.setForeground(new java.awt.Color(255, 255, 255));
         income_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dollar.png"))); // NOI18N
+        income_Button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         income_Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 income_ButtonMouseClicked(evt);
@@ -255,7 +288,7 @@ public class Income extends javax.swing.JPanel {
 
         tablePanel.setBackground(new java.awt.Color(51, 0, 102));
 
-        IncomeShowTable.setBackground(new java.awt.Color(0, 0, 0));
+        IncomeShowTable.setBackground(new java.awt.Color(255, 255, 255));
         IncomeShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         IncomeShowTable.setForeground(new java.awt.Color(0, 0, 0));
         IncomeShowTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -343,27 +376,42 @@ public class Income extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void income_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_income_ButtonMouseClicked
-        //get incometype
-        type = (String)salary_type_jComboBox.getSelectedItem();
-        
-        //get income
-        try{
-         income_amount = Double.parseDouble(amount_enter_jTextField.getText());
-        }catch(Exception e){
-            e.printStackTrace();
+    // Retrieve income type
+    String type = (String) salary_type_jComboBox.getSelectedItem();
+        if (type == null) {
+            JOptionPane.showMessageDialog(this, "Please select an income type.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        
-        //value getter from date selector
-        Date selectedDate = jDateChooser.getDate();
-        // Format the date to a readable format
+
+    // Retrieve income amount
+    double income_amount;
+    try {
+        income_amount = Double.parseDouble(amount_enter_jTextField.getText());
+        if (income_amount < 0) {
+            throw new NumberFormatException("Income amount cannot be negative.");
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Invalid income amount. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Retrieve and format the date
+    Date selectedDate = jDateChooser.getDate();
+    if (selectedDate == null) {
+         JOptionPane.showMessageDialog(this, "Please select a date.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = dateFormat.format(selectedDate);
 
-        //Note taker
-        note = note_taker_jTextArea.getText();
+        // Retrieve note
+        String note = note_taker_jTextArea.getText();
         
         //send values to the database
         AccessOfDatabase.ValueSetterToDatabase.setIncomePerform(type, income_amount, dateString, note);
+        
+        //update table
+        dynamicTableUpdater();
     }//GEN-LAST:event_income_ButtonMouseClicked
 
 

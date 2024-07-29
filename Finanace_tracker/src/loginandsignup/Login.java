@@ -54,12 +54,12 @@ public class Login extends javax.swing.JFrame {
         
         //database
         try {
-            if(UserAuthentication.authenticateUser(userID, password)!=null) {
+            if(UserAuthentication.authenticateUser(password, userID)!=null) {
                 String userIDtoSend=UserAuthentication.authenticateUser(userID, password);
                  
                 java.awt.EventQueue.invokeLater(() -> {
                     this.dispose();
-                    Home page = new Home(userIDtoSend); //userID send username
+                    Home page = new Home(userID); //userID send username
                     page.setVisible(true);
                     Welcome_Page pnl = new Welcome_Page();
                     page.panelResetter(pnl);
@@ -119,15 +119,15 @@ public class Login extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        left.setBackground(new java.awt.Color(28, 88, 90));
+        left.setBackground(new java.awt.Color(9, 61, 61));
         left.setPreferredSize(new java.awt.Dimension(400, 500));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginandsignup/logo.png"))); // NOI18N
 
         jLabel7.setBackground(new java.awt.Color(0, 102, 102));
-        jLabel7.setFont(new java.awt.Font("Viner Hand ITC", 1, 30)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Cascadia Code", 1, 35)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Finance Tracker");
+        jLabel7.setText("PLUToS");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,21 +138,25 @@ public class Login extends javax.swing.JFrame {
         leftLayout.setHorizontalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(leftLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLabel6))
+                    .addGroup(leftLayout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addGroup(leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         leftLayout.setVerticalGroup(
             leftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(96, 96, 96)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(54, 54, 54))
         );
@@ -165,7 +169,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(7, 6, 36));
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Sign In");
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
@@ -205,7 +209,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        signInButton.setBackground(new java.awt.Color(47, 79, 163));
+        signInButton.setBackground(new java.awt.Color(0, 102, 102));
         signInButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         signInButton.setForeground(new java.awt.Color(255, 255, 255));
         signInButton.setText("Sign In");

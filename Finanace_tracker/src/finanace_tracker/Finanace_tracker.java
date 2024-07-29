@@ -10,6 +10,7 @@ package finanace_tracker;
  */
 public class Finanace_tracker {
 
+    
     /**
      * @param args the command line arguments
      */

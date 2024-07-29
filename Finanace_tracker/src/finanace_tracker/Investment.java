@@ -5,7 +5,17 @@
 package finanace_tracker;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static loginandsignup.SQLite.getFirstCurrencyType;
+import static loginandsignup.SQLite.getInvestmentRecords;
+import static loginandsignup.SQLite.getTotalIncome;
+import static loginandsignup.SQLite.getTotalInvestment;
 import raven_cell.TableActionButtonRender;
+import records.InvestmentRecord;
 
 /**
  *
@@ -16,20 +26,62 @@ public class Investment extends javax.swing.JPanel {
     /**
      * Creates new form Expenses
      */
+    
+    //VARIABLES 
+    String type=null,note=null;
+    double expense_amount=0.00;
+    String currency=getFirstCurrencyType();
+    
+    
     public Investment() {
         initComponents();
-        IncomeShowTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionButtonRender());
+        
+        //table initiation
+        InvestmentShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionButtonRender());
         
         //Color changes of table
-        IncomeShowTable.setDefaultRenderer(Object.class, new TableGradientFun());
+        InvestmentShowTable.setDefaultRenderer(Object.class, new TableGradientFun());
         tablePanel.putClientProperty(FlatClientProperties.STYLE,"border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
-        IncomeShowTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, "hoverBackground:null;"
+        InvestmentShowTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, "hoverBackground:null;"
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background");
         TableScroll.putClientProperty(FlatClientProperties.STYLE, "border:3,0,3,0,$Table.background,10,10");
         TableScroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE,"hoverTrackColor:null");
+        
+        //call table updater
+        dynamicTableUpdater();
+        
+        //lableupdater
+        updateLableUpdate();
+        
     }
 
+    //investement table updater method 
+    public void dynamicTableUpdater(){
+        List<InvestmentRecord> investmentRecords = getInvestmentRecords();
+        updateInvestmentTable(investmentRecords);
+    }
+    
+    public void updateInvestmentTable(List<InvestmentRecord> investmentRecords) {
+        DefaultTableModel model = (DefaultTableModel) InvestmentShowTable.getModel();
+        model.setRowCount(0); // Clear existing rows
+
+        for (InvestmentRecord record : investmentRecords) {
+            Object[] rowData = {
+                record.getIndex(), // Use getIndex() instead of getId()
+                record.getDateChooser(),
+                record.getInvestmentType(),
+                record.getNote(),
+                record.getInvestmentAmount()
+            };
+            model.addRow(rowData);
+        }
+    }
+    
+    public void updateLableUpdate(){
+        totalInvestment_lbl.setText(currency+". "+getTotalInvestment());
+        totalincome_lbl.setText(currency+". "+getTotalIncome());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,25 +94,25 @@ public class Investment extends javax.swing.JPanel {
         kGradientPanel1 = new keeptoo.KGradientPanel();
         kGradientPanel2 = new keeptoo.KGradientPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        totalInvestment_lbl = new javax.swing.JLabel();
         kGradientPanel3 = new keeptoo.KGradientPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        totalincome_lbl = new javax.swing.JLabel();
         kGradientPanel4 = new keeptoo.KGradientPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        investment_type = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        amount_invested = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        note_txt = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        date_chooser = new com.toedter.calendar.JDateChooser();
         tablePanel = new javax.swing.JPanel();
         TableScroll = new javax.swing.JScrollPane();
-        IncomeShowTable = new javax.swing.JTable();
+        InvestmentShowTable = new javax.swing.JTable();
 
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
         kGradientPanel1.setkStartColor(new java.awt.Color(85, 77, 222));
@@ -70,8 +122,8 @@ public class Investment extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("TOTAL INVESTMENT");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setText("0.00");
+        totalInvestment_lbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        totalInvestment_lbl.setText("0.00");
 
         javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
         kGradientPanel2.setLayout(kGradientPanel2Layout);
@@ -83,7 +135,7 @@ public class Investment extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(totalInvestment_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         kGradientPanel2Layout.setVerticalGroup(
@@ -92,7 +144,7 @@ public class Investment extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(totalInvestment_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -101,8 +153,8 @@ public class Investment extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setText("TOTAL INCOME");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setText("0.00");
+        totalincome_lbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        totalincome_lbl.setText("0.00");
 
         javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
         kGradientPanel3.setLayout(kGradientPanel3Layout);
@@ -114,7 +166,7 @@ public class Investment extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addGroup(kGradientPanel3Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(totalincome_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         kGradientPanel3Layout.setVerticalGroup(
@@ -123,7 +175,7 @@ public class Investment extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(totalincome_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -140,11 +192,11 @@ public class Investment extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Method");
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Savings Account", "Fixed Deposit", "Stocks", "Bonds", "Mutual Funds", "Real Estate", "Gold/Commodities", "Retirement Accounts (e.g., EPF, ETF)", "Education Savings Plans", "Cryptocurrency", "Peer-to-Peer Lending", "Other Investments" }));
-        jComboBox1.setBorder(null);
+        investment_type.setBackground(new java.awt.Color(255, 255, 255));
+        investment_type.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        investment_type.setForeground(new java.awt.Color(0, 0, 0));
+        investment_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Savings Account", "Fixed Deposit", "Stocks", "Bonds", "Mutual Funds", "Real Estate", "Gold/Commodities", "Retirement Accounts (e.g., EPF, ETF)", "Education Savings Plans", "Cryptocurrency", "Peer-to-Peer Lending", "Other Investments" }));
+        investment_type.setBorder(null);
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -156,18 +208,19 @@ public class Investment extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Note");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        amount_invested.setBackground(new java.awt.Color(255, 255, 255));
+        amount_invested.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        amount_invested.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        note_txt.setBackground(new java.awt.Color(255, 255, 255));
+        note_txt.setColumns(20);
+        note_txt.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        note_txt.setForeground(new java.awt.Color(0, 0, 0));
+        note_txt.setRows(5);
+        jScrollPane1.setViewportView(note_txt);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/return-on-investment.png"))); // NOI18N
+        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel9MouseClicked(evt);
@@ -179,8 +232,8 @@ public class Investment extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Date");
 
-        jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
-        jDateChooser1.setForeground(new java.awt.Color(0, 0, 0));
+        date_chooser.setBackground(new java.awt.Color(255, 255, 255));
+        date_chooser.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout kGradientPanel4Layout = new javax.swing.GroupLayout(kGradientPanel4);
         kGradientPanel4.setLayout(kGradientPanel4Layout);
@@ -196,8 +249,8 @@ public class Investment extends javax.swing.JPanel {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                            .addComponent(investment_type, javax.swing.GroupLayout.Alignment.LEADING, 0, 1, Short.MAX_VALUE)
+                            .addComponent(amount_invested, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
                     .addGroup(kGradientPanel4Layout.createSequentialGroup()
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,7 +258,7 @@ public class Investment extends javax.swing.JPanel {
                         .addGap(0, 0, 0)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(date_chooser, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9)))
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -221,15 +274,15 @@ public class Investment extends javax.swing.JPanel {
                         .addGap(12, 12, 12)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(investment_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(amount_invested, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(8, 8, 8)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(date_chooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(kGradientPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGradientPanel4Layout.createSequentialGroup()
@@ -243,10 +296,10 @@ public class Investment extends javax.swing.JPanel {
 
         tablePanel.setBackground(new java.awt.Color(51, 0, 102));
 
-        IncomeShowTable.setBackground(new java.awt.Color(0, 0, 0));
-        IncomeShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        IncomeShowTable.setForeground(new java.awt.Color(0, 0, 0));
-        IncomeShowTable.setModel(new javax.swing.table.DefaultTableModel(
+        InvestmentShowTable.setBackground(new java.awt.Color(255, 255, 255));
+        InvestmentShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        InvestmentShowTable.setForeground(new java.awt.Color(0, 0, 0));
+        InvestmentShowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -265,10 +318,10 @@ public class Investment extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        IncomeShowTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        IncomeShowTable.setGridColor(new java.awt.Color(0, 0, 0));
-        IncomeShowTable.setRowHeight(40);
-        TableScroll.setViewportView(IncomeShowTable);
+        InvestmentShowTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        InvestmentShowTable.setGridColor(new java.awt.Color(0, 0, 0));
+        InvestmentShowTable.setRowHeight(40);
+        TableScroll.setViewportView(InvestmentShowTable);
 
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
         tablePanel.setLayout(tablePanelLayout);
@@ -331,15 +384,54 @@ public class Investment extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
-        // TODO add your handling code here:
+       // Retrieve investment type
+        String type = (String) investment_type.getSelectedItem();
+        if (type == null) {
+            JOptionPane.showMessageDialog(this, "Please select an investment type.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+        }
+
+        // Retrieve investment amount
+        double investment_amount;
+        try {
+             investment_amount = Double.parseDouble(amount_invested.getText());
+            if (investment_amount < 0) {
+            throw new NumberFormatException("Investment amount cannot be negative.");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid investment amount. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Retrieve and format the date
+        Date selectedDate = date_chooser.getDate();
+        if (selectedDate == null) {
+            JOptionPane.showMessageDialog(this, "Please select a date.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = dateFormat.format(selectedDate);
+
+        // Retrieve note
+        String note = note_txt.getText();
+        
+        //send values to the database
+        AccessOfDatabase.ValueSetterToDatabase.setInvestmentPerform(type, expense_amount, dateString, note);
+        
+        //call table updater
+        dynamicTableUpdater();
+        
+        //lableupdater
+        updateLableUpdate();
     }//GEN-LAST:event_jLabel9MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable IncomeShowTable;
+    private javax.swing.JTable InvestmentShowTable;
     private javax.swing.JScrollPane TableScroll;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JTextField amount_invested;
+    private com.toedter.calendar.JDateChooser date_chooser;
+    private javax.swing.JComboBox<String> investment_type;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -347,16 +439,15 @@ public class Investment extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;
     private keeptoo.KGradientPanel kGradientPanel4;
+    private javax.swing.JTextArea note_txt;
     private javax.swing.JPanel tablePanel;
+    private javax.swing.JLabel totalInvestment_lbl;
+    private javax.swing.JLabel totalincome_lbl;
     // End of variables declaration//GEN-END:variables
 }

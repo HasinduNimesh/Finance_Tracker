@@ -7,7 +7,16 @@ package finanace_tracker;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import loginandsignup.SQLite;
+import static loginandsignup.SQLite.getExpenseRecords;
+import static loginandsignup.SQLite.getFirstCurrencyType;
+import static loginandsignup.SQLite.getTotalExpense;
+import static loginandsignup.SQLite.getTotalIncome;
 import raven_cell.TableActionButtonRender;
+import records.ExpenseRecord;
 
 /**
  *
@@ -21,19 +30,62 @@ public class Expenses extends javax.swing.JPanel {
     //VARIABLES 
     String type=null,note=null;
     double expense_amount=0.00;
+    String currency=getFirstCurrencyType();
+    double leftOver=getTotalIncome()-getTotalExpense();
     
     public Expenses() {
         initComponents();
-        IncomeShowTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionButtonRender());
+        ExpenseShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionButtonRender());
         
         //Color changes of table
-        IncomeShowTable.setDefaultRenderer(Object.class, new TableGradientFun());
+        ExpenseShowTable.setDefaultRenderer(Object.class, new TableGradientFun());
         tablePanel.putClientProperty(FlatClientProperties.STYLE,"border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
-        IncomeShowTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, "hoverBackground:null;"
+        ExpenseShowTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, "hoverBackground:null;"
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background");
         TableScroll.putClientProperty(FlatClientProperties.STYLE, "border:3,0,3,0,$Table.background,10,10");
         TableScroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE,"hoverTrackColor:null");
+        
+        //update table
+        dynamicTableUpdater();
+        
+        //lableupdater
+        updateLableUpdate();
+    }
+    
+    //investement table updater method 
+    public void dynamicTableUpdater(){
+        List<ExpenseRecord> expenseRecords = getExpenseRecords();
+        updateExpenseTable(expenseRecords);
+    }
+    
+     public void updateExpenseTable(List<ExpenseRecord> expenseRecords) {
+        DefaultTableModel model = (DefaultTableModel) ExpenseShowTable.getModel();
+        model.setRowCount(0); // Clear existing rows
+
+        for (ExpenseRecord record : expenseRecords) {
+            Object[] rowData = {
+                record.getId(),
+                record.getDateChooser(),
+                record.getExpenseType(),
+                record.getNote(),
+                record.getExpenseAmount()
+            };
+            model.addRow(rowData);
+        }
+    }
+     
+    public void updateLableUpdate(){
+        totalexpenses_lbl.setText(currency+". "+getTotalExpense());
+        leftover_lbl.setText(currency+". "+leftOver);
+    }
+     
+     // Method to clear all input fields
+    public void clearInputs() {
+        amount_enter_jTextField.setText("");
+        expense_type_jComboBox.setSelectedIndex(0);
+        note_taker_jTextArea.setText("");
+        jDateChooser.setDate(null);
     }
 
     /**
@@ -48,9 +100,9 @@ public class Expenses extends javax.swing.JPanel {
         kGradientPanel1 = new keeptoo.KGradientPanel();
         kGradientPanel2 = new keeptoo.KGradientPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        totalexpenses_lbl = new javax.swing.JLabel();
         kGradientPanel3 = new keeptoo.KGradientPanel();
-        jLabel8 = new javax.swing.JLabel();
+        leftover_lbl = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         kGradientPanel4 = new keeptoo.KGradientPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -66,7 +118,7 @@ public class Expenses extends javax.swing.JPanel {
         jDateChooser = new com.toedter.calendar.JDateChooser();
         tablePanel = new javax.swing.JPanel();
         TableScroll = new javax.swing.JScrollPane();
-        IncomeShowTable = new javax.swing.JTable();
+        ExpenseShowTable = new javax.swing.JTable();
 
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
         kGradientPanel1.setkStartColor(new java.awt.Color(85, 77, 222));
@@ -76,8 +128,8 @@ public class Expenses extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("TOTAL EXPENSES");
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setText("0.00");
+        totalexpenses_lbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        totalexpenses_lbl.setText("0.00");
 
         javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
         kGradientPanel2.setLayout(kGradientPanel2Layout);
@@ -87,7 +139,7 @@ public class Expenses extends javax.swing.JPanel {
                 .addGroup(kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(totalexpenses_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel5)))
@@ -99,14 +151,14 @@ public class Expenses extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(totalexpenses_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
         kGradientPanel3.setkStartColor(new java.awt.Color(191, 0, 255));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setText("0.00");
+        leftover_lbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        leftover_lbl.setText("0.00");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel11.setText("LEFT OVER");
@@ -119,7 +171,7 @@ public class Expenses extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addGroup(kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(leftover_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         kGradientPanel3Layout.setVerticalGroup(
@@ -128,7 +180,7 @@ public class Expenses extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
+                .addComponent(leftover_lbl)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -172,6 +224,7 @@ public class Expenses extends javax.swing.JPanel {
         jScrollPane1.setViewportView(note_taker_jTextArea);
 
         expenseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/expense (1).png"))); // NOI18N
+        expenseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         expenseButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 expenseButtonMouseClicked(evt);
@@ -245,10 +298,10 @@ public class Expenses extends javax.swing.JPanel {
 
         tablePanel.setBackground(new java.awt.Color(51, 0, 102));
 
-        IncomeShowTable.setBackground(new java.awt.Color(0, 0, 0));
-        IncomeShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        IncomeShowTable.setForeground(new java.awt.Color(0, 0, 0));
-        IncomeShowTable.setModel(new javax.swing.table.DefaultTableModel(
+        ExpenseShowTable.setBackground(new java.awt.Color(255, 255, 255));
+        ExpenseShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ExpenseShowTable.setForeground(new java.awt.Color(0, 0, 0));
+        ExpenseShowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -267,10 +320,10 @@ public class Expenses extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        IncomeShowTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        IncomeShowTable.setGridColor(new java.awt.Color(0, 0, 0));
-        IncomeShowTable.setRowHeight(40);
-        TableScroll.setViewportView(IncomeShowTable);
+        ExpenseShowTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ExpenseShowTable.setGridColor(new java.awt.Color(0, 0, 0));
+        ExpenseShowTable.setRowHeight(40);
+        TableScroll.setViewportView(ExpenseShowTable);
 
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
         tablePanel.setLayout(tablePanelLayout);
@@ -333,33 +386,53 @@ public class Expenses extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void expenseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expenseButtonMouseClicked
-        //get incometype
-        type = (String)expense_type_jComboBox.getSelectedItem();
-        
-        //get income
-        try{
-         expense_amount = Double.parseDouble(amount_enter_jTextField.getText());
-        }catch(Exception e){
-            e.printStackTrace();
+        // Retrieve expense type
+        String type = (String) expense_type_jComboBox.getSelectedItem();
+        if (type == null) {
+            JOptionPane.showMessageDialog(this, "Please select an expense type.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
         }
-        
-        //value getter from date selector
+
+        // Retrieve expense amount
+        double expense_amount;
+        try {
+            expense_amount = Double.parseDouble(amount_enter_jTextField.getText());
+                if (expense_amount < 0) {
+                    throw new NumberFormatException("Expense amount cannot be negative.");
+                }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid expense amount. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Retrieve and format the date
         Date selectedDate = jDateChooser.getDate();
-        
-        // Format the date to a readable format
+        if (selectedDate == null) {
+            JOptionPane.showMessageDialog(this, "Please select a date.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = dateFormat.format(selectedDate);
 
-        //Note taker
-        note = note_taker_jTextArea.getText();
+        // Retrieve note
+        String note = note_taker_jTextArea.getText();
         
         //send values to the database
         AccessOfDatabase.ValueSetterToDatabase.setExpensePerform(type, expense_amount, dateString, type);
+        
+         //update table
+        dynamicTableUpdater();
+        
+        //lableupdater
+        updateLableUpdate();
+        
+        //clear inputs
+        clearInputs();
     }//GEN-LAST:event_expenseButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable IncomeShowTable;
+    private javax.swing.JTable ExpenseShowTable;
     private javax.swing.JScrollPane TableScroll;
     private javax.swing.JTextField amount_enter_jTextField;
     private javax.swing.JLabel expenseButton;
@@ -372,14 +445,14 @@ public class Expenses extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;
     private keeptoo.KGradientPanel kGradientPanel4;
+    private javax.swing.JLabel leftover_lbl;
     private javax.swing.JTextArea note_taker_jTextArea;
     private javax.swing.JPanel tablePanel;
+    private javax.swing.JLabel totalexpenses_lbl;
     // End of variables declaration//GEN-END:variables
 }

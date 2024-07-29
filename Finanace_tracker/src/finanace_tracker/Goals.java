@@ -6,6 +6,11 @@ package finanace_tracker;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import static loginandsignup.SQLite.getTotalExpense;
+import static loginandsignup.SQLite.getTotalExpenseGoals;
+import static loginandsignup.SQLite.getTotalIncome;
+import static loginandsignup.SQLite.getTotalIncomeGoals;
 
 
 /**
@@ -19,6 +24,37 @@ public class Goals extends javax.swing.JPanel {
      */
     public Goals() {
         initComponents();
+        //progress bar update
+        updateGoalAchievements();
+    }
+    
+    //variables
+    double incomeGoal=0.0;
+    double expenseGoal=0.0;
+    
+    // Method to clear all user input elements
+    private void clearUserInputs() {
+        income_amount_txtfield.setText("");
+        start_jDateChooser_income.setDate(null);
+        end_jDateChooser_income.setDate(null);
+        expense_amount_txtfield.setText("");
+        start_jDateChooser_expense.setDate(null);
+        end_jDateChooser_expense.setDate(null);
+    }
+    
+    //progress shower
+      // Update goal achievements
+    private void updateGoalAchievements() {
+        double totalIncome = getTotalIncome();
+        double totalExpense = getTotalExpense();
+        double totalIncomeGoals = getTotalIncomeGoals();
+        double totalExpenseGoals = getTotalExpenseGoals();
+
+        int incomeProgress = (int) ((totalIncome / totalIncomeGoals) * 100);
+        int expenseProgress = (int) ((totalExpense / totalExpenseGoals) * 100);
+
+        income_goal_jProgressBar.setValue(incomeProgress);
+        expense_goal_jProgressBar.setValue(expenseProgress);
     }
 
     /**
@@ -93,6 +129,7 @@ public class Goals extends javax.swing.JPanel {
         end_jDateChooser_income.setForeground(new java.awt.Color(255, 255, 255));
 
         income_goal_setter_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add.png"))); // NOI18N
+        income_goal_setter_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         income_goal_setter_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 income_goal_setter_buttonMouseClicked(evt);
@@ -152,6 +189,10 @@ public class Goals extends javax.swing.JPanel {
         );
 
         kGradientPanel2.setkStartColor(new java.awt.Color(191, 0, 255));
+
+        income_goal_jProgressBar.setBackground(new java.awt.Color(153, 153, 153));
+        income_goal_jProgressBar.setForeground(new java.awt.Color(51, 153, 255));
+        income_goal_jProgressBar.setStringPainted(true);
 
         incomeGoalAchievementLable.setBackground(new java.awt.Color(255, 255, 255));
         incomeGoalAchievementLable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -215,6 +256,7 @@ public class Goals extends javax.swing.JPanel {
         end_jDateChooser_expense.setForeground(new java.awt.Color(255, 255, 255));
 
         expense_goal_setter_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add.png"))); // NOI18N
+        expense_goal_setter_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         expense_goal_setter_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 expense_goal_setter_buttonMouseClicked(evt);
@@ -274,6 +316,10 @@ public class Goals extends javax.swing.JPanel {
         );
 
         kGradientPanel3.setkStartColor(new java.awt.Color(191, 0, 255));
+
+        expense_goal_jProgressBar.setBackground(new java.awt.Color(153, 153, 153));
+        expense_goal_jProgressBar.setForeground(new java.awt.Color(51, 153, 255));
+        expense_goal_jProgressBar.setStringPainted(true);
 
         ExpenseGoalAchievementLable.setBackground(new java.awt.Color(255, 255, 255));
         ExpenseGoalAchievementLable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -345,43 +391,95 @@ public class Goals extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void income_goal_setter_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_income_goal_setter_buttonMouseClicked
-        //enter income goal
-        try{
-        double incomeGoal = Double.parseDouble(income_amount_txtfield.getText());
-        }catch(Exception e){
-            e.printStackTrace();
+     try {
+        incomeGoal = Double.parseDouble(income_amount_txtfield.getText());
+        if (incomeGoal < 0) {
+            throw new NumberFormatException("Income goal cannot be negative.");
         }
-        //start date getter
-        java.util.Date selectedStartDate_Income = start_jDateChooser_income.getDate();
-        //end date getter
-        java.util.Date selectEndDate_Income = end_jDateChooser_income.getDate();
-        // Format the date to a readable format
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //save income startdate to Date
-        String income_start_date = dateFormat.format(selectedStartDate_Income);
-        //save income enddate to Date
-        String income_end_date = dateFormat.format(selectEndDate_Income);
-        
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Invalid income goal. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Start date getter
+    java.util.Date selectedStartDate_Income = start_jDateChooser_income.getDate();
+    if (selectedStartDate_Income == null) {
+        JOptionPane.showMessageDialog(this, "Please select a start date.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // End date getter
+    java.util.Date selectEndDate_Income = end_jDateChooser_income.getDate();
+    if (selectEndDate_Income == null) {
+        JOptionPane.showMessageDialog(this, "Please select an end date.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Verify that the start date is not older than the end date
+    if (selectedStartDate_Income.compareTo(selectEndDate_Income) > 0) {
+        JOptionPane.showMessageDialog(this, "Start date cannot be after the end date.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Format the date to a readable format
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String income_start_date = dateFormat.format(selectedStartDate_Income);
+    String income_end_date = dateFormat.format(selectEndDate_Income);
+
+    // Send goal to the database
+    AccessOfDatabase.ValueSetterToDatabase.setGoalIncomePerform(incomeGoal, income_start_date, income_end_date);
+    
+     // Clear all user input elements
+    clearUserInputs();
+    
+    //progress bar update
+    updateGoalAchievements();
     }//GEN-LAST:event_income_goal_setter_buttonMouseClicked
 
     private void expense_goal_setter_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expense_goal_setter_buttonMouseClicked
-        //enter income goal
-        try{
-        double expenseGoal = Double.parseDouble(expense_amount_txtfield.getText());
-        }catch(Exception e){
-            e.printStackTrace();
+          try {
+        expenseGoal = Double.parseDouble(expense_amount_txtfield.getText());
+        if (expenseGoal < 0) {
+            throw new NumberFormatException("Expense goal cannot be negative.");
         }
-        //start date getter
-        java.util.Date selectedStartDate_Expense = start_jDateChooser_expense.getDate();
-        //end date getter
-        java.util.Date selectEndDate_Expense = end_jDateChooser_expense.getDate();
-        // Format the date to a readable format
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        //save income startdate to Date
-        String expense_start_date = dateFormat.format(selectedStartDate_Expense);
-        //save income enddate to Date
-        String expense_end_date = dateFormat.format(selectEndDate_Expense);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Invalid expense goal. Please enter a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Start date getter
+    java.util.Date selectedStartDate_Expense = start_jDateChooser_expense.getDate();
+    if (selectedStartDate_Expense == null) {
+        JOptionPane.showMessageDialog(this, "Please select a start date.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // End date getter
+    java.util.Date selectEndDate_Expense = end_jDateChooser_expense.getDate();
+    if (selectEndDate_Expense == null) {
+        JOptionPane.showMessageDialog(this, "Please select an end date.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Verify that the start date is not older than the end date
+    if (selectedStartDate_Expense.compareTo(selectEndDate_Expense) > 0) {
+        JOptionPane.showMessageDialog(this, "Start date cannot be after the end date.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Format the date to a readable format
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String expense_start_date = dateFormat.format(selectedStartDate_Expense);
+    String expense_end_date = dateFormat.format(selectEndDate_Expense);
         
+    // Send goal to the database
+    AccessOfDatabase.ValueSetterToDatabase.setGoalExpensePerform(expenseGoal, expense_start_date, expense_end_date);
+    
+     // Clear all user input elements
+    clearUserInputs();
+    
+    //progress bar update
+    updateGoalAchievements();
     }//GEN-LAST:event_expense_goal_setter_buttonMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

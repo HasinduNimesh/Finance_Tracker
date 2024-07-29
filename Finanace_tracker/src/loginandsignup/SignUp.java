@@ -4,6 +4,10 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
+import finanace_tracker.Home;
+import finanace_tracker.Welcome_Page;
+
 import java.sql.*;
 import javax.swing.JFrame;
 
@@ -31,6 +35,7 @@ public class SignUp extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -68,45 +73,48 @@ public class SignUp extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(9, 61, 61));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginandsignup/logo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginandsignup/hades.png"))); // NOI18N
 
         jLabel2.setBackground(new java.awt.Color(0, 102, 102));
-        jLabel2.setFont(new java.awt.Font("Viner Hand ITC", 1, 30)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Cascadia Code", 1, 35)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Finance Tracker");
+        jLabel2.setText("PLUToS");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Copyright @FinanceTracker All Rights Reserved");
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginandsignup/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(77, 77, 77))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jLabel6)
-                .addGap(0, 64, Short.MAX_VALUE))
+                .addGap(0, 59, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(96, 96, 96)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(55, 55, 55))
         );
@@ -304,6 +312,7 @@ public class SignUp extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(60, 60, 60)
                                 .addComponent(signUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(signInRedirectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -439,17 +448,7 @@ public class SignUp extends javax.swing.JFrame {
     //This method is used to perform the sign up procedure
     private void signUpActionPerformer(){
         String dbfName, dblName, dbEmail, dbPassword, querry;
-        
-        String SUrl, SUser, SPass;
-        SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
-        SUser = "root";
-        SPass = "";
-        
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(SUrl, SUser, SPass);
-            Statement st = con.createStatement();
-            
+        try{ 
             if(firstName.getText().trim().isEmpty() && (lastName.getText().trim().isEmpty()) && (signUpEmail.getText().trim().isEmpty()) && (signUpPassword.getText().trim().isEmpty()) && (signUpPasswordConf.getText().trim().isEmpty())){
             fNameLbl.setText("?");
             lNameLbl.setText("?");
@@ -512,26 +511,33 @@ public class SignUp extends javax.swing.JFrame {
         }else if(!(new String(signUpPassword.getPassword()).equals(new String(signUpPasswordConf.getPassword())))){
             emptySymbolRemover();
             JOptionPane.showMessageDialog(new JFrame(), "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
-            emptySymbolRemover();
-            
+        }
+          else{
+           // emptySymbolRemover();
+          /* 
             dbfName = firstName.getText();
             dblName = lastName.getText();
             dbEmail = signUpEmail.getText();
             dbPassword = signUpPassword.getText();
             
-            UserAuthentication.registerUser()
+            UserAuthentication.registerUser(dbfName, dblName, dbEmail, dbPassword);
             querry = "INSERT INTO signup_user(fName, lName, email, password)"+"VALUES('"+dbfName+"','"+dblName+"','"+dbEmail+"','"+dbPassword+"')";
-            st.execute(querry);
+           // st.execute(querry);
             
             firstName.setText("");
             lastName.setText("");
             signUpEmail.setText("");
             signUpPassword.setText("");
-            signUpPasswordConf.setText("");
-            
+            signUpPasswordConf.setText("");*/ 
+             signUpActionPerformerH2();
             JOptionPane.showMessageDialog(this, "Your Account has been created Successfully!");
-        }
+            this.dispose();
+            Login LogInFrame = new Login();
+            LogInFrame.setVisible(true);
+
+            
+          }
+            
             
         }catch(Exception e){
             System.out.println("Error!"+ e.getMessage());
@@ -541,14 +547,21 @@ public class SignUp extends javax.swing.JFrame {
     
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
         // TODO add your handling code here:
-        signUpActionPerformer();
-        signUpActionPerformerH2();
+       signUpActionPerformer();
+       
         
     }//GEN-LAST:event_signUpButtonActionPerformed
 
     private void signUpActionPerformerH2() {
+        //make the sign up process for h2 database
+
+        String dbfName = firstName.getText();
+        String dblName = lastName.getText();
+        String dbEmail = signUpEmail.getText();
+        String dbPassword = signUpPassword.getText();
         
-        
+        //String insertQuery = "INSERT INTO users (first_name, last_name, email, password_hash) VALUES (?, ?, ?, ?)";
+        UserAuthentication.insertUser(dbfName, dblName, dbEmail, dbPassword);
     }
 
 
@@ -635,6 +648,7 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel fNameLbl;
     private javax.swing.JTextField firstName;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -5,6 +5,8 @@
 package finanace_tracker;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import java.awt.Frame;
+import javax.swing.SwingUtilities;
 import raven_cell.TableActionButtonRender;
 
 /**
@@ -32,7 +34,7 @@ public class Settings extends javax.swing.JPanel {
 
         kGradientPanel1 = new keeptoo.KGradientPanel();
         btn_load_dashboard = new javax.swing.JButton();
-        btn_load_dashboard1 = new javax.swing.JButton();
+        changeCurrencyBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -43,7 +45,7 @@ public class Settings extends javax.swing.JPanel {
         btn_load_dashboard.setFont(new java.awt.Font("MS PGothic", 1, 18)); // NOI18N
         btn_load_dashboard.setForeground(new java.awt.Color(0, 0, 0));
         btn_load_dashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dashboard (1).png"))); // NOI18N
-        btn_load_dashboard.setText("EDIT USER DETAILS");
+        btn_load_dashboard.setText("Edit User Details");
         btn_load_dashboard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 10));
         btn_load_dashboard.setBorderPainted(false);
         btn_load_dashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -59,23 +61,23 @@ public class Settings extends javax.swing.JPanel {
             }
         });
 
-        btn_load_dashboard1.setBackground(new java.awt.Color(255, 255, 255));
-        btn_load_dashboard1.setFont(new java.awt.Font("MS PGothic", 1, 18)); // NOI18N
-        btn_load_dashboard1.setForeground(new java.awt.Color(0, 0, 0));
-        btn_load_dashboard1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dashboard (1).png"))); // NOI18N
-        btn_load_dashboard1.setText("Change Currency");
-        btn_load_dashboard1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 10));
-        btn_load_dashboard1.setBorderPainted(false);
-        btn_load_dashboard1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_load_dashboard1.setFocusPainted(false);
-        btn_load_dashboard1.setFocusable(false);
-        btn_load_dashboard1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btn_load_dashboard1.setIconTextGap(25);
-        btn_load_dashboard1.setMargin(new java.awt.Insets(10, 20, 10, 20));
-        btn_load_dashboard1.setPreferredSize(new java.awt.Dimension(50, 20));
-        btn_load_dashboard1.addActionListener(new java.awt.event.ActionListener() {
+        changeCurrencyBtn.setBackground(new java.awt.Color(255, 255, 255));
+        changeCurrencyBtn.setFont(new java.awt.Font("MS PGothic", 1, 18)); // NOI18N
+        changeCurrencyBtn.setForeground(new java.awt.Color(0, 0, 0));
+        changeCurrencyBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/currency.png"))); // NOI18N
+        changeCurrencyBtn.setText("Change Currency");
+        changeCurrencyBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 102), 10));
+        changeCurrencyBtn.setBorderPainted(false);
+        changeCurrencyBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        changeCurrencyBtn.setFocusPainted(false);
+        changeCurrencyBtn.setFocusable(false);
+        changeCurrencyBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        changeCurrencyBtn.setIconTextGap(25);
+        changeCurrencyBtn.setMargin(new java.awt.Insets(10, 20, 10, 20));
+        changeCurrencyBtn.setPreferredSize(new java.awt.Dimension(50, 20));
+        changeCurrencyBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_load_dashboard1ActionPerformed(evt);
+                changeCurrencyBtnActionPerformed(evt);
             }
         });
 
@@ -94,22 +96,26 @@ public class Settings extends javax.swing.JPanel {
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(57, Short.MAX_VALUE))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
                         .addComponent(btn_load_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_load_dashboard1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(changeCurrencyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(98, 98, 98))))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(79, 79, 79)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_load_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_load_dashboard1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(137, 137, 137)
+                    .addComponent(changeCurrencyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_load_dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,17 +135,21 @@ public class Settings extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_load_dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_dashboardActionPerformed
-
+         
+        // Open a dialog to edit user details
+        EditUserDetails editFrame = new EditUserDetails();
+        editFrame.setVisible(true);
     }//GEN-LAST:event_btn_load_dashboardActionPerformed
 
-    private void btn_load_dashboard1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_dashboard1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_load_dashboard1ActionPerformed
+    private void changeCurrencyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeCurrencyBtnActionPerformed
+        EditCurrency currencyFrame = new EditCurrency();
+        currencyFrame.setVisible(true);
+    }//GEN-LAST:event_changeCurrencyBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_load_dashboard;
-    private javax.swing.JButton btn_load_dashboard1;
+    private javax.swing.JButton changeCurrencyBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private keeptoo.KGradientPanel kGradientPanel1;

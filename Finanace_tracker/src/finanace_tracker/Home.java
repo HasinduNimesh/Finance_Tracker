@@ -7,22 +7,35 @@ package finanace_tracker;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import loginandsignup.Login;
+import loginandsignup.UserAuthentication;
 
 public class Home extends javax.swing.JFrame {
-    private String userID;
 
+    private String email;
+    
     public Home() {
         initComponents();
     }
-    public Home(String userID) {
-        this.userID=userID;
+    
+    public Home(String email){
+        this.email=email;
         initComponents();
+        lbl_accemail.setText(email);
+        try {
+            lbl_username.setText(UserAuthentication.getUserFullName(email));
+        } catch (SQLException ex) {
+            Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
      void SetButtonColor(JButton btn)
@@ -114,11 +127,11 @@ public class Home extends javax.swing.JFrame {
         lbl_pfp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/programmer (1).png"))); // NOI18N
         lbl_pfp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lbl_username.setFont(new java.awt.Font("MS PGothic", 1, 18)); // NOI18N
+        lbl_username.setFont(new java.awt.Font("MS PGothic", 1, 12)); // NOI18N
         lbl_username.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_username.setText(userID);
+        lbl_username.setText("User Name");
 
-        lbl_accemail.setFont(new java.awt.Font("MS PGothic", 0, 10)); // NOI18N
+        lbl_accemail.setFont(new java.awt.Font("MS PGothic", 0, 8)); // NOI18N
         lbl_accemail.setForeground(new java.awt.Color(0, 0, 0));
         lbl_accemail.setText("user@email.com");
 
@@ -444,7 +457,7 @@ public class Home extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(pnl_design1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -498,11 +511,19 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_load_reportsActionPerformed
 
     private void btn_load_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_logoutActionPerformed
-
+        dispose();
+        Login LogInFrame = new Login();
+        LogInFrame.setVisible(true);
+        LogInFrame.pack();
     }//GEN-LAST:event_btn_load_logoutActionPerformed
 
     private void btn_load_calculatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_calculatorActionPerformed
-        // TODO add your handling code here:
+        panelPreprocessor();
+        ResetButtonColor();
+        SetButtonColor(btn_load_calculator);
+        // Assuming pnl is an instance of the Dashboard panel 
+        Calculator pnl = new Calculator();
+        panelResetter(pnl);
     }//GEN-LAST:event_btn_load_calculatorActionPerformed
 
     private void btn_load_settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_settingsActionPerformed
@@ -542,9 +563,6 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_close;
-    private javax.swing.JButton btn_close1;
-    private javax.swing.JButton btn_close2;
     private javax.swing.JButton btn_load_calculator;
     private javax.swing.JButton btn_load_dashboard;
     private javax.swing.JButton btn_load_expenses;
@@ -561,9 +579,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_pfp;
     private javax.swing.JLabel lbl_username;
     private javax.swing.JLayeredPane mainPane;
-    private javax.swing.JPanel pnl_control_bar;
-    private javax.swing.JPanel pnl_control_bar1;
-    private javax.swing.JPanel pnl_control_bar2;
     private javax.swing.JPanel pnl_design1;
     private keeptoo.KGradientPanel pnl_menu;
     private javax.swing.JPanel pnl_profile_info;
