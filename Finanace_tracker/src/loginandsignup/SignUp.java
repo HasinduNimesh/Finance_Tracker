@@ -4,6 +4,10 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
+import finanace_tracker.Home;
+import finanace_tracker.Welcome_Page;
+
 import java.sql.*;
 import javax.swing.JFrame;
 
@@ -440,15 +444,10 @@ public class SignUp extends javax.swing.JFrame {
     private void signUpActionPerformer(){
         String dbfName, dblName, dbEmail, dbPassword, querry;
         
-        String SUrl, SUser, SPass;
-        SUrl = "jdbc:MySQL://localhost:3306/java_user_database";
-        SUser = "root";
-        SPass = "";
+       
         
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(SUrl, SUser, SPass);
-            Statement st = con.createStatement();
+            
             
             if(firstName.getText().trim().isEmpty() && (lastName.getText().trim().isEmpty()) && (signUpEmail.getText().trim().isEmpty()) && (signUpPassword.getText().trim().isEmpty()) && (signUpPasswordConf.getText().trim().isEmpty())){
             fNameLbl.setText("?");
@@ -512,9 +511,10 @@ public class SignUp extends javax.swing.JFrame {
         }else if(!(new String(signUpPassword.getPassword()).equals(new String(signUpPasswordConf.getPassword())))){
             emptySymbolRemover();
             JOptionPane.showMessageDialog(new JFrame(), "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
-            emptySymbolRemover();
-            
+        }
+          else{
+           // emptySymbolRemover();
+          /* 
             dbfName = firstName.getText();
             dblName = lastName.getText();
             dbEmail = signUpEmail.getText();
@@ -522,16 +522,22 @@ public class SignUp extends javax.swing.JFrame {
             
             UserAuthentication.registerUser(dbfName, dblName, dbEmail, dbPassword);
             querry = "INSERT INTO signup_user(fName, lName, email, password)"+"VALUES('"+dbfName+"','"+dblName+"','"+dbEmail+"','"+dbPassword+"')";
-            st.execute(querry);
+           // st.execute(querry);
             
             firstName.setText("");
             lastName.setText("");
             signUpEmail.setText("");
             signUpPassword.setText("");
-            signUpPasswordConf.setText("");
-            
+            signUpPasswordConf.setText("");*/ 
+             signUpActionPerformerH2();
             JOptionPane.showMessageDialog(this, "Your Account has been created Successfully!");
-        }
+            this.dispose();
+            Login LogInFrame = new Login();
+            LogInFrame.setVisible(true);
+
+            
+          }
+            
             
         }catch(Exception e){
             System.out.println("Error!"+ e.getMessage());
@@ -541,14 +547,21 @@ public class SignUp extends javax.swing.JFrame {
     
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
         // TODO add your handling code here:
-        signUpActionPerformer();
-        signUpActionPerformerH2();
+       signUpActionPerformer();
+       
         
     }//GEN-LAST:event_signUpButtonActionPerformed
 
     private void signUpActionPerformerH2() {
+        //make the sign up process for h2 database
+
+        String dbfName = firstName.getText();
+        String dblName = lastName.getText();
+        String dbEmail = signUpEmail.getText();
+        String dbPassword = signUpPassword.getText();
         
-        
+        //String insertQuery = "INSERT INTO users (first_name, last_name, email, password_hash) VALUES (?, ?, ?, ?)";
+        UserAuthentication.insertUser(dbfName, dblName, dbEmail, dbPassword);
     }
 
 

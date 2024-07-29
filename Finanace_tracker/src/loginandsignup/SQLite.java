@@ -14,13 +14,13 @@ public class SQLite {
     public static String jdbcUrl = "jdbc:sqlite:C:\\Users\\ASUS\\OneDrive - General Sir John Kotelawala Defence University\\Documents\\NetBeansProjects\\Finanace_tracker\\src\\loginandsignup\\database\\userPasswords.db";
    //! public static String jdbcUrl = "jdbc:sqlite:database/userPasswords.db";
     
-     static boolean userAuthentication(String username, String password) {
+     static boolean userAuthentication(String email, String password) {
         try {
             Class.forName("org.sqlite.JDBC");
             Connection connection = DriverManager.getConnection(jdbcUrl);
             System.out.println("Connected to database");
 
-            String sql = "SELECT * FROM user WHERE name = '" + username + "'";
+            String sql = "SELECT * FROM user WHERE email = '" + email + "'";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
 
