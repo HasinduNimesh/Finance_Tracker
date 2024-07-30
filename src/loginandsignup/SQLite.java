@@ -98,7 +98,7 @@ public class SQLite {
         }
     }
      
-    // Method to insert income into the database
+    // Method to insert income into the database  //!replacing this
     public static void setIncome(String incomeType, double incomeAmount, String dateChooser, String note) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

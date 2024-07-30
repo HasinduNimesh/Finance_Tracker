@@ -59,7 +59,7 @@ public class Login extends javax.swing.JFrame {
                  
                 java.awt.EventQueue.invokeLater(() -> {
                     this.dispose();
-                    Home page = new Home(userID); //userID send username
+                    Home page = new Home(UserAuthentication.convertEmailToPlainString(userID)); //userID send username
                     page.setVisible(true);
                     Welcome_Page pnl = new Welcome_Page();
                     page.panelResetter(pnl);

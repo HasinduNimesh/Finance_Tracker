@@ -116,7 +116,8 @@ public class UserAuthentication {
         }
     }
 
-    public static Boolean settingUpTablesPerUser(String email) throws SQLException {
+    public static Boolean settingUpTablesPerUser(String emailIn) throws SQLException {
+        String email=convertEmailToPlainString(emailIn);
         settingUpUserPreference(email);
         settingUpSetIncomeTable(email);
         settingUpIncomeGoalsTable(email);
@@ -276,14 +277,21 @@ public class UserAuthentication {
     }
     public static boolean settingUpUserPreference(String email){
         try(Connection conn=DatabaseUtil.getConnection()){
-            String query="CREATE TABLE IF NOT EXISTS "+email+"_user_preference (id INT PRIMARY KEY AUTO_INCREMENT, currency VARCHAR(255) not null , theme VARCHAR(255) not null)";
+            String query="CREATE TABLE IF NOT EXISTS "+email+"_user_preference (id INT PRIMARY KEY AUTO_INCREMENT, currency VARCHAR(255) DEFAULT 'LKR' , theme VARCHAR(255))";
             PreparedStatement stmt=conn.prepareStatement(query);
             stmt.executeUpdate();
-    }
-    catch(Exception e){
-        System.out.println(e);
-        return false;
-    }
+
+            // Add a new record to the table
+            query = "INSERT INTO " + email + "_user_preference (currency, theme) VALUES (?, ?)";
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, "LKR");
+            stmt.setString(2, null);
+            stmt.executeUpdate();
+        }
+        catch(Exception e){
+            System.out.println(e);
+            return false;
+        }
     return true;
 }
 //accessing tables 
@@ -334,6 +342,19 @@ public class UserAuthentication {
         } catch (SQLException e) {
             e.printStackTrace();
 }
+    }
+    public static String getUserCurrency(String email) {
+        try (Connection conn = DatabaseUtil.getConnection()) {
+            String query = "SELECT CURRENCY  FROM "+ email + "_USER_PREFERENCE WHERE id=1";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("currency");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "LKR";
     }
     public static void viewExpenseGoals(String email) {
         try (Connection conn = DatabaseUtil.getConnection()) {

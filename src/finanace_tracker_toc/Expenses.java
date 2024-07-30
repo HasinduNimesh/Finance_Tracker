@@ -5,10 +5,14 @@
 package finanace_tracker;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import loginandsignup.SQLite;
 import loginandsignup.UserAuthentication;
@@ -19,6 +23,9 @@ import static loginandsignup.SQLite.getTotalExpense;
 import static loginandsignup.SQLite.getTotalIncome;
 import raven_cell.TableActionButtonRender;
 import records.ExpenseRecord;
+import tableCellUpdate.TableActionCellEditor;
+import tableCellUpdate.TableActionCellRender;
+import tableCellUpdate.TableActionEvent;
 
 /**
  *
@@ -43,25 +50,50 @@ public class Expenses extends javax.swing.JPanel {
         initComponents();
         this.email=email;
         currency=UserAuthentication.getUserCurrency(email);
-
-        ExpenseShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionButtonRender());
-        
-        //Color changes of table
-        ExpenseShowTable.setDefaultRenderer(Object.class, new TableGradientFun());
-        tablePanel.putClientProperty(FlatClientProperties.STYLE,"border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
-        ExpenseShowTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, "hoverBackground:null;"
-                + "pressedBackground:null;"
-                + "separatorColor:$TableHeader.background");
-        TableScroll.putClientProperty(FlatClientProperties.STYLE, "border:3,0,3,0,$Table.background,10,10");
-        TableScroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE,"hoverTrackColor:null");
         
         //update table
         dynamicTableUpdater();
         
         //lableupdater
         updateLableUpdate();
+        
+        //table action button
+        tableActionSetter();
     }
     
+     public void tableActionSetter(){
+                 TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                System.out.println("Edit row : " + row);
+                
+            }
+
+            @Override
+            public void onDelete(int row) {
+                if (ExpenseShowTable.isEditing()) {
+                    ExpenseShowTable.getCellEditor().stopCellEditing();
+                }
+                DefaultTableModel model = (DefaultTableModel) ExpenseShowTable.getModel();
+                model.removeRow(row);
+            }
+
+            @Override
+            public void onView(int row) {
+                System.out.println("View row : " + row);
+            }
+        };
+        ExpenseShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
+        ExpenseShowTable.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
+        ExpenseShowTable.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
+                setHorizontalAlignment(SwingConstants.RIGHT);
+                return super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
+            }
+        });
+    }
+     
     //investement table updater method 
     public void dynamicTableUpdater(){
         //List<ExpenseRecord> expenseRecords = getExpenseRecords(); sqlite
@@ -128,7 +160,7 @@ public class Expenses extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
         tablePanel = new javax.swing.JPanel();
-        TableScroll = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         ExpenseShowTable = new javax.swing.JTable();
 
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
@@ -154,7 +186,7 @@ public class Expenses extends javax.swing.JPanel {
                     .addGroup(kGradientPanel2Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         kGradientPanel2Layout.setVerticalGroup(
             kGradientPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,32 +341,30 @@ public class Expenses extends javax.swing.JPanel {
 
         tablePanel.setBackground(new java.awt.Color(51, 0, 102));
 
-        ExpenseShowTable.setBackground(new java.awt.Color(255, 255, 255));
-        ExpenseShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        ExpenseShowTable.setForeground(new java.awt.Color(0, 0, 0));
         ExpenseShowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {"1", "A", "001", null, null, null},
+                {"2", "B", "002", null, null, null},
+                {"3", "C", "003", null, null, null},
+                {"4", "D", "004", null, null, null}
             },
             new String [] {
-                "Date", "Index", "Expenses Type", "Note", "Amount", "Edit"
+                "Index", "Date", "Expense Type", "Note", "Amount", "Edit"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, true
+                false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        ExpenseShowTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        ExpenseShowTable.setGridColor(new java.awt.Color(0, 0, 0));
+        ExpenseShowTable.setMinimumSize(new java.awt.Dimension(90, 160));
+        ExpenseShowTable.setPreferredSize(new java.awt.Dimension(450, 160));
         ExpenseShowTable.setRowHeight(40);
-        TableScroll.setViewportView(ExpenseShowTable);
+        ExpenseShowTable.setSelectionBackground(new java.awt.Color(56, 138, 112));
+        jScrollPane2.setViewportView(ExpenseShowTable);
 
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
         tablePanel.setLayout(tablePanelLayout);
@@ -342,14 +372,14 @@ public class Expenses extends javax.swing.JPanel {
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
         tablePanelLayout.setVerticalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(tablePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -381,7 +411,7 @@ public class Expenses extends javax.swing.JPanel {
                         .addComponent(kGradientPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -444,7 +474,6 @@ public class Expenses extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable ExpenseShowTable;
-    private javax.swing.JScrollPane TableScroll;
     private javax.swing.JTextField amount_enter_jTextField;
     private javax.swing.JLabel expenseButton;
     private javax.swing.JComboBox<String> expense_type_jComboBox;
@@ -457,6 +486,7 @@ public class Expenses extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;

@@ -25,16 +25,19 @@ public static void main(String[] args) {
       //  Connection connection= DriverManager.getConnection(jdbcURL, USER, PASSWORD);
        // System.out.println("Connected to H2 database");
     //done UserAuthentication.registerUser("Admin1", "StrongPassword123", "admin@kdu.ac.lk");
-        UserAuthentication.authenticateUser("StrongPassword123","Admin1" );
-       // UserAuthentication.insertUser("tharusha", "banda", "thasruha@kdu.lk","StrongPassword123");
+       UserAuthentication.authenticateUser("StrongPassword123","Admin1" );
+      //  UserAuthentication.insertUser("Admin2", "lastname", "Admin2@kdu.ac.lk","StrongPassword123");
         //UserAuthentication.authenticateUser( "StrongPassword123","thasruha@kdu.lk");
        // connection.close();
-      // UserAuthentication.settingUpTablesPerUser("thasruhakduu");
-       UserAuthentication.setIncome("thasruhakduu", "ddp", 10000," 2021/20/10", "mytest");
+      // UserAuthentication.settingUpTablesPerUser("Admin2@kdu.ac.lk");
+       UserAuthentication.setExpenses("Admin2kduaclk", "food", 1760," 2021/20/10", "mytest");
+      // AccessOfDatabase.ValueSetterToDatabase.setIncomePerform_h2("thasruhakduu", "ddp", 15000," 2021/20/10", "mytest");
       //  System.out.println(UserAuthentication.getIncomeRecords("thasruhakduu"));
-      System.out.println(  UserAuthentication.getTotalIncome("thasruhakduu"));
-      UserAuthentication authtest = new UserAuthentication();
-      System.out.println(authtest.getIncomeData("thasruhakduu"));
+      //System.out.println(  UserAuthentication.getTotalIncome("thasruhakduu"));
+     // UserAuthentication authtest = new UserAuthentication();
+     // System.out.println(authtest.getIncomeData("thasruhakduu"));
+      //AccessOfDatabase.ValueSetterToDatabase.setInvestmentPerform_h2("thasruhakduu@kdu.ac.lk", "ddp", 15000," 2021/20/10", "mytest");
+      //AccessOfDatabase.ValueGetterFromElems.
     } catch (SQLException | NoSuchAlgorithmException e) {
         e.printStackTrace();
     }
