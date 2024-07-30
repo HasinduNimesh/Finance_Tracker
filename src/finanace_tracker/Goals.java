@@ -7,6 +7,9 @@ package finanace_tracker;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+
+import loginandsignup.UserAuthentication;
+
 import static loginandsignup.SQLite.getTotalExpense;
 import static loginandsignup.SQLite.getTotalExpenseGoals;
 import static loginandsignup.SQLite.getTotalIncome;
@@ -22,7 +25,8 @@ public class Goals extends javax.swing.JPanel {
     /**
      * Creates new form Expenses
      */
-    public Goals() {
+    String email;
+    public Goals(String email) {
         initComponents();
         //progress bar update
         updateGoalAchievements();
@@ -45,10 +49,14 @@ public class Goals extends javax.swing.JPanel {
     //progress shower
       // Update goal achievements
     private void updateGoalAchievements() {
-        double totalIncome = getTotalIncome();
-        double totalExpense = getTotalExpense();
-        double totalIncomeGoals = getTotalIncomeGoals();
-        double totalExpenseGoals = getTotalExpenseGoals();
+        //double totalIncome = getTotalIncome();
+        double totalIncome = UserAuthentication.getTotalIncome(email);
+      //  double totalExpense = getTotalExpense();
+        double totalExpense = UserAuthentication.getTotalExpense(email);
+       // double totalIncomeGoals = getTotalIncomeGoals();
+        double totalIncomeGoals = UserAuthentication.getTotalIncomeGoals(email);
+       // double totalExpenseGoals = getTotalExpenseGoals();
+        double totalExpenseGoals = UserAuthentication.getTotalExpenseGoals(email);
 
         int incomeProgress = (int) ((totalIncome / totalIncomeGoals) * 100);
         int expenseProgress = (int) ((totalExpense / totalExpenseGoals) * 100);
@@ -427,7 +435,7 @@ public class Goals extends javax.swing.JPanel {
     String income_end_date = dateFormat.format(selectEndDate_Income);
 
     // Send goal to the database
-    AccessOfDatabase.ValueSetterToDatabase.setGoalIncomePerform(incomeGoal, income_start_date, income_end_date);
+    AccessOfDatabase.ValueSetterToDatabase.setGoalIncomePerform_h2(email,incomeGoal, income_start_date, income_end_date);
     
      // Clear all user input elements
     clearUserInputs();
@@ -473,7 +481,7 @@ public class Goals extends javax.swing.JPanel {
     String expense_end_date = dateFormat.format(selectEndDate_Expense);
         
     // Send goal to the database
-    AccessOfDatabase.ValueSetterToDatabase.setGoalExpensePerform(expenseGoal, expense_start_date, expense_end_date);
+    AccessOfDatabase.ValueSetterToDatabase.setGoalExpensePerform_h2(email,expenseGoal, expense_start_date, expense_end_date);
     
      // Clear all user input elements
     clearUserInputs();

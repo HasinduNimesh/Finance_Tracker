@@ -6,23 +6,14 @@ package finanace_tracker;
 
 import records.IncomeRecord;
 import com.formdev.flatlaf.FlatClientProperties;
-import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import static loginandsignup.SQLite.getFirstCurrencyType;
 import static loginandsignup.SQLite.getIncomeRecords;
-import static loginandsignup.SQLite.getTotalIncome;
-import static loginandsignup.SQLite.getTotalIncomeGoals;
 import raven_cell.TableActionButtonRender;
-import tableCellUpdate.TableActionCellEditor;
-import tableCellUpdate.TableActionCellRender;
-import tableCellUpdate.TableActionEvent;
 
 /**
  *
@@ -37,52 +28,22 @@ public class Income extends javax.swing.JPanel {
     //VARIABLES 
     String type=null,note=null;
     double income_amount=0.00;
-    String currency=getFirstCurrencyType();
-    double incomegoalDefict=getTotalIncome()-getTotalIncomeGoals();
+    
     
     public Income() {
         initComponents();
+        IncomeShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionButtonRender());
+        
+        //Color changes of table
+        IncomeShowTable.setDefaultRenderer(Object.class, new TableGradientFun());
+        tablePanel.putClientProperty(FlatClientProperties.STYLE,"border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
+        IncomeShowTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, "hoverBackground:null;"
+                + "pressedBackground:null;"
+                + "separatorColor:$TableHeader.background");
+        TableScroll.putClientProperty(FlatClientProperties.STYLE, "border:3,0,3,0,$Table.background,10,10");
+        TableScroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE,"hoverTrackColor:null");
         
        dynamicTableUpdater();
-       
-       //lableupdater
-        updateLableUpdate();
-        
-        //table action button
-        tableActionSetter();
-    }
-    
-     public void tableActionSetter(){
-                 TableActionEvent event = new TableActionEvent() {
-            @Override
-            public void onEdit(int row) {
-                System.out.println("Edit row : " + row);
-                
-            }
-
-            @Override
-            public void onDelete(int row) {
-                if (IncomeShowTable.isEditing()) {
-                    IncomeShowTable.getCellEditor().stopCellEditing();
-                }
-                DefaultTableModel model = (DefaultTableModel) IncomeShowTable.getModel();
-                model.removeRow(row);
-            }
-
-            @Override
-            public void onView(int row) {
-                System.out.println("View row : " + row);
-            }
-        };
-        IncomeShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
-        IncomeShowTable.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
-        IncomeShowTable.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
-                setHorizontalAlignment(SwingConstants.RIGHT);
-                return super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
-            }
-        });
     }
  
 
@@ -108,10 +69,6 @@ public class Income extends javax.swing.JPanel {
         }
     }
 
-    public void updateLableUpdate(){
-        incomegoal_defict.setText(currency+". "+incomegoalDefict);
-        totalincome_lbl.setText(currency+". "+getTotalIncome());
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,10 +81,10 @@ public class Income extends javax.swing.JPanel {
         kGradientPanel1 = new keeptoo.KGradientPanel();
         tot_income_kGradientPanel2 = new keeptoo.KGradientPanel();
         jLabel5 = new javax.swing.JLabel();
-        totalincome_lbl = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         income_goal_defict_kGradientPanel3 = new keeptoo.KGradientPanel();
         jLabel6 = new javax.swing.JLabel();
-        incomegoal_defict = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         kGradientPanel4 = new keeptoo.KGradientPanel();
         add_new_income_jLabel = new javax.swing.JLabel();
         method_jLabel = new javax.swing.JLabel();
@@ -141,7 +98,7 @@ public class Income extends javax.swing.JPanel {
         date_jLabel = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
         tablePanel = new javax.swing.JPanel();
-        JScrollPanel1 = new javax.swing.JScrollPane();
+        TableScroll = new javax.swing.JScrollPane();
         IncomeShowTable = new javax.swing.JTable();
 
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
@@ -153,8 +110,8 @@ public class Income extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("TOTAL INCOME");
 
-        totalincome_lbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        totalincome_lbl.setText("0.00");
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("0.00");
 
         javax.swing.GroupLayout tot_income_kGradientPanel2Layout = new javax.swing.GroupLayout(tot_income_kGradientPanel2);
         tot_income_kGradientPanel2.setLayout(tot_income_kGradientPanel2Layout);
@@ -166,7 +123,7 @@ public class Income extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addGroup(tot_income_kGradientPanel2Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(totalincome_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tot_income_kGradientPanel2Layout.setVerticalGroup(
@@ -175,7 +132,7 @@ public class Income extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalincome_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -185,8 +142,8 @@ public class Income extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel6.setText("INCOME GOAL DEFICIT");
 
-        incomegoal_defict.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        incomegoal_defict.setText("0.00");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setText("0.00");
 
         javax.swing.GroupLayout income_goal_defict_kGradientPanel3Layout = new javax.swing.GroupLayout(income_goal_defict_kGradientPanel3);
         income_goal_defict_kGradientPanel3.setLayout(income_goal_defict_kGradientPanel3Layout);
@@ -196,7 +153,7 @@ public class Income extends javax.swing.JPanel {
                 .addGroup(income_goal_defict_kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(income_goal_defict_kGradientPanel3Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(incomegoal_defict, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(income_goal_defict_kGradientPanel3Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jLabel6)))
@@ -208,7 +165,7 @@ public class Income extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(incomegoal_defict, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -331,30 +288,32 @@ public class Income extends javax.swing.JPanel {
 
         tablePanel.setBackground(new java.awt.Color(51, 0, 102));
 
+        IncomeShowTable.setBackground(new java.awt.Color(255, 255, 255));
+        IncomeShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        IncomeShowTable.setForeground(new java.awt.Color(0, 0, 0));
         IncomeShowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", null, "A", "001", null, null},
-                {"2", null, "B", "002", null, null},
-                {"3", null, "C", "003", null, null},
-                {"4", null, "D", "004", null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
                 "Index", "Date", "Income Type", "Note", "Amount", "Edit"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, true, true
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        IncomeShowTable.setMinimumSize(new java.awt.Dimension(90, 160));
-        IncomeShowTable.setPreferredSize(new java.awt.Dimension(450, 160));
+        IncomeShowTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        IncomeShowTable.setGridColor(new java.awt.Color(0, 0, 0));
         IncomeShowTable.setRowHeight(40);
-        IncomeShowTable.setSelectionBackground(new java.awt.Color(56, 138, 112));
-        JScrollPanel1.setViewportView(IncomeShowTable);
+        TableScroll.setViewportView(IncomeShowTable);
 
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
         tablePanel.setLayout(tablePanelLayout);
@@ -362,14 +321,14 @@ public class Income extends javax.swing.JPanel {
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JScrollPanel1)
+                .addComponent(TableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
                 .addContainerGap())
         );
         tablePanelLayout.setVerticalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JScrollPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -401,7 +360,7 @@ public class Income extends javax.swing.JPanel {
                         .addComponent(income_goal_defict_kGradientPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -453,25 +412,23 @@ public class Income extends javax.swing.JPanel {
         
         //update table
         dynamicTableUpdater();
-        
-        //lableupdater
-        updateLableUpdate();
     }//GEN-LAST:event_income_ButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable IncomeShowTable;
-    private javax.swing.JScrollPane JScrollPanel1;
+    private javax.swing.JScrollPane TableScroll;
     private javax.swing.JLabel add_new_income_jLabel;
     private javax.swing.JTextField amount_enter_jTextField;
     private javax.swing.JLabel amount_jLabel;
     private javax.swing.JLabel date_jLabel;
     private javax.swing.JLabel income_Button;
     private keeptoo.KGradientPanel income_goal_defict_kGradientPanel3;
-    private javax.swing.JLabel incomegoal_defict;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel4;
@@ -481,6 +438,5 @@ public class Income extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> salary_type_jComboBox;
     private javax.swing.JPanel tablePanel;
     private keeptoo.KGradientPanel tot_income_kGradientPanel2;
-    private javax.swing.JLabel totalincome_lbl;
     // End of variables declaration//GEN-END:variables
 }

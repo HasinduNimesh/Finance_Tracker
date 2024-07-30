@@ -5,10 +5,14 @@
 package finanace_tracker;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import static loginandsignup.SQLite.getFirstCurrencyType;
 import static loginandsignup.SQLite.getInvestmentRecords;
@@ -16,6 +20,9 @@ import static loginandsignup.SQLite.getTotalIncome;
 import static loginandsignup.SQLite.getTotalInvestment;
 import raven_cell.TableActionButtonRender;
 import records.InvestmentRecord;
+import tableCellUpdate.TableActionCellEditor;
+import tableCellUpdate.TableActionCellRender;
+import tableCellUpdate.TableActionEvent;
 
 /**
  *
@@ -36,24 +43,48 @@ public class Investment extends javax.swing.JPanel {
     public Investment() {
         initComponents();
         
-        //table initiation
-        InvestmentShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionButtonRender());
-        
-        //Color changes of table
-        InvestmentShowTable.setDefaultRenderer(Object.class, new TableGradientFun());
-        tablePanel.putClientProperty(FlatClientProperties.STYLE,"border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
-        InvestmentShowTable.getTableHeader().putClientProperty(FlatClientProperties.STYLE, "hoverBackground:null;"
-                + "pressedBackground:null;"
-                + "separatorColor:$TableHeader.background");
-        TableScroll.putClientProperty(FlatClientProperties.STYLE, "border:3,0,3,0,$Table.background,10,10");
-        TableScroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE,"hoverTrackColor:null");
-        
         //call table updater
         dynamicTableUpdater();
         
         //lableupdater
         updateLableUpdate();
         
+        //table action button
+        tableActionSetter();
+        
+    }
+    
+    public void tableActionSetter(){
+                 TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                System.out.println("Edit row : " + row);
+                
+            }
+
+            @Override
+            public void onDelete(int row) {
+                if (InvestmentShowTable.isEditing()) {
+                    InvestmentShowTable.getCellEditor().stopCellEditing();
+                }
+                DefaultTableModel model = (DefaultTableModel) InvestmentShowTable.getModel();
+                model.removeRow(row);
+            }
+
+            @Override
+            public void onView(int row) {
+                System.out.println("View row : " + row);
+            }
+        };
+        InvestmentShowTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
+        InvestmentShowTable.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
+        InvestmentShowTable.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
+                setHorizontalAlignment(SwingConstants.RIGHT);
+                return super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
+            }
+        });
     }
 
     //investement table updater method 
@@ -111,7 +142,7 @@ public class Investment extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         date_chooser = new com.toedter.calendar.JDateChooser();
         tablePanel = new javax.swing.JPanel();
-        TableScroll = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         InvestmentShowTable = new javax.swing.JTable();
 
         kGradientPanel1.setkEndColor(new java.awt.Color(51, 0, 102));
@@ -296,32 +327,30 @@ public class Investment extends javax.swing.JPanel {
 
         tablePanel.setBackground(new java.awt.Color(51, 0, 102));
 
-        InvestmentShowTable.setBackground(new java.awt.Color(255, 255, 255));
-        InvestmentShowTable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        InvestmentShowTable.setForeground(new java.awt.Color(0, 0, 0));
         InvestmentShowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {"1", "A", "001", null, null, null},
+                {"2", "B", "002", null, null, null},
+                {"3", "C", "003", null, null, null},
+                {"4", "D", "004", null, null, null}
             },
             new String [] {
-                "Date", "Index", "Investment Type", "Note", "Amount", "Edit"
+                "Index", "Date", "Investment Type", "Note", "Amount", "Edit"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, true
+                false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        InvestmentShowTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        InvestmentShowTable.setGridColor(new java.awt.Color(0, 0, 0));
+        InvestmentShowTable.setMinimumSize(new java.awt.Dimension(90, 160));
+        InvestmentShowTable.setPreferredSize(new java.awt.Dimension(450, 160));
         InvestmentShowTable.setRowHeight(40);
-        TableScroll.setViewportView(InvestmentShowTable);
+        InvestmentShowTable.setSelectionBackground(new java.awt.Color(56, 138, 112));
+        jScrollPane2.setViewportView(InvestmentShowTable);
 
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
         tablePanel.setLayout(tablePanelLayout);
@@ -329,14 +358,14 @@ public class Investment extends javax.swing.JPanel {
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TableScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
         tablePanelLayout.setVerticalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(tablePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -368,7 +397,7 @@ public class Investment extends javax.swing.JPanel {
                         .addComponent(kGradientPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -428,7 +457,6 @@ public class Investment extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable InvestmentShowTable;
-    private javax.swing.JScrollPane TableScroll;
     private javax.swing.JTextField amount_invested;
     private com.toedter.calendar.JDateChooser date_chooser;
     private javax.swing.JComboBox<String> investment_type;
@@ -441,6 +469,7 @@ public class Investment extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;

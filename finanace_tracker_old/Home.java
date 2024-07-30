@@ -472,7 +472,7 @@ public class Home extends javax.swing.JFrame {
         ResetButtonColor();
         SetButtonColor(btn_load_income);
         // Assuming pnl is an instance of the Dashboard panel 
-        Income pnl = new Income(email);
+        Income pnl = new Income();
         panelResetter(pnl);
     }//GEN-LAST:event_btn_load_incomeActionPerformed
 
@@ -499,7 +499,7 @@ public class Home extends javax.swing.JFrame {
         ResetButtonColor();
         SetButtonColor(btn_load_goals);
         // Assuming pnl is an instance of the Dashboard panel 
-        Goals pnl = new Goals(email);
+        Goals pnl = new Goals(email );
         panelResetter(pnl);
     }//GEN-LAST:event_btn_load_goalsActionPerformed
 
@@ -537,7 +537,7 @@ public class Home extends javax.swing.JFrame {
         ResetButtonColor();
         SetButtonColor(btn_load_investments);
         // Assuming pnl is an instance of the Dashboard panel 
-        Investment pnl = new Investment(email);
+        Investment pnl = new Investment();
         panelResetter(pnl);
     }//GEN-LAST:event_btn_load_investmentsActionPerformed
 

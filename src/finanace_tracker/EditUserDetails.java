@@ -358,13 +358,13 @@ public class EditUserDetails extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(102, 0, 153));
+        jPanel1.setBackground(new java.awt.Color(9, 61, 61));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 0, 153));
+        jLabel6.setForeground(new java.awt.Color(0, 102, 102));
         jLabel6.setText("Edit Profile");
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -460,7 +460,7 @@ public class EditUserDetails extends javax.swing.JFrame {
             }
         });
 
-        saveEditBtn.setBackground(new java.awt.Color(102, 0, 153));
+        saveEditBtn.setBackground(new java.awt.Color(0, 102, 102));
         saveEditBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         saveEditBtn.setForeground(new java.awt.Color(255, 255, 255));
         saveEditBtn.setText("Save");
@@ -515,6 +515,7 @@ public class EditUserDetails extends javax.swing.JFrame {
         });
 
         eCloseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cross (2).png"))); // NOI18N
+        eCloseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         eCloseButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 eCloseButtonMouseClicked(evt);
@@ -771,7 +772,7 @@ public class EditUserDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_editPasswordConfKeyPressed
 
     private void saveEditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveEditBtnActionPerformed
-        // TODO add your handling code here:
+                              
         saveActionPerformer();
     }//GEN-LAST:event_saveEditBtnActionPerformed
     
@@ -858,9 +859,7 @@ public class EditUserDetails extends javax.swing.JFrame {
             editPasswordConf.setText("");
             
             JOptionPane.showMessageDialog(this, "Your details have been edited Successfully!");
-        }
-            
-        
+        }  
     }
     
     private void editPassConfToggleButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editPassConfToggleButtonMouseClicked

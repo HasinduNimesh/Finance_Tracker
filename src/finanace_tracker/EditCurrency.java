@@ -60,6 +60,7 @@ public class EditCurrency extends javax.swing.JFrame {
         });
 
         currencySelectBtn.setBackground(new java.awt.Color(255, 255, 255));
+        currencySelectBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         currencySelectBtn.setForeground(new java.awt.Color(102, 0, 153));
         currencySelectBtn.setText("Select");
         currencySelectBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +70,7 @@ public class EditCurrency extends javax.swing.JFrame {
         });
 
         eCurrCloseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cross (2).png"))); // NOI18N
+        eCurrCloseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         eCurrCloseButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 eCurrCloseButtonMouseClicked(evt);
@@ -87,14 +89,15 @@ public class EditCurrency extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addComponent(eCurrCloseButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(163, 163, 163)
-                        .addComponent(currencySelectBtn)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(editCurrencyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(134, 134, 134)
+                                .addComponent(currencySelectBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(editCurrencyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +111,9 @@ public class EditCurrency extends javax.swing.JFrame {
                         .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(editCurrencyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(currencySelectBtn)
-                .addGap(50, 50, 50))
+                .addGap(40, 40, 40)
+                .addComponent(currencySelectBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
