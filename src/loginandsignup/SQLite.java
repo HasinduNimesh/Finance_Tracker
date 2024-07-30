@@ -20,7 +20,8 @@ import records.InvestmentRecord;
 
 public class SQLite {
     public static String jdbcUrlLogin = "jdbc:sqlite:C:\\Users\\ASUS\\OneDrive - General Sir John Kotelawala Defence University\\Documents\\NetBeansProjects\\Finanace_tracker\\src\\loginandsignup\\database\\userPasswords.db";
-    public static String jdbcUrl = "jdbc:sqlite:C:\\Users\\ASUS\\OneDrive - General Sir John Kotelawala Defence University\\Documents\\NetBeansProjects\\Finanace_tracker\\src\\loginandsignup\\database\\userDetailDatabase.db";
+  //  public static String jdbcUrl = "jdbc:sqlite:/E:/Gitrep/Finance_Tracker/src/loginandsignup/database/userDetailDatabase.db";
+    public static String jdbcUrl = "jdbc:sqlite:./src/loginandsignup/database/userDetailDatabase.db";
 
     
     static boolean userAuthentication(String username, String password) {

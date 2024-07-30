@@ -642,3 +642,306 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: E:/Gitrep/Financ
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 51 more
+2024-07-29 17:22:42.577962+05:30 jdbc[3]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-230]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:217)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:134)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:291)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:811)
+	at org.h2.server.web.WebApp.login(WebApp.java:1038)
+	at org.h2.server.web.WebApp.process(WebApp.java:226)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.WebThread.process(WebThread.java:154)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection was not closed by the application and is garbage collected [90018-230]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 13 more
+2024-07-29 17:22:42.590543+05:30 jdbc[3]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-230]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:217)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:134)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:291)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:811)
+	at org.h2.server.web.WebApp.login(WebApp.java:1038)
+	at org.h2.server.web.WebApp.process(WebApp.java:226)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.WebThread.process(WebThread.java:154)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection was not closed by the application and is garbage collected [90018-230]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 13 more
+2024-07-29 22:59:25.598720+05:30 database: close
+org.h2.message.DbException: IO Exception: "Closing" [90028-230]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.mvstore.db.Store.close(Store.java:374)
+	at org.h2.engine.Database.closeOpenFilesAndUnlock(Database.java:1292)
+	at org.h2.engine.Database.closeImpl(Database.java:1254)
+	at org.h2.engine.Database.close(Database.java:1173)
+	at org.h2.engine.Database.onShutdown(Database.java:1158)
+	at org.h2.engine.OnExitDatabaseCloser.onShutdown(OnExitDatabaseCloser.java:85)
+	at org.h2.engine.OnExitDatabaseCloser.run(OnExitDatabaseCloser.java:114)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: IO Exception: "Closing" [90028-230]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 8 more
+Caused by: org.h2.mvstore.MVStoreException: java.lang.NoClassDefFoundError: org/h2/mvstore/Chunk$PositionComparator [2.3.230/3]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:926)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:463)
+	at org.h2.mvstore.RandomAccessStore.compactStore(RandomAccessStore.java:443)
+	at org.h2.mvstore.FileStore.compactStore(FileStore.java:888)
+	at org.h2.mvstore.FileStore.stop(FileStore.java:275)
+	at org.h2.mvstore.MVStore.closeStore(MVStore.java:693)
+	at org.h2.mvstore.MVStore.close(MVStore.java:643)
+	at org.h2.mvstore.db.Store.close(Store.java:364)
+	... 6 more
+Caused by: java.lang.NoClassDefFoundError: org/h2/mvstore/Chunk$PositionComparator
+	at org.h2.mvstore.RandomAccessStore.findChunksToMove(RandomAccessStore.java:516)
+	at org.h2.mvstore.RandomAccessStore.compactMoveChunks(RandomAccessStore.java:479)
+	at org.h2.mvstore.RandomAccessStore.lambda$compactMoveChunks$1(RandomAccessStore.java:468)
+	at org.h2.mvstore.FileStore.executeFileStoreOperation(FileStore.java:1891)
+	at org.h2.mvstore.MVStore.executeFilestoreOperation(MVStore.java:922)
+	... 13 more
+Caused by: java.lang.ClassNotFoundException: org.h2.mvstore.Chunk$PositionComparator
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 18 more
+2024-07-29 23:08:13.270496+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from ADMIN_INCOME \000d\000aCREATE [*]TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL)"; SQL statement:
+select * from ADMIN_INCOME 
+CREATE TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL) [42000-230]
+2024-07-29 23:08:29.251033+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from ADMIN_INCOME \000d\000aCREATE [*]TABLE  Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL)"; SQL statement:
+select * from ADMIN_INCOME 
+CREATE TABLE  Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL) [42000-230]
+2024-07-29 23:12:36.518989+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS ""+email+""[*]_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255))"; SQL statement:
+CREATE TABLE IF NOT EXISTS "+email+"_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255)) [42000-230]
+2024-07-29 23:16:44.891701+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS ""+email+""[*]_user_preference (id INT PRIMARY KEY AUTO_INCREMENT, currency VARCHAR(255) not null , theme VARCHAR(255) not null)"; SQL statement:
+CREATE TABLE IF NOT EXISTS "+email+"_user_preference (id INT PRIMARY KEY AUTO_INCREMENT, currency VARCHAR(255) not null , theme VARCHAR(255) not null) [42000-230]
+2024-07-29 23:17:32.557656+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from ADMIN_INCOME \000d\000a\000d\000aCREATE [*]TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL)"; SQL statement:
+select * from ADMIN_INCOME 
+
+CREATE TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL) [42000-230]
+2024-07-29 23:17:32.558745+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from ADMIN_USER_PREFERENCE \000d\000a            CREATE [*]TABLE IF NOT EXISTS Admin_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255))"; SQL statement:
+select * from ADMIN_USER_PREFERENCE 
+            CREATE TABLE IF NOT EXISTS Admin_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255)) [42000-230]
+2024-07-29 23:17:36.502713+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from ADMIN_INCOME \000d\000a\000d\000aCREATE [*]TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL)"; SQL statement:
+select * from ADMIN_INCOME 
+
+CREATE TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL) [42000-230]
+2024-07-29 23:17:36.504249+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from ADMIN_USER_PREFERENCE \000d\000a            CREATE [*]TABLE IF NOT EXISTS Admin_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255))"; SQL statement:
+select * from ADMIN_USER_PREFERENCE 
+            CREATE TABLE IF NOT EXISTS Admin_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255)) [42000-230]
+2024-07-29 23:17:39.517395+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from ADMIN_INCOME \000d\000a\000d\000aCREATE [*]TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL)"; SQL statement:
+select * from ADMIN_INCOME 
+
+CREATE TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL) [42000-230]
+2024-07-29 23:17:39.518404+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from ADMIN_USER_PREFERENCE \000d\000a            CREATE [*]TABLE IF NOT EXISTS Admin_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255))"; SQL statement:
+select * from ADMIN_USER_PREFERENCE 
+            CREATE TABLE IF NOT EXISTS Admin_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255)) [42000-230]
+2024-07-29 23:18:05.940116+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from ADMIN_INCOME \000d\000a\000d\000aCREATE [*]TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL)"; SQL statement:
+select * from ADMIN_INCOME 
+
+CREATE TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL) [42000-230]
+2024-07-29 23:18:05.942384+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "show [*]database"; SQL statement:
+show database [42000-230]
+2024-07-29 23:18:08.792420+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "show [*]database"; SQL statement:
+show database [42000-230]
+2024-07-29 23:18:20.458761+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "select * from ADMIN_INCOME \000d\000a\000d\000aCREATE [*]TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL)"; SQL statement:
+select * from ADMIN_INCOME 
+
+CREATE TABLE IF NOT EXISTS Admin_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL) [42000-230]
+2024-07-29 23:18:20.459857+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "show [*]* database"; SQL statement:
+show * database [42000-230]
+2024-07-29 23:18:26.706644+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "show [*]* database"; SQL statement:
+show * database [42000-230]
+2024-07-29 23:18:37.693297+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "show [*]* tables"; SQL statement:
+show * tables [42000-230]
+2024-07-30 06:39:37.219243+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ADMIN1_EXPENSE" not found; SQL statement:
+SELECT * FROM Admin1_expense [42102-230]
+2024-07-30 06:40:00.123415+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ADMIN_EXPENSE" not found; SQL statement:
+SELECT * FROM Admin_expense [42102-230]
+2024-07-30 06:44:54.841017+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS thasruha[*]@kdu.lk_user_preference (id INT PRIMARY KEY AUTO_INCREMENT, currency VARCHAR(255) not null , theme VARCHAR(255) not null)"; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruha@kdu.lk_user_preference (id INT PRIMARY KEY AUTO_INCREMENT, currency VARCHAR(255) not null , theme VARCHAR(255) not null) [42000-230]
+2024-07-30 06:44:55.070404+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS thasruha[*]@kdu.lk_income (id INT PRIMARY KEY AUTO_INCREMENT, income_type VARCHAR(255) not null, income_amount DECIMAL(10,2) not null, income_date DATE NOT NULL , income_note VARCHAR(255))"; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruha@kdu.lk_income (id INT PRIMARY KEY AUTO_INCREMENT, income_type VARCHAR(255) not null, income_amount DECIMAL(10,2) not null, income_date DATE NOT NULL , income_note VARCHAR(255)) [42000-230]
+2024-07-30 06:44:55.298556+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS thasruha[*]@kdu.lk_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL)"; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruha@kdu.lk_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL) [42000-230]
+2024-07-30 06:44:55.521854+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS thasruha[*]@kdu.lk_expense (id INT PRIMARY KEY AUTO_INCREMENT, expense_type VARCHAR(255) not null, expense_amount DECIMAL(10,2) not null, expense_date DATE NOT NULL , expense_note VARCHAR(255))"; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruha@kdu.lk_expense (id INT PRIMARY KEY AUTO_INCREMENT, expense_type VARCHAR(255) not null, expense_amount DECIMAL(10,2) not null, expense_date DATE NOT NULL , expense_note VARCHAR(255)) [42000-230]
+2024-07-30 06:44:55.748498+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS thasruha[*]@kdu.lk_expense_goals (id INT PRIMARY KEY AUTO_INCREMENT, expense_goal_amount DECIMAL(10,2) not null, expense_goal_date DATE NOT NULL ,expense_goal_end_date DATE NOT NULL)"; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruha@kdu.lk_expense_goals (id INT PRIMARY KEY AUTO_INCREMENT, expense_goal_amount DECIMAL(10,2) not null, expense_goal_date DATE NOT NULL ,expense_goal_end_date DATE NOT NULL) [42000-230]
+2024-07-30 06:44:55.972750+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS thasruha[*]@kdu.lk_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255))"; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruha@kdu.lk_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255)) [42000-230]
+2024-07-30 06:45:43.017776+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Schema "THASRUHAKDU" not found; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruhakdu.lk_user_preference (id INT PRIMARY KEY AUTO_INCREMENT, currency VARCHAR(255) not null , theme VARCHAR(255) not null) [90079-230]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.getSchema(Parser.java:922)
+	at org.h2.command.Parser.getSchema(Parser.java:928)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8807)
+	at org.h2.command.Parser.parseCreate(Parser.java:6396)
+	at org.h2.command.Parser.parsePrepared(Parser.java:644)
+	at org.h2.command.Parser.parse(Parser.java:580)
+	at org.h2.command.Parser.parse(Parser.java:555)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:644)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:560)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
+	at loginandsignup.UserAuthentication.settingUpUserPreference(UserAuthentication.java:280)
+	at loginandsignup.UserAuthentication.settingUpTablesPerUser(UserAuthentication.java:120)
+	at loginandsignup.database.DatabaseConfig.main(DatabaseConfig.java:31)
+2024-07-30 06:45:43.253309+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Schema "THASRUHAKDU" not found; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruhakdu.lk_income (id INT PRIMARY KEY AUTO_INCREMENT, income_type VARCHAR(255) not null, income_amount DECIMAL(10,2) not null, income_date DATE NOT NULL , income_note VARCHAR(255)) [90079-230]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.getSchema(Parser.java:922)
+	at org.h2.command.Parser.getSchema(Parser.java:928)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8807)
+	at org.h2.command.Parser.parseCreate(Parser.java:6396)
+	at org.h2.command.Parser.parsePrepared(Parser.java:644)
+	at org.h2.command.Parser.parse(Parser.java:580)
+	at org.h2.command.Parser.parse(Parser.java:555)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:644)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:560)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
+	at loginandsignup.UserAuthentication.settingUpSetIncomeTable(UserAuthentication.java:134)
+	at loginandsignup.UserAuthentication.settingUpTablesPerUser(UserAuthentication.java:121)
+	at loginandsignup.database.DatabaseConfig.main(DatabaseConfig.java:31)
+2024-07-30 06:45:43.482949+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Schema "THASRUHAKDU" not found; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruhakdu.lk_income_goals (id INT PRIMARY KEY AUTO_INCREMENT, income_goal_amount DECIMAL(10,2) not null, income_goal_date DATE NOT NULL ,income_goal_end_date DATE NOT NULL) [90079-230]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.getSchema(Parser.java:922)
+	at org.h2.command.Parser.getSchema(Parser.java:928)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8807)
+	at org.h2.command.Parser.parseCreate(Parser.java:6396)
+	at org.h2.command.Parser.parsePrepared(Parser.java:644)
+	at org.h2.command.Parser.parse(Parser.java:580)
+	at org.h2.command.Parser.parse(Parser.java:555)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:644)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:560)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
+	at loginandsignup.UserAuthentication.settingUpIncomeGoalsTable(UserAuthentication.java:192)
+	at loginandsignup.UserAuthentication.settingUpTablesPerUser(UserAuthentication.java:122)
+	at loginandsignup.database.DatabaseConfig.main(DatabaseConfig.java:31)
+2024-07-30 06:45:43.708701+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Schema "THASRUHAKDU" not found; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruhakdu.lk_expense (id INT PRIMARY KEY AUTO_INCREMENT, expense_type VARCHAR(255) not null, expense_amount DECIMAL(10,2) not null, expense_date DATE NOT NULL , expense_note VARCHAR(255)) [90079-230]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.getSchema(Parser.java:922)
+	at org.h2.command.Parser.getSchema(Parser.java:928)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8807)
+	at org.h2.command.Parser.parseCreate(Parser.java:6396)
+	at org.h2.command.Parser.parsePrepared(Parser.java:644)
+	at org.h2.command.Parser.parse(Parser.java:580)
+	at org.h2.command.Parser.parse(Parser.java:555)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:644)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:560)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
+	at loginandsignup.UserAuthentication.settingUpSetExpenseTable(UserAuthentication.java:163)
+	at loginandsignup.UserAuthentication.settingUpTablesPerUser(UserAuthentication.java:123)
+	at loginandsignup.database.DatabaseConfig.main(DatabaseConfig.java:31)
+2024-07-30 06:45:43.939003+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Schema "THASRUHAKDU" not found; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruhakdu.lk_expense_goals (id INT PRIMARY KEY AUTO_INCREMENT, expense_goal_amount DECIMAL(10,2) not null, expense_goal_date DATE NOT NULL ,expense_goal_end_date DATE NOT NULL) [90079-230]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.getSchema(Parser.java:922)
+	at org.h2.command.Parser.getSchema(Parser.java:928)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8807)
+	at org.h2.command.Parser.parseCreate(Parser.java:6396)
+	at org.h2.command.Parser.parsePrepared(Parser.java:644)
+	at org.h2.command.Parser.parse(Parser.java:580)
+	at org.h2.command.Parser.parse(Parser.java:555)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:644)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:560)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
+	at loginandsignup.UserAuthentication.settingUpExpenseGoalsTable(UserAuthentication.java:222)
+	at loginandsignup.UserAuthentication.settingUpTablesPerUser(UserAuthentication.java:124)
+	at loginandsignup.database.DatabaseConfig.main(DatabaseConfig.java:31)
+2024-07-30 06:45:44.164774+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Schema "THASRUHAKDU" not found; SQL statement:
+CREATE TABLE IF NOT EXISTS thasruhakdu.lk_investments (id INT PRIMARY KEY AUTO_INCREMENT, investment_type VARCHAR(255) not null, investment_amount DECIMAL(10,2) not null, investment_date DATE NOT NULL , investment_note VARCHAR(255)) [90079-230]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:644)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.getSchema(Parser.java:922)
+	at org.h2.command.Parser.getSchema(Parser.java:928)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8807)
+	at org.h2.command.Parser.parseCreate(Parser.java:6396)
+	at org.h2.command.Parser.parsePrepared(Parser.java:644)
+	at org.h2.command.Parser.parse(Parser.java:580)
+	at org.h2.command.Parser.parse(Parser.java:555)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:644)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:560)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
+	at loginandsignup.UserAuthentication.settingUpInvestmentsTable(UserAuthentication.java:251)
+	at loginandsignup.UserAuthentication.settingUpTablesPerUser(UserAuthentication.java:125)
+	at loginandsignup.database.DatabaseConfig.main(DatabaseConfig.java:31)
