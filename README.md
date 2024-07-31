@@ -72,7 +72,4 @@ The database schema includes the following tables:
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-## Contact
-
-If you have any questions, feel free to contact me at your.email@example.com.
 
