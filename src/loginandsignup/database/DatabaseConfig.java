@@ -30,7 +30,8 @@ public static void main(String[] args) {
         //UserAuthentication.authenticateUser( "StrongPassword123","thasruha@kdu.lk");
        // connection.close();
       // UserAuthentication.settingUpTablesPerUser("Admin2@kdu.ac.lk");
-       UserAuthentication.setExpenses("Admin2kduaclk", "food", 1760," 2021/20/10", "mytest");
+      UserAuthentication.editUserFirstName("Admin2@kdu.ac.lk", "newFirstName");
+      // UserAuthentication.setExpenses("Admin2kduaclk", "food", 1760," 2021/20/10", "mytest");
       // AccessOfDatabase.ValueSetterToDatabase.setIncomePerform_h2("thasruhakduu", "ddp", 15000," 2021/20/10", "mytest");
       //  System.out.println(UserAuthentication.getIncomeRecords("thasruhakduu"));
       //System.out.println(  UserAuthentication.getTotalIncome("thasruhakduu"));

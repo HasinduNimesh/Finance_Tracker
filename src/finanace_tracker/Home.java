@@ -21,14 +21,15 @@ import loginandsignup.UserAuthentication;
 
 public class Home extends javax.swing.JFrame {
 
-    private String email;
+    private String email, emailOG;
     
     public Home() {
         initComponents();
     }
     
-    public Home(String email){
-        this.email=email;
+    public Home(String emailOG){
+        this.emailOG=emailOG;
+        email=UserAuthentication.convertEmailToPlainString(emailOG);
         initComponents();
         lbl_accemail.setText(email);
         try {
@@ -472,7 +473,7 @@ public class Home extends javax.swing.JFrame {
         ResetButtonColor();
         SetButtonColor(btn_load_income);
         // Assuming pnl is an instance of the Dashboard panel 
-        Income pnl = new Income(email);
+        Income pnl = new Income(emailOG);
         panelResetter(pnl);
     }//GEN-LAST:event_btn_load_incomeActionPerformed
 
@@ -481,7 +482,7 @@ public class Home extends javax.swing.JFrame {
         ResetButtonColor();
         SetButtonColor(btn_load_expenses);
         // Assuming pnl is an instance of the Dashboard panel 
-        Expenses pnl = new Expenses(email);
+        Expenses pnl = new Expenses(emailOG);
         panelResetter(pnl);
     }//GEN-LAST:event_btn_load_expensesActionPerformed
 
@@ -490,7 +491,7 @@ public class Home extends javax.swing.JFrame {
         ResetButtonColor();
         SetButtonColor(btn_load_dashboard);
         // Assuming pnl is an instance of the Dashboard panel 
-        Dashboard pnl = new Dashboard(email);
+        Dashboard pnl = new Dashboard(emailOG);
         panelResetter(pnl);
     }//GEN-LAST:event_btn_load_dashboardActionPerformed
 
@@ -499,7 +500,7 @@ public class Home extends javax.swing.JFrame {
         ResetButtonColor();
         SetButtonColor(btn_load_goals);
         // Assuming pnl is an instance of the Dashboard panel 
-        Goals pnl = new Goals(email);
+        Goals pnl = new Goals(emailOG);
         panelResetter(pnl);
     }//GEN-LAST:event_btn_load_goalsActionPerformed
 
@@ -528,7 +529,7 @@ public class Home extends javax.swing.JFrame {
         ResetButtonColor();
         SetButtonColor(btn_load_settings);
         // Assuming pnl is an instance of the Dashboard panel 
-        Settings pnl = new Settings(email);
+        Settings pnl = new Settings(emailOG);
         panelResetter(pnl);
     }//GEN-LAST:event_btn_load_settingsActionPerformed
 
@@ -537,7 +538,7 @@ public class Home extends javax.swing.JFrame {
         ResetButtonColor();
         SetButtonColor(btn_load_investments);
         // Assuming pnl is an instance of the Dashboard panel 
-        Investment pnl = new Investment(email);
+        Investment pnl = new Investment(emailOG);
         panelResetter(pnl);
     }//GEN-LAST:event_btn_load_investmentsActionPerformed
 

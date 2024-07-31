@@ -595,4 +595,266 @@ public static String convertEmailToPlainString(String email) {
 
 }
 
+public static boolean editUserDetails(String emailIn, String firstName, String lastName, String password) {
+    String email=convertEmailToPlainString(emailIn);
+
+    try (Connection conn = DatabaseUtil.getConnection()) {
+        String query = "UPDATE users SET f_name = ?, l_name = ?, PASSWORD_HASH = ? WHERE email = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, firstName);
+        stmt.setString(2, lastName);
+        stmt.setString(3, password);
+        stmt.setString(4, emailIn);
+        int rowsAffected = stmt.executeUpdate();
+        return rowsAffected > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
+
+}
+
+public static boolean editUserFirstName(String emailIn, String firstName) {
+    String email=convertEmailToPlainString(emailIn);
+
+    try (Connection conn = DatabaseUtil.getConnection()) {
+        String query = "UPDATE users SET f_name = ? WHERE email = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, firstName);
+        stmt.setString(2, emailIn);
+        int rowsAffected = stmt.executeUpdate();
+        return rowsAffected > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
+public static boolean editUserLastName(String emailIn, String lastName) {// need to send real email not the striped
+    String email=convertEmailToPlainString(emailIn);
+
+    try (Connection conn = DatabaseUtil.getConnection()) {
+        String query = "UPDATE users SET L_NAME   = ? WHERE email = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, lastName);
+        stmt.setString(2, emailIn); //emailin
+        int rowsAffected = stmt.executeUpdate();
+        return rowsAffected > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
+public static boolean editUserPassword(String emailIn, String password) {
+    String email=convertEmailToPlainString(emailIn);
+    try (Connection conn = DatabaseUtil.getConnection()) {
+        String query = "UPDATE users SET PASSWORD_HASH = ? WHERE email = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, password);
+        stmt.setString(2, emailIn);
+        int rowsAffected = stmt.executeUpdate();
+        return rowsAffected > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
+} 
+
+
+
+
+
+        public static boolean editTableRow(String emailIn,String tableName, int id, String newData) {
+            String email=convertEmailToPlainString(emailIn);
+
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "UPDATE "+ email + "_" + tableName + " SET data = ? WHERE id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setString(1, newData);
+                stmt.setInt(2, id);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+
+        public static boolean editExpense(String email, int expenseId, String expenseType, double expenseAmount, String expenseDate, String expenseNote) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "UPDATE " + email + "_expense SET expense_type = ?, expense_amount = ?, expense_date = ?, expense_note = ? WHERE expense_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setString(1, expenseType);
+                stmt.setDouble(2, expenseAmount);
+                stmt.setString(3, expenseDate);
+                stmt.setString(4, expenseNote);
+                stmt.setInt(5, expenseId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public static boolean editExpenseGoal(String email, int expenseGoalId, double expenseGoalAmount, String expenseGoalDate, String expenseGoalEndDate) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "UPDATE " + email + "_expense_goals SET expense_goal_amount = ?, expense_goal_date = ?, expense_goal_end_date = ? WHERE expense_goal_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setDouble(1, expenseGoalAmount);
+                stmt.setString(2, expenseGoalDate);
+                stmt.setString(3, expenseGoalEndDate);
+                stmt.setInt(4, expenseGoalId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public static boolean editIncome(String email, int incomeId, String incomeType, double incomeAmount, String incomeDate, String incomeNote) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "UPDATE " + email + "_income SET income_type = ?, income_amount = ?, income_date = ?, income_note = ? WHERE income_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setString(1, incomeType);
+                stmt.setDouble(2, incomeAmount);
+                stmt.setString(3, incomeDate);
+                stmt.setString(4, incomeNote);
+                stmt.setInt(5, incomeId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public static boolean editIncomeGoal(String email, int incomeGoalId, double incomeGoalAmount, String incomeGoalDate, String incomeGoalEndDate) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "UPDATE " + email + "_income_goals SET income_goal_amount = ?, income_goal_date = ?, income_goal_end_date = ? WHERE income_goal_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setDouble(1, incomeGoalAmount);
+                stmt.setString(2, incomeGoalDate);
+                stmt.setString(3, incomeGoalEndDate);
+                stmt.setInt(4, incomeGoalId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public static boolean editInvestment(String email, int investmentId, String investmentType, double investmentAmount, String investmentDate, String investmentNote) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "UPDATE " + email + "_investments SET investment_type = ?, investment_amount = ?, investment_date = ?, investment_note = ? WHERE investment_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setString(1, investmentType);
+                stmt.setDouble(2, investmentAmount);
+                stmt.setString(3, investmentDate);
+                stmt.setString(4, investmentNote);
+                stmt.setInt(5, investmentId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public static boolean editUserPreference(String email, int preferenceId, String preferenceData) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "UPDATE " + email + "_user_preferences SET data = ? WHERE preference_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setString(1, preferenceData);
+                stmt.setInt(2, preferenceId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public static boolean deleteExpense(String email, int expenseId) {
+        String query = "DELETE FROM " + email + "_Expenses WHERE id = ?";
+        try (Connection conn = DatabaseUtil.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, expenseId);
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+        }
+    
+
+        public static boolean deleteExpenseGoal(String email, int expenseGoalId) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "DELETE FROM " + email + "_expense_goals WHERE expense_goal_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setInt(1, expenseGoalId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public static boolean deleteIncome(String email, int incomeId) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "DELETE FROM " + email + "_income WHERE income_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setInt(1, incomeId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public static boolean deleteIncomeGoal(String email, int incomeGoalId) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "DELETE FROM " + email + "_income_goals WHERE income_goal_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setInt(1, incomeGoalId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public static boolean deleteInvestment(String email, int investmentId) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "DELETE FROM " + email + "_investments WHERE investment_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setInt(1, investmentId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        public static boolean deleteUserPreference(String email, int preferenceId) {
+            try (Connection conn = DatabaseUtil.getConnection()) {
+                String query = "DELETE FROM " + email + "_user_preferences WHERE preference_id = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setInt(1, preferenceId);
+                int rowsAffected = stmt.executeUpdate();
+                return rowsAffected > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
 }

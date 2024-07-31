@@ -45,10 +45,13 @@ public class Income extends javax.swing.JPanel {
     double income_amount=0.00;
     String currency=getFirstCurrencyType();
     double incomegoalDefict;
-    String email;
+    String email , emailOG;
     
-    public Income(String email) {
+    public Income(String emailOG) {
         initComponents();
+        this.emailOG=emailOG;
+        email=UserAuthentication.convertEmailToPlainString(emailOG);
+
         incomegoalDefict=UserAuthentication.getTotalIncome(email)-UserAuthentication.getTotalIncomeGoals(email);
         currency=UserAuthentication.getUserCurrency(email);
         

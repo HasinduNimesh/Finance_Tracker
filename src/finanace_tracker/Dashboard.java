@@ -23,7 +23,7 @@ public class Dashboard extends javax.swing.JPanel {
 
     private SQLite sqlite;
     private UserAuthentication userAuthentication;
-    String email;
+    String email, emailOG;
     //String currency=getFirstCurrencyType();
     String currency;
 
@@ -31,9 +31,10 @@ public class Dashboard extends javax.swing.JPanel {
     /**
      * Creates new form Dashboard
      */
-   public Dashboard(String email) {
+   public Dashboard(String emailOG) {
         initComponents();
-        this.email=email;
+        this.emailOG=emailOG;
+        email=UserAuthentication.convertEmailToPlainString(emailOG);
         currency=UserAuthentication.getUserCurrency(email);
 
         sqlite = new SQLite();

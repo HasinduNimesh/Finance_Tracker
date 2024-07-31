@@ -5,6 +5,9 @@
 package finanace_tracker;
 
 import com.formdev.flatlaf.FlatClientProperties;
+
+import loginandsignup.UserAuthentication;
+
 import java.awt.Frame;
 import javax.swing.SwingUtilities;
 import raven_cell.TableActionButtonRender;
@@ -14,12 +17,16 @@ import raven_cell.TableActionButtonRender;
  * @author ASUS
  */
 public class Settings extends javax.swing.JPanel {
+    String email , emailOG;
 
     /**
      * Creates new form Expenses
      */
-    public Settings() {
+    public Settings(String emailOG) {
         initComponents();
+        this.emailOG = emailOG;
+         email=UserAuthentication.convertEmailToPlainString(emailOG);
+
      
     }
 
@@ -136,7 +143,7 @@ public class Settings extends javax.swing.JPanel {
     private void btn_load_dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_load_dashboardActionPerformed
          
         // Open a dialog to edit user details
-        EditUserDetails editFrame = new EditUserDetails();
+        EditUserDetails editFrame = new EditUserDetails(emailOG);
         editFrame.setVisible(true);
     }//GEN-LAST:event_btn_load_dashboardActionPerformed
 

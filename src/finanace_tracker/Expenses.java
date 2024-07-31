@@ -38,7 +38,7 @@ public class Expenses extends javax.swing.JPanel {
      */
     //VARIABLES 
     String type=null,note=null;
-    String email;
+    String email, emailOG;
     double expense_amount=0.00;
     String currency=getFirstCurrencyType();
     
@@ -46,9 +46,12 @@ public class Expenses extends javax.swing.JPanel {
     //double leftOver=getTotalIncome()-getTotalExpense();
     double leftOver;
     
-    public Expenses(String email) {
+    public Expenses(String emailOG) {
         initComponents();
-        this.email=email;
+
+        this.emailOG=emailOG;
+        email=UserAuthentication.convertEmailToPlainString(emailOG);
+
         currency=UserAuthentication.getUserCurrency(email);
         
         //update table

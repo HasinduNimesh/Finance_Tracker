@@ -7,6 +7,8 @@ package finanace_tracker;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import loginandsignup.UserAuthentication;
 import loginandsignup.ValidateData;
 
 /**
@@ -14,12 +16,17 @@ import loginandsignup.ValidateData;
  * @author Tharusha
  */
 public class EditUserDetails extends javax.swing.JFrame {
+    String email , emailOG;
 
     /**
      * Creates new form EditUserDetails
      */
-    public EditUserDetails() {
+    public EditUserDetails(String emailOG) {
+    
         initComponents();
+        this.emailOG=emailOG;
+                email=UserAuthentication.convertEmailToPlainString(emailOG);
+
         
         //setting password hide character
         editPassword.setEchoChar('\u25cf');
@@ -926,7 +933,7 @@ public class EditUserDetails extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditUserDetails().setVisible(true);
+                EditUserDetails new EditUserDetails().setVisible(true);
             }
         });
     }

@@ -25,8 +25,11 @@ public class Goals extends javax.swing.JPanel {
     /**
      * Creates new form Expenses
      */
-    String email;
-    public Goals(String email) {
+    String email , emailOG;
+    public Goals(String emailOG) {
+        this.emailOG = emailOG;
+        email=UserAuthentication.convertEmailToPlainString(emailOG);
+
         initComponents();
         //progress bar update
         updateGoalAchievements();

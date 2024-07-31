@@ -56,7 +56,7 @@ public class ValueSetterToDatabase {
     }
 
 
-
+    
     // Method to set income goal in the database
     public static void setGoalIncomePerform_slqite(double incomeGoalAmount, String startDate, String endDate) {
         SQLite.setIncomeGoal(incomeGoalAmount, startDate, endDate);

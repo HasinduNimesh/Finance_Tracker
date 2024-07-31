@@ -5,6 +5,9 @@
 package finanace_tracker;
 
 import com.formdev.flatlaf.FlatClientProperties;
+
+import loginandsignup.UserAuthentication;
+
 import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +33,8 @@ import tableCellUpdate.TableActionEvent;
  */
 public class Investment extends javax.swing.JPanel {
 
+    String email,emailOG;
+
     /**
      * Creates new form Expenses
      */
@@ -40,7 +45,10 @@ public class Investment extends javax.swing.JPanel {
     String currency=getFirstCurrencyType();
     
     
-    public Investment() {
+    public Investment(String emailOG) {
+        this.emailOG = emailOG;
+        email=UserAuthentication.convertEmailToPlainString(emailOG);
+
         initComponents();
         
         //call table updater
@@ -88,8 +96,8 @@ public class Investment extends javax.swing.JPanel {
     }
 
     //investement table updater method 
-    public void dynamicTableUpdater(){
-        List<InvestmentRecord> investmentRecords = getInvestmentRecords();
+    public void dynamicTableUpdater(String email){
+        List<InvestmentRecord> investmentRecords = UserAuthentication.getInvestmentRecords(email);
         updateInvestmentTable(investmentRecords);
     }
     
